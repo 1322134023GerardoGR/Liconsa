@@ -29,3 +29,16 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+Route::get('/p1', function () {
+    return view('pruebas.prueba1');
+});
+Route::get('/p2', function () {
+    return view('pruebas.prueba2');
+});
+Route::get('/p3', function () {
+    return view('pruebas.prueba3');
+});
+Route::get('/p4', function () {
+    return view('pruebas.prueba4');
+});
