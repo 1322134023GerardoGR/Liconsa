@@ -43,8 +43,6 @@ Route::get('/p3', function () {
 Route::get('/p4', function () {
     return view('pruebas.prueba4');
 });
-Route::get('/index', function () {
-    return view('pruebas.prueba5');
-});
+
 
 Route::get('/generate-pdf', [PdfController::class,'generatePDF'])->name('pdf.generate');
