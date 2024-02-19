@@ -43,6 +43,14 @@ Route::get('/p3', function () {
 Route::get('/p4', function () {
     return view('pruebas.prueba4');
 });
-
+Route::get('/index', function () {
+    return view('liconsa.index');
+});
+Route::get('/add', function () {
+    return view('liconsa.agrBeneficiario');
+});
+Route::get('/see', function () {
+    return view('liconsa.seeBeneficiario');
+});
 
 Route::get('/generate-pdf', [PdfController::class,'generatePDF'])->name('pdf.generate');
