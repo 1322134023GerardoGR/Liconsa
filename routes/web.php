@@ -44,5 +44,11 @@ Route::get('/p4', function () {
     return view('pruebas.prueba4');
 });
 Route::get('/index', function () {
-    return view('pruebas.prueba4');
+    return view('liconsa.index');
+});
+Route::get('/add', function () {
+    return view('liconsa.agrBeneficiario');
+});
+Route::get('/see', function () {
+    return view('liconsa.seeBeneficiario');
 });
