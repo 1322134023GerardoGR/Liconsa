@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\PdfController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -44,5 +44,7 @@ Route::get('/p4', function () {
     return view('pruebas.prueba4');
 });
 Route::get('/index', function () {
-    return view('pruebas.prueba4');
+    return view('pruebas.prueba5');
 });
+
+Route::get('/generate-pdf', [PdfController::class,'generatePDF'])->name('pdf.generate');
