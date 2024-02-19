@@ -14,11 +14,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+
+Route::get('/1', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
+Route::get('/', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
@@ -40,5 +41,8 @@ Route::get('/p3', function () {
     return view('pruebas.prueba3');
 });
 Route::get('/p4', function () {
+    return view('pruebas.prueba4');
+});
+Route::get('/index', function () {
     return view('pruebas.prueba4');
 });
