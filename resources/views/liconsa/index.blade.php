@@ -44,6 +44,12 @@
             align-items: center;
             justify-content: center;
         }
+        .panel {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
         .btn-container {
             display: flex;
             justify-content: center;
@@ -92,6 +98,9 @@
             right: 10px;
             cursor: pointer;
         }
+        h1 {
+            text-align: center;
+        }
     </style>
 </head>
 <body class="font-sans  antialiased">
@@ -100,11 +109,15 @@
     <h2>Gobierno de México</h2>
 </header>
 <div class="content">
-    <h1>Bienvenido Usuario</h1>
-    <div class="btn-container">
-        <button class="btn"><i class="fas fa-user-plus"></i>Registrar Beneficiario</button>
-        <button class="btn" onclick="showForm()"><i class="fas fa-search"></i>Buscar Beneficiario</button>
-        <button class="btn"><i class="fas fa-cart-plus"></i>Registrar Nueva Venta</button>
+    <div class="panel"> <!-- Contenedor del panel blanco -->
+        <h1>Bienvenido Usuario</h1>
+        <div class="btn-container">
+            <button class="btn">Registrar Usuario</button>
+            <button class="btn"><i class="fas fa-user-plus"></i>Registrar Beneficiario</button>
+            <button class="btn">Lista de Beneficiarios</button>
+            <button class="btn" onclick="showForm()"><i class="fas fa-search"></i>Buscar Beneficiario</button>
+            <button class="btn"><i class="fas fa-cart-plus"></i>Registrar Nueva Venta</button>
+        </div>
     </div>
 
     <!-- Formulario flotante -->

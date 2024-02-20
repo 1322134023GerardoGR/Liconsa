@@ -99,7 +99,7 @@
 <div class="content">
     <div class="card">
         <div class="card-header">
-            Datos del usuario
+            Datos del usuario Juan Pérez López
         </div>
         <div class="form-group">
             <label for="nombre" class="form-label">Nombre del interesado:</label>

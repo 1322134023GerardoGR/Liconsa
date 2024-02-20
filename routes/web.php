@@ -52,5 +52,11 @@ Route::get('/add', function () {
 Route::get('/see', function () {
     return view('liconsa.seeBeneficiario');
 });
+Route::get('/list', function () {
+    return view('liconsa.listBene');
+});
+Route::get('/addU', function () {
+    return view('liconsa.addUser');
+});
 
 Route::get('/generate-pdf', [PdfController::class,'generatePDF'])->name('pdf.generate');

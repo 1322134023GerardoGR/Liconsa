@@ -92,36 +92,32 @@
     <div class="form-container">
         <form>
             <div class="form-group">
-                <label for="nombre" class="form-label">Nombre del interesado:</label>
-                <input type="text" class="form-control" id="nombre" placeholder="Ej. Gerardo">
+                <label for="nombre" class="form-label">Nombre(s):</label>
+                <input type="text" class="form-control" id="nombre" placeholder="Ej. Adrian Alejandro">
             </div>
             <div class="form-group">
                 <label for="apellido_paterno" class="form-label">Apellido paterno:</label>
-                <input type="text" class="form-control" id="apellido_paterno" placeholder="Ej. Gutiérrez">
+                <input type="text" class="form-control" id="apellido_paterno" placeholder="Ej. Gómez">
             </div>
             <div class="form-group">
                 <label for="apellido_materno" class="form-label">Apellido materno:</label>
-                <input type="text" class="form-control" id="apellido_materno" placeholder="Ej. Ramírez">
+                <input type="text" class="form-control" id="apellido_materno" placeholder="Ej. Rodriguez">
             </div>
             <div class="form-group">
-                <label for="curp" class="form-label">CURP del interesado:</label>
-                <input type="text" class="form-control" id="curp" placeholder="Ej. GURG080412HDFDRRA3">
+                <label for="curp" class="form-label">CURP:</label>
+                <input type="text" class="form-control" id="curp" placeholder="ROHM040812HDFDRRA3">
             </div>
             <div class="form-group">
-                <label for="direccion" class="form-label">Dirección:</label>
-                <input type="text" class="form-control" id="direccion" placeholder="Ej. Villa del Real, Canes 35, Tecámac Edo.Mex.">
+                <label for="rfc" class="form-label">RFC:</label>
+                <input type="text" class="form-control" id="rfc" placeholder="ROHM040812">
             </div>
             <div class="form-group">
-                <label for="fecha_nacimiento" class="form-label">Fecha de nacimiento:</label>
-                <input type="date" class="form-control" id="fecha_nacimiento" placeholder="Ej. 12/08/2004">
-            </div>
-            <div class="form-group">
-                <label for="num_beneficiarios" class="form-label">Número de beneficiarios:</label>
-                <input type="number" class="form-control" id="num_beneficiarios" placeholder="Ej. 3">
-            </div>
-            <div class="form-group">
-                <label for="curp_beneficiarios" class="form-label">CURP de los beneficiarios:</label>
-                <input class="form-control" id="curp_beneficiarios" placeholder="Ej. GURG080412HDFDRRA3">
+                <label for="rol" class="form-label">Rol:</label>
+                <select class="form-control" id="rol">
+                    <option value="vendedor">Vendedor</option>
+                    <option value="atencion_clientes">At. Clientes</option>
+                    <option value="supervisor">Supervisor</option>
+                </select>
             </div>
             <div class="btn-container">
                 <button type="submit" class="btn"><i class="fas fa-save"></i>Guardar</button>
