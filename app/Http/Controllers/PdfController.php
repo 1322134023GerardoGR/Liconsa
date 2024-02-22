@@ -3,16 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\PDFWithImageFromVar;
 use Illuminate\Http\Request;
 use FPDF;
 use JetBrains\PhpStorm\NoReturn;
-use setasign\Fpdi\Fpdi;
+use Picqer\Barcode\BarcodeGeneratorPNG;
 class PdfController extends Controller
 {
     #[NoReturn] public function generatePDF(): void
     {
         // Configurar dimensiones de la página (cuarto de hoja tamaño carta)
-        $pdf = new FPDF('P', 'mm', 'Letter');
+        $pdf = new PDFWithImageFromVar('P', 'mm', 'Letter');
         $pdf->AddPage();
 
 // Configurar margen izquierdo y superior
@@ -55,12 +56,22 @@ class PdfController extends Controller
 
 // Agregar texto "Sello de validez"
         $anchoTexto = $pdf->GetStringWidth('Sello de validez'); // Obtener el ancho del texto
-        $pdf->Text($x + $anchoCredencial - $anchoTexto - 20, $y + 80, 'Sello de validez'); // Agregar texto
 
-// Dibujar una línea horizontal justo sobre el texto "Sello de validez"
-        $pdf->Line($x + $anchoCredencial - $anchoTexto - 35, $y + 76, $x + $anchoCredencial - 8, $y + 76);
+        $pdf->Line($x + $anchoCredencial - $anchoTexto - 35, $y + 65, $x + $anchoCredencial - 8, $y + 65);
+// Generar código de barras
 
-// Salida del PDF
+        $generator = new BarcodeGeneratorPNG();
+        $barcode = $generator->getBarcode('123456789', $generator::TYPE_CODE_128);
+        file_put_contents('img/barcode.png', $barcode);
+        $pdf->Image('img/barcode.png',$x + $anchoCredencial - 50, $y + 78, 40, 20,'PNG');
+// Asumiendo que quieres el código de barras justo encima de "Sello de validez"
+// Ajusta las coordenadas x, y según sea necesario, así como el ancho y alto del código de barras
+      //  $pdf->MemImage($barcode, $x + $anchoCredencial - 100, $y + 65, 40, 20);
+
+        // Continúa con el sello de validez y el resto del PDF
+        $pdf->Text($x + $anchoCredencial - $anchoTexto - 20, $y + 70, 'Sello de validez');
+
+        // Salida del PDF
         $pdf->Output();
         exit;
     }
