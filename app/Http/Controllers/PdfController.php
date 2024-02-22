@@ -41,18 +41,15 @@ class PdfController extends Controller
 // Agregar nombre completo del beneficiario
         $pdf->Text($x + 5, $y + 50, 'Nombre: ' . '$nombreCompleto');
 
-// Agregar CURP del beneficiario
-        $pdf->Text($x + 5, $y + 60, 'CURP: ' . '$curp');
-
 // Agregar cantidad de beneficiarios
-        $pdf->Text($x + 5, $y + 70, 'Cant de Beneficiarios: ' . '$cant_beneficiarios');
+        $pdf->Text($x + 5, $y + 60, 'Cant de Beneficiarios: ' . '$cant_beneficiarios');
 
 // Agregar fecha de expedición
-        $pdf->Text($x + 5, $y + 80, 'Fecha de expedicion: ' . '$fecha_exp');
+        $pdf->Text($x + 5, $y + 70, 'Fecha de expedicion: ' . '$fecha_exp');
 
 // Agregar texto informativo o cualquier otro detalle
         $pdf->SetFont('Arial', 'I', 8);
-        $pdf->Text($x + 5, $y + 90, 'Esta credencial es válida hasta la fecha de vencimiento.');
+        $pdf->Text($x + 5, $y + 90, 'Esta credencial es valida hasta la fecha de vencimiento.');
 
 // Agregar texto "Sello de validez"
         $anchoTexto = $pdf->GetStringWidth('Sello de validez'); // Obtener el ancho del texto
