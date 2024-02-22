@@ -17,9 +17,11 @@ return new class extends Migration
             $table->string('apellido_p',50);
             $table->string('apellido_m',50);
             $table->string('curp',18);
-            $table->integer('edad');
+            $table->date('fecha_nac');
             $table->integer('nBeneficiarios');
             $table->string('direccion',150);
+            $table->string('folio_cb',10);
+            $table->string('num_lecheria',10);
             $table->timestamps();
         });
     }

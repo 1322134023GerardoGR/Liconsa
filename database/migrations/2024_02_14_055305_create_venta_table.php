@@ -20,6 +20,7 @@ return new class extends Migration
             $table->float('Total');
             $table->unsignedBigInteger('tutor_id'); // Cambiado a unsignedBigInteger
             $table->unsignedBigInteger('trabajador_id');
+            $table->string('num_lecheria',10);
             $table->timestamps();
 
             $table->foreign('tutor_id')->references('id')->on('tutor_legal');
