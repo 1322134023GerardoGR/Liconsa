@@ -37,18 +37,20 @@
             padding: 20px;
         }
         .content {
+            display: grid;
             background-color: #D4C19C;
-            min-height: calc(100vh - 160px);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
+            grid-template-columns: repeat(2, 1fr);
+            grid-gap: 20px;
+            height: calc(100vh - 160px);
+            padding: 20px;
         }
         .panel {
             background-color: white;
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            margin: 0 80px; /* Margen añadido a los lados */
         }
         .btn-container {
             display: flex;
@@ -70,6 +72,14 @@
         }
         .btn:hover {
             background-color: #4a0e27;
+        }
+
+        .image-container {
+            grid-column: span 2;
+            text-align: center;
+        }
+        img {
+            width: 100px; /* Ajuste del ancho de la imagen */
         }
 
         /* Estilos para el formulario flotante */
@@ -101,6 +111,17 @@
         h1 {
             text-align: center;
         }
+
+        /* Clase adicional para centrar el último panel */
+        .center-panel {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            margin: 0 450px; /* Margen añadido a los lados */
+            grid-column: span 2;
+        }
     </style>
 </head>
 <body class="font-sans  antialiased">
@@ -109,14 +130,50 @@
     <h2>Gobierno de México</h2>
 </header>
 <div class="content">
-    <div class="panel"> <!-- Contenedor del panel blanco -->
-        <h1>Bienvenido Usuario</h1>
+
+    <div class="panel">
+        <div class="btn-container">
+            <button class="btn">Lista de Beneficiarios</button>
+        </div>
+        <div class="image-container">
+            <img src="/img/bx-list-ul.svg" alt="Leche" />
+        </div>
+    </div>
+
+    <div class="panel">
+        <div class="btn-container">
+            <button class="btn"><i class="fas fa-user-plus"></i>Registrar Beneficiario</button>
+        </div>
+        <div class="image-container">
+            <img src="/img/bx-user-plus.svg" alt="Leche" />
+        </div>
+    </div>
+
+    <div class="panel">
+        <div class="btn-container">
+            <button class="btn"><i class="fas fa-cart-plus"></i>Registrar Nueva Venta</button>
+        </div>
+        <div class="image-container">
+            <img src="/img/bx-dollar-circle.svg" alt="Leche" />
+        </div>
+    </div>
+
+    <div class="panel">
+        <div class="btn-container">
+            <button class="btn" onclick="showForm()"><i class="fas fa-search"></i>Buscar Beneficiario</button>
+        </div>
+        <div class="image-container">
+            <img src="/img/bx-search-alt-2.svg" alt="Leche" />
+        </div>
+    </div>
+
+    <!-- Panel centrado -->
+    <div class="panel center-panel">
         <div class="btn-container">
             <button class="btn">Registrar Usuario</button>
-            <button class="btn"><i class="fas fa-user-plus"></i>Registrar Beneficiario</button>
-            <button class="btn">Lista de Beneficiarios</button>
-            <button class="btn" onclick="showForm()"><i class="fas fa-search"></i>Buscar Beneficiario</button>
-            <button class="btn"><i class="fas fa-cart-plus"></i>Registrar Nueva Venta</button>
+        </div>
+        <div class="image-container">
+            <img src="/img/bx-user.svg" alt="Leche" />
         </div>
     </div>
 
