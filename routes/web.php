@@ -62,4 +62,4 @@ Route::get('/addS', function () {
     return view('liconsa.addSell');
 });
 
-Route::get('/generate-pdf', [PdfController::class,'generatePDF'])->name('pdf.generate');
+Route::get('/card-pdf', [PdfController::class,'generatePDF'])->name('pdf.generate');
