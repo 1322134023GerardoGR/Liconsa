@@ -20,58 +20,6 @@
             box-sizing: border-box;
         }
 
-        .sidebar {
-            position: fixed;
-            top: 0;
-            left: -250px; /* Oculta la barra lateral al inicio */
-            width: 250px; /* Ancho original de la barra lateral */
-            min-width: 80px; /* Ancho mínimo para asegurar visibilidad de íconos */
-            height: 100%;
-            background-color: #13322B;
-            transition: all 0.3s ease;
-            z-index: 1000; /* Asegura que esté por encima de otros elementos */
-            padding-top: 80px; /* Ajusta para que no cubra el encabezado */
-        }
-
-        .sidebar.active {
-            left: 0; /* Muestra la barra lateral al activarse */
-        }
-
-        .sidebar .nav-item {
-            margin: 20px;
-        }
-
-        /* Estilo para el botón de alternancia */
-        #sidebarToggle {
-            position: absolute;
-            left: 20px;
-            top: 20px;
-            cursor: pointer;
-            z-index: 1500; /* Asegura que esté por encima de otros elementos */
-        }
-
-        /* Estilo para el icono de alternancia */
-        #sidebarToggle span {
-            background-color: white;
-            width: 30px;
-            height: 5px;
-            display: block;
-            margin-bottom: 5px;
-            transition: all 0.3s ease;
-        }
-
-        /* Estilo para el icono de alternancia cuando está activo */
-        #sidebarToggle.active span:nth-child(1) {
-            transform: rotate(45deg) translate(5px, 5px);
-        }
-
-        #sidebarToggle.active span:nth-child(2) {
-            opacity: 0;
-        }
-
-        #sidebarToggle.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(7px, -8px);
-        }
 
         .header {
             background-color: #13322B;
@@ -95,7 +43,6 @@
 
         .content {
             background-color: #D4C19C;
-            min-height: calc(100vh - 160px);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -119,13 +66,12 @@
         }
 
         .btn-container {
-            display: flex;
+            display: block;
             justify-content: center;
             margin-top: 20px;
         }
 
         .btn {
-            margin: 0 10px;
             padding: 15px 30px;
             border: none;
             border-radius: 5px;
@@ -142,47 +88,85 @@
         .btn:hover {
             background-color: #4a0e27;
         }
+        .mynav{
+            background-color: #285C4D;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: right;
+            height: 80px;
+
+        }
+        .navbar {
+            background-color: #285C4D;
+        }
+        .navbar a {
+            color: white;
+            background-color: #285C4D;
+        }
+
+        .navbar a:hover {
+            color: #621132;
+            background-color: #285C4D;
+        }
+        .navbar-toggler {
+            background-color: #285C4D;
+            color: white;
+            border: none;
+        }
+        .navbar-toggler:hover {
+            background-color: #285C4D;
+            color: #621132;
+        }
+        .asd{
+            background-color: #285C4D;
+        }
+
+
     </style>
 </head>
 <body class="font-sans  antialiased">
 <header class="header">
     <h1>Liconsa</h1>
     <h2>Gobierno de México</h2>
-    <div id="sidebarToggle" onclick="toggleSidebar()">
-        <span></span>
-        <span></span>
-        <span></span>
-    </div>
 </header>
-<div class="sidebar" id="sidebar">
-    <!-- Barra de navegación -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
-        <div class="container-fluid">
-            <!-- Botón de alternancia de la barra lateral -->
-            <!-- Contenido de la barra de navegación -->
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
-                    <li class="nav-item active"><a class="nav-link" href="#!">
-                            <button class="btn">Lista de Beneficiarios</button>
-                        </a></li>
-                    <li class="nav-item"><a class="nav-link" href="#!">
-                            <button class="btn"><i class="fas fa-user-plus"></i>Registrar Beneficiario</button>
-                        </a></li>
-                    <li class="nav-item"><a class="nav-link" href="#!">
-                            <button class="btn"><i class="fas fa-cart-plus"></i>Registrar Nueva Venta</button>
-                        </a></li>
-                    <li class="nav-item"><a class="nav-link" href="#!">
-                            <button class="btn" onclick="showForm()"><i class="fas fa-search"></i>Buscar Beneficiario
-                            </button>
-                        </a></li>
-                    <li class="nav-item"><a class="nav-link" href="#!">
-                            <button class="btn">Registrar Usuario</button>
-                        </a></li>
+<div class="mynav">
+
+    <nav class="navbar navbar-expand-lg ">
+        <div class="container-fluid asd">
+            <a class="navbar-brand" href="#"></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse asd" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link "  href="#">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Lista de Beneficiarios</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Registrar Beneficiario</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Registrar Nueva Venta</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Buscar Beneficiario</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"> Registrar Usuario</a>
+                    </li>
                 </ul>
+
             </div>
         </div>
     </nav>
+
 </div>
+
+
 <div class="content">
     <div class="form-container">
         <form>
