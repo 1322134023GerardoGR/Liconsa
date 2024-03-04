@@ -79,10 +79,8 @@ class PdfController extends Controller
         $pdf->Text($x + 123, $y + 96, $code);
 
 
-
-
-
-        echo $fecha->format('Y-m-d'); // Muestra la nueva fecha
+       // $fecha = new DateTime('2023-09-15'); // Crea un objeto DateTime
+        //echo $fecha->format('Y-m-d'); // Muestra la nueva fecha
         // Salida del PDF
         $pdf->Output();
         exit;
