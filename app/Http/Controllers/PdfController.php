@@ -59,7 +59,7 @@ class PdfController extends Controller
 // Agregar fecha de expedición
         $pdf->Text($x + 5, $y + 85, 'Fecha de expedicion: ' . '$fecha_exp');
 
-        $pdf->Image('img/gato_gojo.jpg', $x + $anchoCredencial - 50, $y + 30, 40);
+        //$pdf->Image('img/gato_gojo.jpg', $x + $anchoCredencial - 50, $y + 30, 40);
         $pdf->Rect($x + $anchoCredencial - 50, $y + 30, 40, 40, 'D');
 
 // Agregar texto informativo o cualquier otro detalle

@@ -88,8 +88,13 @@
     <h1>Liconsa</h1>
     <h2>Gobierno de México</h2>
 </header>
+
+
+
 <div class="content">
     <div class="form-container">
+        <div class="card-header"><h2>Agregar Usuario</h2></div>
+
         <form>
             <div class="form-group">
                 <label for="nombre" class="form-label">Nombre(s):</label>

@@ -88,7 +88,8 @@
         .btn:hover {
             background-color: #4a0e27;
         }
-        .mynav{
+
+        .mynav {
             background-color: #285C4D;
             color: white;
             display: flex;
@@ -97,9 +98,11 @@
             height: 80px;
 
         }
+
         .navbar {
             background-color: #285C4D;
         }
+
         .navbar a {
             color: white;
             background-color: #285C4D;
@@ -109,16 +112,19 @@
             color: #621132;
             background-color: #285C4D;
         }
+
         .navbar-toggler {
             background-color: #285C4D;
             color: white;
             border: none;
         }
+
         .navbar-toggler:hover {
             background-color: #285C4D;
             color: #621132;
         }
-        .asd{
+
+        .asd {
             background-color: #285C4D;
         }
 
@@ -135,13 +141,15 @@
     <nav class="navbar navbar-expand-lg ">
         <div class="container-fluid asd">
             <a class="navbar-brand" href="#"></a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse asd" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link "  href="#">Inicio</a>
+                        <a class="nav-link " href="#">Inicio</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Lista de Beneficiarios</a>
@@ -163,12 +171,12 @@
             </div>
         </div>
     </nav>
-
 </div>
 
 
 <div class="content">
     <div class="form-container">
+        <div class="card-header"><h2>Agregar beneficiario</h2></div>
         <form>
             <div class="form-group">
                 <label for="nombre" class="form-label">Nombre del interesado:</label>
@@ -200,11 +208,11 @@
                 <input type="date" class="form-control" id="fecha_nacimiento" placeholder="Ej. 12/08/2004">
             </div>
             <div class="form-group">
-                <label for="num_beneficiarios" class="form-label">Número de beneficiarios:</label>
+                <label for="num_beneficiarios" class="form-label">Número de dependientes:</label>
                 <input type="number" class="form-control" id="num_beneficiarios" placeholder="Ej. 3">
             </div>
             <div class="form-group">
-                <label for="curp_beneficiarios" class="form-label">CURP de los beneficiarios:</label>
+                <label for="curp_beneficiarios" class="form-label">CURP de los dependientes:</label>
                 <input class="form-control" id="curp_beneficiarios" placeholder="Ej. GURG080412HDFDRRA3">
             </div>
             <div class="form-group">

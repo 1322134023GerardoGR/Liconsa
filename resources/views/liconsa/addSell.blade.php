@@ -183,37 +183,39 @@
 <header class="header">
     <h1>Liconsa</h1>
     <h2>Gobierno de México</h2>
-    <div id="sidebarToggle" onclick="toggleSidebar()">
-        <span></span>
-        <span></span>
-        <span></span>
-    </div>
 </header>
-<div class="sidebar" id="sidebar">
-    <!-- Barra de navegación -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
-        <div class="container-fluid">
-            <!-- Botón de alternancia de la barra lateral -->
-            <!-- Contenido de la barra de navegación -->
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
-                    <li class="nav-item active"><a class="nav-link" href="#!">
-                            <button class="btn">Lista de Beneficiarios</button>
-                        </a></li>
-                    <li class="nav-item"><a class="nav-link" href="#!">
-                            <button class="btn"><i class="fas fa-user-plus"></i>Registrar Beneficiario</button>
-                        </a></li>
-                    <li class="nav-item"><a class="nav-link" href="#!">
-                            <button class="btn"><i class="fas fa-cart-plus"></i>Registrar Nueva Venta</button>
-                        </a></li>
-                    <li class="nav-item"><a class="nav-link" href="#!">
-                            <button class="btn" onclick="showForm()"><i class="fas fa-search"></i>Buscar Beneficiario
-                            </button>
-                        </a></li>
-                    <li class="nav-item"><a class="nav-link" href="#!">
-                            <button class="btn">Registrar Usuario</button>
-                        </a></li>
+<div class="mynav">
+
+    <nav class="navbar navbar-expand-lg ">
+        <div class="container-fluid asd">
+            <a class="navbar-brand" href="#"></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse asd" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link " href="#">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Lista de Beneficiarios</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Registrar Beneficiario</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Registrar Nueva Venta</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Buscar Beneficiario</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"> Registrar Usuario</a>
+                    </li>
                 </ul>
+
             </div>
         </div>
     </nav>

@@ -96,13 +96,13 @@
     <h1>Liconsa</h1>
     <h2>Gobierno de México</h2>
 </header>
+
 <div class="content">
     <div class="card">
-        <div class="card-header">
-            Datos del usuario Juan Pérez López
-        </div>
+        <div class="card-header"><h2>Datos del Beneficiario Juan Pérez</h2></div>
+
         <div class="form-group">
-            <label for="nombre" class="form-label">Nombre del interesado:</label>
+            <label for="nombre" class="form-label">Nombre del beneficiario:</label>
             <input type="text" class="form-control" id="nombre" value="Juan" disabled>
         </div>
         <div class="form-group">
@@ -114,7 +114,7 @@
             <input type="text" class="form-control" id="apellido_materno" value="López" disabled>
         </div>
         <div class="form-group">
-            <label for="curp" class="form-label">CURP del interesado:</label>
+            <label for="curp" class="form-label">CURP del beneficiario:</label>
             <input type="text" class="form-control" id="curp" value="PERJ010101HDFXXXA4" disabled>
         </div>
         <div class="form-group">
@@ -126,11 +126,11 @@
             <input type="text" class="form-control" id="fecha_nacimiento" value="01/01/1990" disabled>
         </div>
         <div class="form-group">
-            <label for="num_beneficiarios" class="form-label">Número de beneficiarios:</label>
+            <label for="num_beneficiarios" class="form-label">Número de dependientes:</label>
             <input type="text" class="form-control" id="num_beneficiarios" value="2" disabled>
         </div>
         <div class="form-group">
-            <label for="curp_beneficiarios" class="form-label">CURP de los beneficiarios:</label>
+            <label for="curp_beneficiarios" class="form-label">CURP de los dependientes:</label>
             <textarea class="form-control" id="curp_beneficiarios" rows="3" disabled>MALA010101HDFXXXA1
 MALB010101HDFXXXA2</textarea>
         </div>

@@ -114,7 +114,7 @@
                 <th>CURP</th>
                 <th>Dirección</th>
                 <th>Fecha de Nacimiento</th>
-                <th>Número de Beneficiarios</th>
+                <th>Número de Dependientes</th>
             </tr>
             </thead>
             <tbody>
