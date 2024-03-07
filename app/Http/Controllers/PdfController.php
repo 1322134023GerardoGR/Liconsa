@@ -51,7 +51,7 @@ class PdfController extends Controller
         //$cantidad_dotacion=$cant_beneficiarios*2;
         $cantidad_dotacion = 2;
 
-        $pdf->Text($x + 5, $y + 68, 'Dotacion: '.$cantidad_dotacion);
+        $pdf->Text($x + 5, $y + 68, 'Dotacion: '.$cantidad_dotacion.' Lts');
 
         $pdf->Text($x + 5, $y + 78, 'Dias de Asistencia: '.'$dias_asistencia');
 
@@ -68,7 +68,8 @@ class PdfController extends Controller
         $fecha_vencimiento->add($intervalo); // Añade el intervalo a la fecha
 
         $pdf->Text($x + 5, $y + 90, 'Esta credencial es valida hasta la fecha de vencimiento: ');
-        $pdf->Text($x + 5, $y + 95, '$fecha_vencimiento');
+        $fecha = new DateTime('2025-03-01'); // Crea un objeto DateTime
+        $pdf->Text($x + 5, $y + 95, $fecha->format('Y-m-d'));  // Muestra la nueva fecha
         // Generar código de barras
 
         $generator = new BarcodeGeneratorPNG();
@@ -79,8 +80,8 @@ class PdfController extends Controller
         $pdf->Text($x + 123, $y + 96, $code);
 
 
-       // $fecha = new DateTime('2023-09-15'); // Crea un objeto DateTime
-        //echo $fecha->format('Y-m-d'); // Muestra la nueva fecha
+
+
         // Salida del PDF
         $pdf->Output();
         exit;
