@@ -11,16 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('trabajador', function (Blueprint $table) {
-            $table->id();
-            $table->string('nombre',50);
-            $table->string('apellido_p',50);
-            $table->string('apellido_m',50);
-            $table->string('curp',18);
-            $table->string('rol',30);
-            $table->string('rfc',13);
-            $table->timestamps();
-        });
+
     }
 
     /**

@@ -11,14 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('beneficiarios', function (Blueprint $table) {
-            $table->id();
-            $table->string('curp',18);
-            $table->unsignedBigInteger('tutor_id'); // Cambiado a unsignedBigInteger
-            $table->timestamps();
 
-            $table->foreign('tutor_id')->references('id')->on('tutor_legal');
-        });
     }
 
     /**

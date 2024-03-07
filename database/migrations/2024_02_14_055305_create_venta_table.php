@@ -11,21 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('venta', function (Blueprint $table) {
-            $table->id();
-            $table->string('folio',50);
-            $table->date('fecha');
-            $table->time('hora');
-            $table->integer('litros');
-            $table->float('Total');
-            $table->unsignedBigInteger('tutor_id'); // Cambiado a unsignedBigInteger
-            $table->unsignedBigInteger('trabajador_id');
-            $table->string('num_lecheria',10);
-            $table->timestamps();
 
-            $table->foreign('tutor_id')->references('id')->on('tutor_legal');
-            $table->foreign('trabajador_id')->references('id')->on('trabajador');
-        });
     }
 
     /**
