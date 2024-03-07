@@ -13,7 +13,11 @@ return new class extends Migration
     {
         Schema::create('faltas', function (Blueprint $table) {
             $table->id();
+            $table->date('fecha');
+            $table->unsignedBigInteger('beneficiario_id');
             $table->timestamps();
+
+            $table->foreign('beneficiario_id')->references('id')->on('beneficiarios');
         });
     }
 

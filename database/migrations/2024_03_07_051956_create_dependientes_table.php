@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('dependientes', function (Blueprint $table) {
             $table->id();
             $table->string('curp',18);
-            $table->unsignedBigInteger('tutor_id'); // Cambiado a unsignedBigInteger
+            $table->unsignedBigInteger('beneficiario_id'); // Cambiado a unsignedBigInteger
             $table->timestamps();
-            $table->foreign('tutor_id')->references('id')->on('tutor_legal');
+            $table->foreign('beneficiario_id')->references('id')->on('beneficiarios');
         });
     }
 

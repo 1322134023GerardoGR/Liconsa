@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('cuentas', function (Blueprint $table) {
             $table->id();
+            $table->string('correo',50)->unique();
+            $table->string('contraseña',50);
             $table->timestamps();
         });
     }

@@ -16,15 +16,15 @@ return new class extends Migration
             $table->string('folio',50);
             $table->date('fecha');
             $table->time('hora');
-            $table->integer('litros');
-            $table->float('Total');
-            $table->unsignedBigInteger('tutor_id'); // Cambiado a unsignedBigInteger
-            $table->unsignedBigInteger('trabajador_id');
+            $table->integer('litros_v');
+            $table->float('total');
             $table->string('num_lecheria',10);
+            $table->unsignedBigInteger('beneficiario_id');
+            $table->unsignedBigInteger('trabajador_id');
             $table->timestamps();
 
-            $table->foreign('tutor_id')->references('id')->on('tutor_legal');
-            $table->foreign('trabajador_id')->references('id')->on('trabajador');
+            $table->foreign('beneficiario_id')->references('id')->on('beneficiarios');
+            $table->foreign('trabajador_id')->references('id')->on('trabajadors');
         });
     }
 
