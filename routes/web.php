@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BeneficiarioController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PdfController;
@@ -48,7 +49,7 @@ Route::get('/index', function () {
 });
 Route::get('/add', function () {
     return view('liconsa.agrBeneficiario');
-});
+})->name('add');
 Route::get('/see', function () {
     return view('liconsa.seeBeneficiario');
 });
@@ -63,3 +64,11 @@ Route::get('/addS', function () {
 });
 
 Route::get('/card-pdf', [PdfController::class,'generatePDF'])->name('pdf.generate');
+
+
+
+
+Route::post('/beneficiarios/store', [BeneficiarioController::class, 'store'])->name('beneficiarios.store');
+
+
+

@@ -18,11 +18,11 @@ return new class extends Migration
             $table->string('apellido_m', 50);
             $table->string('curp', 18);
             $table->date('fecha_nac');
-            $table->integer('nBeneficiarios');
+            $table->integer('n_dependientes');
             $table->string('direccion', 150);
             $table->string('folio_cb', 10);
             $table->string('num_lecheria', 10);
-            $table->string('d_recoleccion', 50);
+            $table->string('d_recoleccion', 50)->nullable();
             $table->boolean('Sancionado');
             $table->timestamps();
         });

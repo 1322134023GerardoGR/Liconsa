@@ -131,7 +131,22 @@
 
     </style>
 </head>
+
 <body class="font-sans  antialiased">
+@if(session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
+@if($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
 <header class="header">
     <h1>Liconsa</h1>
     <h2>Gobierno de México</h2>
@@ -177,47 +192,45 @@
 <div class="content">
     <div class="form-container">
         <div class="card-header"><h2>Agregar beneficiario</h2></div>
-        <form>
+        <form action="../beneficiarios/store" method="POST" enctype="multipart/form-data">
+            @csrf
             <div class="form-group">
-                <label for="nombre" class="form-label">Nombre del interesado:</label>
-                <input type="text" class="form-control" id="nombre" placeholder="Ej. Gerardo">
+                <label for="nombre" class="form-label">Nombre del beneficiario:</label>
+                <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ej. Gerardo">
             </div>
             <div class="form-group">
-                <label for="apellido_paterno" class="form-label">Apellido paterno:</label>
-                <input type="text" class="form-control" id="apellido_paterno" placeholder="Ej. Gutiérrez">
+                <label for="apellido_p" class="form-label">Apellido paterno:</label>
+                <input type="text" class="form-control" id="apellido_p" name="apellido_p" placeholder="Ej. Gutiérrez">
             </div>
             <div class="form-group">
-                <label for="apellido_materno" class="form-label">Apellido materno:</label>
-                <input type="text" class="form-control" id="apellido_materno" placeholder="Ej. Ramírez">
+                <label for="apellido_m" class="form-label">Apellido materno:</label>
+                <input type="text" class="form-control" id="apellido_m" name="apellido_m" placeholder="Ej. Ramírez">
             </div>
-            <div class="form-group">
-                <label for="edad" class="form-label">Edad:</label>
-                <input type="number" class="form-control" id="edad" placeholder="Ej. 25">
-            </div>
+
             <div class="form-group">
                 <label for="curp" class="form-label">CURP del interesado:</label>
-                <input type="text" class="form-control" id="curp" placeholder="Ej. GURG080412HDFDRRA3">
+                <input type="text" class="form-control" id="curp" name="curp" placeholder="Ej. GURG080412HDFDRRA3">
             </div>
             <div class="form-group">
                 <label for="direccion" class="form-label">Dirección:</label>
-                <input type="text" class="form-control" id="direccion"
+                <input type="text" class="form-control" id="direccion" name="direccion"
                        placeholder="Ej. Villa del Real, Canes 35, Tecámac Edo.Mex.">
             </div>
             <div class="form-group">
-                <label for="fecha_nacimiento" class="form-label">Fecha de nacimiento:</label>
-                <input type="date" class="form-control" id="fecha_nacimiento" placeholder="Ej. 12/08/2004">
+                <label for="fecha_nac" class="form-label">Fecha de nacimiento:</label>
+                <input type="date" class="form-control" id="fecha_nac" name="fecha_nac" placeholder="Ej. 12/08/2004">
             </div>
             <div class="form-group">
-                <label for="num_beneficiarios" class="form-label">Número de dependientes:</label>
-                <input type="number" class="form-control" id="num_beneficiarios" placeholder="Ej. 3">
+                <label for="n_dependientes" class="form-label">Número de dependientes:</label>
+                <input type="number" class="form-control" id="n_dependientes" name="n_dependientes" placeholder="Ej. 3">
             </div>
             <div class="form-group">
                 <label for="curp_beneficiarios" class="form-label">CURP de los dependientes:</label>
-                <input class="form-control" id="curp_beneficiarios" placeholder="Ej. GURG080412HDFDRRA3">
+                <input class="form-control" id="curp_beneficiarios" name="curp_beneficiarios" placeholder="Ej. GURG080412HDFDRRA3">
             </div>
             <div class="form-group">
-                <label for="Nlecheria" class="form-label">N° Lecheria:</label>
-                <input type="number" class="form-control" id="Nlecheria" placeholder="Ej. 65469158647">
+                <label for="num_lecheria" class="form-label">N° Lecheria:</label>
+                <input type="number" class="form-control" id="num_lecheria" name="num_lecheria" placeholder="Ej. 65469158647">
             </div>
             <div class="btn-container">
                 <button type="button" class="btn">Tomar foto de tarjeta</button>
