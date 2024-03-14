@@ -46,13 +46,21 @@ Route::get('/p4', function () {
 });
 Route::get('/index', function () {
     return view('liconsa.index');
-});
+})->name('index');
 Route::get('/add', function () {
     return view('liconsa.agrBeneficiario');
 })->name('add');
-Route::get('/see', function () {
+
+
+
+Route::get('/see/{id}', function () {
     return view('liconsa.seeBeneficiario');
-});
+})->name('details.ben');
+
+Route::get('/edit/{id}', function () {
+    return view('liconsa.editBeneficiario');
+})->name('edit.ben');
+
 Route::get('/list', function () {
     return view('liconsa.listBene');
 });
@@ -69,6 +77,10 @@ Route::get('/card-pdf/{id}', [PdfController::class,'generatePDF'])->name('pdf.ge
 
 
 Route::post('/beneficiarios/store', [BeneficiarioController::class, 'store'])->name('beneficiarios.store');
+Route::match(['get','post'],'/beneficiarios/update/{id}', [BeneficiarioController::class, 'update'])->name('beneficiarios.update');
+Route::match(['get','post'],'/beneficiarios/editar/{id}', [BeneficiarioController::class, 'edit'])->name('beneficiarios.edit');
+Route::match(['get','post'],'/beneficiarios/detalles/{id}', [BeneficiarioController::class, 'show'])->name('beneficiarios.show');
+Route::post('/beneficiarios/eliminar/{id}', [BeneficiarioController::class, 'destroy'])->name('beneficiarios.destroy');
 
 
 

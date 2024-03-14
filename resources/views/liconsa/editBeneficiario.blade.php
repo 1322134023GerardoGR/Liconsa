@@ -101,48 +101,50 @@
 
     <div class="card">
         <div class="card-header"><h2>Datos del Beneficiario {{$beneficiario->nombre}} {{$beneficiario->apellido_p}}</h2></div>
-
-        <div class="form-group">
-            <label for="nombre" class="form-label">Nombre del beneficiario:</label>
-            <input type="text" class="form-control" id="nombre" value="{{$beneficiario->nombre}}" disabled>
-        </div>
-        <div class="form-group">
-            <label for="apellido_paterno" class="form-label">Apellido paterno:</label>
-            <input type="text" class="form-control" id="apellido_paterno" value="{{$beneficiario->apellido_p}}" disabled>
-        </div>
-        <div class="form-group">
-            <label for="apellido_materno" class="form-label">Apellido materno:</label>
-            <input type="text" class="form-control" id="apellido_materno" value="{{$beneficiario->apellido_m}}" disabled>
-        </div>
-        <div class="form-group">
-            <label for="curp" class="form-label">CURP del beneficiario:</label>
-            <input type="text" class="form-control" id="curp" value="{{$beneficiario->curp}}" disabled>
-        </div>
-        <div class="form-group">
-            <label for="direccion" class="form-label">Dirección:</label>
-            <input type="text" class="form-control" id="direccion" value="{{$beneficiario->direccion}}" disabled>
-        </div>
-        <div class="form-group">
-            <label for="fecha_nacimiento" class="form-label">Fecha de nacimiento:</label>
-            <input type="text" class="form-control" id="fecha_nacimiento" value="{{$beneficiario->fecha_nac}}" disabled>
-        </div>
-        <div class="form-group">
-            <label for="num_beneficiarios" class="form-label">Número de dependientes:</label>
-            <input type="text" class="form-control" id="num_beneficiarios" value="{{$beneficiario->n_dependientes}}" disabled>
-        </div>
-        <div class="form-group">
-            <label for="curp_beneficiarios" class="form-label">CURP de los dependientes:</label>
-            <textarea class="form-control" id="curp_beneficiarios" rows="3" disabled>MALA010101HDFXXXA1
-MALB010101HDFXXXA2</textarea>
-        </div>
-        <div class="btn-container">
-            <a href="{{ route('beneficiarios.destroy', $beneficiario->id) }}" class="btn">Borrar</a>
-            <a href="{{ route('beneficiarios.edit', $beneficiario->id) }}" class="btn">Editar</a>
-        </div>
+        <form>
+            <div class="form-group">
+                <label for="nombre" class="form-label">Nombre del beneficiario:</label>
+                <input type="text" class="form-control" id="nombre" name="nombre" value="{{$beneficiario->nombre}}">
+            </div>
+            <div class="form-group">
+                <label for="apellido_paterno" class="form-label">Apellido paterno:</label>
+                <input type="text" class="form-control" id="apellido_paterno" name="apellido_p" value="{{$beneficiario->apellido_p}}">
+            </div>
+            <div class="form-group">
+                <label for="apellido_materno" class="form-label">Apellido materno:</label>
+                <input type="text" class="form-control" id="apellido_materno" name="apellido_m" value="{{$beneficiario->apellido_m}}">
+            </div>
+            <div class="form-group">
+                <label for="curp" class="form-label">CURP del beneficiario:</label>
+                <input type="text" class="form-control" id="curp" name="curp" value="{{$beneficiario->curp}}">
+            </div>
+            <div class="form-group">
+                <label for="direccion" class="form-label">Dirección:</label>
+                <input type="text" class="form-control" id="direccion" name="direccion" value="{{$beneficiario->direccion}}">
+            </div>
+            <div class="form-group">
+                <label for="fecha_nacimiento" class="form-label">Fecha de nacimiento:</label>
+                <input type="text" class="form-control" id="fecha_nacimiento" name="fecha_nac" value="{{$beneficiario->fecha_nac}}">
+            </div>
+            <div class="form-group">
+                <label for="num_beneficiarios" class="form-label">Número de dependientes:</label>
+                <input type="text" class="form-control" id="num_beneficiarios" name="n_dependientes" value="{{$beneficiario->n_dependientes}}">
+            </div>
+            <!-- No es necesario agregar name a curp_beneficiarios ya que está deshabilitado y no se enviará en el formulario -->
+            <div class="form-group">
+                <label for="curp_beneficiarios" class="form-label">CURP de los dependientes:</label>
+                <textarea class="form-control" id="curp_beneficiarios" name="curp_beneficiarios" rows="3" disabled>MALA010101HDFXXXA1
+                MALB010101HDFXXXA2</textarea>
+            </div>
+            <div class="btn-container">
+                <button type="reset" class="btn">Cancelar</button>
+                <button type="submit" class="btn">Guardar</button>
+            </div>
+        </form>
     </div>
 </div>
 <footer class="footer">
-    <p>LICONSA  2024</p>
+    <p>LICONSA © 2024</p>
 </footer>
 
 <!-- Bootstrap JS (optional) -->
