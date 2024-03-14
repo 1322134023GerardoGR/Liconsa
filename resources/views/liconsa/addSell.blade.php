@@ -235,7 +235,13 @@
             <label for="num_lecheria">Número de Lechería:</label>
             <input type="text" class="form-control" id="num_lecheria">
         </div>
-        <img src="https://via.placeholder.com/200" alt="Leche"/>
+
+
+        <p>Barcode: <span class="found"></span></p>
+        <div id="interactive" class="viewport"></div>
+        <script src="{{public_path('JS/script.js')}}"></script>
+
+
         <div class="btn-container">
             <button class="btn">Realizar Compra</button>
             <button class="btn" onclick="showForm()">Cancelar Compra</button>

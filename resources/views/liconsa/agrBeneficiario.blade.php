@@ -151,42 +151,7 @@
     <h1>Liconsa</h1>
     <h2>Gobierno de México</h2>
 </header>
-<div class="mynav">
 
-    <nav class="navbar navbar-expand-lg ">
-        <div class="container-fluid asd">
-            <a class="navbar-brand" href="#"></a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse asd" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link " href="#">Inicio</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Lista de Beneficiarios</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Registrar Beneficiario</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Registrar Nueva Venta</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Buscar Beneficiario</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"> Registrar Usuario</a>
-                    </li>
-                </ul>
-
-            </div>
-        </div>
-    </nav>
-</div>
 
 
 <div class="content">
@@ -195,7 +160,7 @@
         <form action="../beneficiarios/store" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
-                <label for="nombre" class="form-label">Nombre del beneficiario:</label>
+                <label for="nombre" class="form-label">Nombre del interesado:</label>
                 <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ej. Gerardo">
             </div>
             <div class="form-group">
@@ -232,13 +197,14 @@
                 <label for="num_lecheria" class="form-label">N° Lecheria:</label>
                 <input type="number" class="form-control" id="num_lecheria" name="num_lecheria" placeholder="Ej. 65469158647">
             </div>
-            <div class="btn-container">
+            <div class="btn-container text-center">
                 <button type="button" class="btn">Tomar foto de tarjeta</button>
             </div>
-            <div class="btn-container">
+            <div class="btn-container text-center">
                 <button type="submit" class="btn"><i class="fas fa-save"></i>Guardar</button>
                 <button type="reset" class="btn"><i class="fas fa-times"></i>Cancelar</button>
             </div>
+
 
         </form>
     </div>
