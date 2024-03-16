@@ -236,10 +236,11 @@
             <input type="text" class="form-control" id="num_lecheria">
         </div>
 
+        <h1>Scanner de Código de Barras</h1>
+        <p>Barcode: <span id='found' class="found"></span></p>
 
-        <p>Barcode: <span class="found"></span></p>
         <div id="interactive" class="viewport"></div>
-        <script src="{{public_path('JS/script.js')}}"></script>
+
 
 
         <div class="btn-container">
@@ -269,7 +270,8 @@
 <footer class="footer">
     <p>LICONSA © 2024</p>
 </footer>
-
+<script src="https://cdn.jsdelivr.net/npm/quagga/dist/quagga.min.js"></script>
+<script src="{{ asset('JS/script.js') }}"> </script>
 <script>
     function showForm() {
         document.getElementById('overlay').style.display = 'flex';
