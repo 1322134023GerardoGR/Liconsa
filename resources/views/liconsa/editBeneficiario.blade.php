@@ -101,7 +101,7 @@
 
     <div class="card">
         <div class="card-header"><h2>Datos del Beneficiario {{$beneficiario->nombre}} {{$beneficiario->apellido_p}}</h2></div>
-        <form>
+        <form action="{{route('beneficiarios.update',$beneficiario->id)}}" method="get">
             <div class="form-group">
                 <label for="nombre" class="form-label">Nombre del beneficiario:</label>
                 <input type="text" class="form-control" id="nombre" name="nombre" value="{{$beneficiario->nombre}}">
@@ -130,12 +130,17 @@
                 <label for="num_beneficiarios" class="form-label">Número de dependientes:</label>
                 <input type="text" class="form-control" id="num_beneficiarios" name="n_dependientes" value="{{$beneficiario->n_dependientes}}">
             </div>
+            <div class="form-group">
+                <label for="num_lecheria" class="form-label">N° Lecheria:</label>
+                <input type="number" class="form-control" id="num_lecheria" name="num_lecheria" placeholder="Ej. 65469158647" value="{{$beneficiario->num_lecheria}}">
+            </div>
             <!-- No es necesario agregar name a curp_beneficiarios ya que está deshabilitado y no se enviará en el formulario -->
             <div class="form-group">
                 <label for="curp_beneficiarios" class="form-label">CURP de los dependientes:</label>
                 <textarea class="form-control" id="curp_beneficiarios" name="curp_beneficiarios" rows="3" disabled>MALA010101HDFXXXA1
                 MALB010101HDFXXXA2</textarea>
             </div>
+
             <div class="btn-container">
                 <button type="reset" class="btn">Cancelar</button>
                 <button type="submit" class="btn">Guardar</button>

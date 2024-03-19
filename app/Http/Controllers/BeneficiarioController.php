@@ -77,7 +77,7 @@ class BeneficiarioController extends Controller
             $beneficiario->update($request->all());
 
             // Redireccionar con mensaje de éxito
-            return redirect()->route('edit.ben')->with('success', 'Beneficiario actualizado con éxito.');
+            return redirect()->route('index')->with('success', 'Beneficiario actualizado con éxito.');
         } catch (\Exception $e) {
             return redirect()->route('index')->withErrors(['Error al actualizar el beneficiario: ' . $e->getMessage()]);
         }
