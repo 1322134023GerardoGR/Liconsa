@@ -138,6 +138,7 @@
     <h1>Liconsa</h1>
     <h2>Gobierno de México</h2>
 </header>
+
 @if(session('success'))
     <div class="alert alert-success">
         {{ session('success') }}

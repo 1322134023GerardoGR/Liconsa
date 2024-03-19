@@ -118,44 +118,17 @@
             </tr>
             </thead>
             <tbody>
+            @while($beneficiarios->count() > 0)
             <tr>
-                <td>Juan</td>
-                <td>Pérez</td>
-                <td>Gómez</td>
-                <td>PERJ901011HDFJR01</td>
-                <td>Calle 123, Col. Centro</td>
+                <td>{{$beneficiarios->nombre}}</td>
+                <td>{{$beneficiarios->apellido_p}}</td>
+                <td>{{$beneficiarios->apellido_m}}</td>
+                <td>{{$beneficiarios->curp}}</td>
+                <td>{{$beneficiarios->direccion}}</td>
                 <td>1990-10-11</td>
                 <td>3</td>
             </tr>
-            <tr>
-                <td>Maria</td>
-                <td>González</td>
-                <td>Rodríguez</td>
-                <td>GORM890325MDFNG02</td>
-                <td>Avenida XYZ, Col. Norte</td>
-                <td>1989-03-25</td>
-                <td>2</td>
-            </tr>
-            <!-- Agrega más filas con datos de ejemplo -->
-            <!-- Aquí agregamos más filas con datos de ejemplo -->
-            <tr>
-                <td>José</td>
-                <td>López</td>
-                <td>Hernández</td>
-                <td>LOPH880715MDFJR05</td>
-                <td>Calle 456, Col. Sur</td>
-                <td>1988-07-15</td>
-                <td>4</td>
-            </tr>
-            <tr>
-                <td>Ana</td>
-                <td>Martínez</td>
-                <td>García</td>
-                <td>MAGA920420MDFNA08</td>
-                <td>Avenida ABC, Col. Este</td>
-                <td>1992-04-20</td>
-                <td>1</td>
-            </tr>
+            @endwhile
             <!-- Agrega más filas con datos de ejemplo -->
             </tbody>
         </table>

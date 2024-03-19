@@ -9,6 +9,15 @@ use Illuminate\Support\Str;
 
 class BeneficiarioController extends Controller
 {
+    public function index(): \Illuminate\Contracts\View\Factory|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\View
+    {
+        // Obtener todos los beneficiarios
+        $beneficiarios = Beneficiario::all();
+
+        // Pasar los beneficiarios a la vista para mostrarlos
+        return view('liconsa.listBene', compact('beneficiarios'));
+    }
+
     public function store(Request $request): \Illuminate\Http\RedirectResponse
     {
         try {
