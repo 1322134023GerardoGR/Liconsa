@@ -112,9 +112,8 @@
                 <th>Apellido Paterno</th>
                 <th>Apellido Materno</th>
                 <th>CURP</th>
-                <th>Fecha de Nacimiento</th>
                 <th>Número de Dependientes</th>
-                <th>Dirección</th>
+
                 <th>Número de Lechería</th>
 
                 <th>Acciones</th>
@@ -127,9 +126,9 @@
                     <td>{{ $beneficiario->apellido_p }}</td>
                     <td>{{ $beneficiario->apellido_m }}</td>
                     <td>{{ $beneficiario->curp }}</td>
-                    <td>{{ $beneficiario->fecha_nac }}</td>
+
                     <td>{{ $beneficiario->n_dependientes }}</td>
-                    <td>{{ $beneficiario->direccion }}</td>
+
                     <td>{{ $beneficiario->num_lecheria }}</td>
 
                     <td>
