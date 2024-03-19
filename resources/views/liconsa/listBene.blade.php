@@ -113,9 +113,7 @@
                 <th>Apellido Materno</th>
                 <th>CURP</th>
                 <th>Número de Dependientes</th>
-
                 <th>Número de Lechería</th>
-
                 <th>Acciones</th>
             </tr>
             </thead>
@@ -126,9 +124,7 @@
                     <td>{{ $beneficiario->apellido_p }}</td>
                     <td>{{ $beneficiario->apellido_m }}</td>
                     <td>{{ $beneficiario->curp }}</td>
-
                     <td>{{ $beneficiario->n_dependientes }}</td>
-
                     <td>{{ $beneficiario->num_lecheria }}</td>
 
                     <td>
