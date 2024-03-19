@@ -14,8 +14,8 @@ class TrabajadorController extends Controller
             // Validar los datos del formulario
             $request->validate([
                 'nombre' => 'required|string|max:50',
-                'apellido_paterno' => 'required|string|max:50',
-                'apellido_materno' => 'required|string|max:50',
+                'apellido_p' => 'required|string|max:50',
+                'apellido_m' => 'required|string|max:50',
                 'curp' => 'required|string|max:18|unique:trabajadores', // Asegúrate de que el CURP sea único en la tabla
                 'rfc' => 'required|string|max:13|unique:trabajadores', // Asegúrate de que el RFC sea único en la tabla
                 'rol' => 'required|string|in:vendedor,atencion_clientes,supervisor', // Asegúrate de que el rol sea uno de los valores permitidos

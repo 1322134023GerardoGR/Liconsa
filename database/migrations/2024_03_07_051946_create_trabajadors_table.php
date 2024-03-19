@@ -19,7 +19,6 @@ return new class extends Migration
             $table->string('curp',18);
             $table->string('rol',30);
             $table->string('rfc',13);
-            $table->string('codigo',10)->nullable();
             $table->timestamps();
 
         });

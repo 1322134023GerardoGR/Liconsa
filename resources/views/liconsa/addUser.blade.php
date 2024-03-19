@@ -122,27 +122,27 @@
             @csrf
             <div class="form-group">
                 <label for="nombre" class="form-label">Nombre(s):</label>
-                <input type="text" class="form-control" id="nombre" placeholder="Ej. Adrian Alejandro">
+                <input type="text" name="nombre" class="form-control" id="nombre" placeholder="Ej. Adrian Alejandro">
             </div>
             <div class="form-group">
-                <label for="apellido_paterno" class="form-label">Apellido paterno:</label>
-                <input type="text" class="form-control" id="apellido_paterno" placeholder="Ej. Gómez">
+                <label for="apellido_p" class="form-label">Apellido paterno:</label>
+                <input type="text" name="apellido_p" class="form-control" id="apellido_p" placeholder="Ej. Gómez">
             </div>
             <div class="form-group">
-                <label for="apellido_materno" class="form-label">Apellido materno:</label>
-                <input type="text" class="form-control" id="apellido_materno" placeholder="Ej. Rodriguez">
+                <label for="apellido_m" class="form-label">Apellido materno:</label>
+                <input type="text" name="apellido_m" class="form-control" id="apellido_m" placeholder="Ej. Rodriguez">
             </div>
             <div class="form-group">
                 <label for="curp" class="form-label">CURP:</label>
-                <input type="text" class="form-control" id="curp" placeholder="ROHM040812HDFDRRA3">
+                <input type="text" name="curp" class="form-control" id="curp" placeholder="ROHM040812HDFDRRA3">
             </div>
             <div class="form-group">
                 <label for="rfc" class="form-label">RFC:</label>
-                <input type="text" class="form-control" id="rfc" placeholder="ROHM040812">
+                <input type="text" name="rfc" class="form-control" id="rfc" placeholder="ROHM040812">
             </div>
             <div class="form-group">
                 <label for="rol" class="form-label">Rol:</label>
-                <select class="form-control" id="rol">
+                <select name="rol" class="form-control" id="rol">
                     <option value="vendedor">Vendedor</option>
                     <option value="atencion_clientes">At. Clientes</option>
                     <option value="supervisor">Supervisor</option>
