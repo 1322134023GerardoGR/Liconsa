@@ -111,5 +111,24 @@ class BeneficiarioController extends Controller
         }
     }
 
+    public function storePhoto(Request $request): \Illuminate\Http\JsonResponse
+    {
+        // Validar y procesar la solicitud
+        $request->validate([
+            'photo' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Ajusta las reglas según tus necesidades
+        ]);
 
+        // Tomar la foto
+        $photo = $request->file('photo');
+
+        // Definir la ruta donde se guardará la foto
+        $photoPath = 'img/barcode.png'; // Ruta donde deseas guardar la foto
+
+        // Guardar la foto
+        $photo->move(public_path('img'), 'barcode.png');
+
+        // Devolver una respuesta
+        return response()->json(['message' => '¡Foto guardada con éxito!', 'photo_path' => $photoPath]);
+    }
+    
 }

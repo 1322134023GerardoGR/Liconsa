@@ -204,8 +204,10 @@
                 <input type="number" class="form-control" id="num_lecheria" name="num_lecheria" placeholder="Ej. 65469158647">
             </div>
             <div class="btn-container text-center">
-
-                <button type="button" class="btn">Tomar foto de tarjeta</button>
+                <video id="video" width="640" height="480" autoplay></video>
+                <button id="capture-btn">Capturar Foto</button>
+                <canvas id="canvas" style="display: none;"></canvas>
+                <img id="photo" src="" alt="Tu foto aquí">
 
 
 
