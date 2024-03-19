@@ -52,7 +52,6 @@ Route::get('/add', function () {
 })->name('add');
 
 
-
 Route::get('/see/{id}', function () {
     return view('liconsa.seeBeneficiario');
 })->name('details.ben');
@@ -64,6 +63,7 @@ Route::get('/edit/{id}', function () {
 Route::get('/list', function () {
     return view('liconsa.listBene');
 })->name('list.ben');
+
 Route::get('/addU', function () {
     return view('liconsa.addUser');
 });

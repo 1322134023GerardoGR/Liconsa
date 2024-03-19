@@ -27,7 +27,7 @@ Quagga.init({
 
 Quagga.onDetected(function (result) {
     let code = result.codeResult.code;
-    let prinbarcode=document.getElementById('found');
-    prinbarcode.innerHTML=code;
+    let prinbarcode=document.getElementById('code');
+    prinbarcode.value=code;
     console.log("Código de barras detectado: " + code);
 });
