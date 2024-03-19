@@ -24,7 +24,7 @@ return new class extends Migration
             $table->timestamps();
 
             $table->foreign('beneficiario_id')->references('id')->on('beneficiarios');
-            $table->foreign('trabajador_id')->references('id')->on('trabajadors');
+            $table->foreign('trabajador_id')->references('id')->on('trabajadores');
         });
     }
 

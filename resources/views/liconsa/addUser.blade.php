@@ -95,7 +95,7 @@
     <div class="form-container">
         <div class="card-header"><h2>Agregar Usuario</h2></div>
 
-        <form>
+        <form action="{{route('trabajadores.store')}}" method="POST">
             <div class="form-group">
                 <label for="nombre" class="form-label">Nombre(s):</label>
                 <input type="text" class="form-control" id="nombre" placeholder="Ej. Adrian Alejandro">
