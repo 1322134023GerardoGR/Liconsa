@@ -177,11 +177,13 @@
             margin-left: auto;
             margin-right: auto;
         }
+
         .items-center {
             display: flex;
             justify-content: center;
             align-items: center;
         }
+
         .viewport {
             width: 100%;
             max-width: 640px; /* Ajuste del ancho del lector */
@@ -189,7 +191,8 @@
             margin-top: -6px;
             border-radius: 2px;
         }
-        video{
+
+        video {
             border-radius: 50px;
         }
     </style>
@@ -235,51 +238,51 @@
         </div>
     </nav>
 </div>
-<div class="content">
-    <div class="panel"> <!-- Contenedor del panel blanco -->
-        <h1>Registrar Venta</h1>
-        <div class="form-group">
-            <label for="code">Código del Beneficiario:</label>
-            <input disabled type="text" class="form-control" id="code">
-        </div>
-        <div class="form-group">
-            <label for="litros">Número de litros de leche:</label>
-            <input type="number" class="form-control" id="litros">
-        </div>
-        <div class="form-group">
-            <label for="num_lecheria">Número de Lechería:</label>
-            <input type="text" class="form-control" id="num_lecheria">
-        </div>
+<form action="{{route('ventas.store')}}" method="POST">
+    @csrf
+    <div class="content">
+        <div class="panel"> <!-- Contenedor del panel blanco -->
+            <h1>Registrar Venta</h1>
+            <div class="form-group">
+                <label for="code">Código del Beneficiario:</label>
+                <input name="code" type="text" class="form-control" id="code">
+            </div>
+            <div class="form-group">
+                <label for="litros_v">Número de litros de leche:</label>
+                <input name="litros_v" type="number" class="form-control" id="litros_v">
+            </div>
+            <div class="form-group">
+                <label for="num_lecheria">Número de Lechería:</label>
+                <input name="num_lecheria" type="number" class="form-control" id="num_lecheria">
+            </div>
 
-        <div class="items-center">
-            <div id="interactive" class="viewport"></div>
-        </div>
-        <div class="btn-container">
-            <button class="btn">Realizar Compra</button>
-            <button class="btn" onclick="showForm()">Cancelar Compra</button>
-        </div>
+            <div class="items-center">
+                <div id="interactive" class="viewport"></div>
+            </div>
+            <div class="btn-container">
+                <button type="submit" class="btn">Realizar Compra</button>
+                <button type="reset" class="btn" onclick="showForm()">Cancelar Compra</button>
+            </div>
 
-        <div class="overlay" id="overlay">
-            <div class="form-container">
-                <span class="close-btn" onclick="hideForm()">&times;</span>
-                <h2>Ingrese la contraseña del Supervisor</h2>
-                <form>
-                    <div class="form-group">
-                        <label for="password">Contraseña:</label>
-                        <input type="password" id="password" class="form-control">
-                    </div>
-                    <div class="btn-container">
-                        <button type="submit" class="btn btn-primary">Confirmar</button>
-                        <button type="button" class="btn btn-secondary" onclick="hideForm()">Cancelar</button>
-                    </div>
-                </form>
+            <div class="overlay" id="overlay">
+                <div class="form-container">
+                    <span class="close-btn" onclick="hideForm()">&times;</span>
+                    <h2>Ingrese la contraseña del Supervisor</h2>
+                    <form>
+                        <div class="form-group">
+                            <label for="password">Contraseña:</label>
+                            <input type="password" id="password" class="form-control">
+                        </div>
+                        <div class="btn-container">
+                            <button type="submit" class="btn btn-primary">Confirmar</button>
+                            <button type="button" class="btn btn-secondary" onclick="hideForm()">Cancelar</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-
-    <!-- Formulario flotante -->
-
-</div>
+</form>
 <footer class="footer">
     <p>LICONSA © 2024</p>
 </footer>

@@ -7,6 +7,7 @@ use App\Http\Controllers\PdfController;
 use App\Models\Beneficiario;
 use App\Models\Trabajador;
 use App\Http\Controllers\TrabajadorController;
+use App\Http\Controllers\VentaController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -76,6 +77,12 @@ Route::match(['get','post'],'/trabajadores/update/{id}', [TrabajadorController::
 Route::match(['get','post'],'/trabajadores/editar/{id}', [TrabajadorController::class, 'edit'])->name('trabajadores.edit');
 Route::match(['get','post'],'/trabajadores/detalles/{id}', [TrabajadorController::class, 'show'])->name('trabajadores.show');
 Route::match(['get','post'],'/trabajadores/eliminar/{id}', [TrabajadorController::class, 'destroy'])->name('trabajadores.destroy');
+
+Route::post('/ventas/store', [VentaController::class, 'store'])->name('ventas.store');
+Route::match(['get','post'],'/ventas/update/{id}', [VentaController::class, 'update'])->name('ventas.update');
+Route::match(['get','post'],'/ventas/editar/{id}', [VentaController::class, 'edit'])->name('ventas.edit');
+Route::match(['get','post'],'/ventas/detalles/{id}', [VentaController::class, 'show'])->name('ventas.show');
+Route::match(['get','post'],'/ventas/eliminar/{id}', [VentaController::class, 'destroy'])->name('ventas.destroy');
 
 
 Route::match(['get','post','delete'],'/beneficiarios/lista', [BeneficiarioController::class, 'index'])->name('beneficiarios.list');

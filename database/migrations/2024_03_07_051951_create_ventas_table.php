@@ -20,11 +20,8 @@ return new class extends Migration
             $table->float('total');
             $table->string('num_lecheria',10);
             $table->unsignedBigInteger('beneficiario_id');
-            $table->unsignedBigInteger('trabajador_id');
-            $table->timestamps();
 
             $table->foreign('beneficiario_id')->references('id')->on('beneficiarios');
-            $table->foreign('trabajador_id')->references('id')->on('trabajadores');
         });
     }
 
