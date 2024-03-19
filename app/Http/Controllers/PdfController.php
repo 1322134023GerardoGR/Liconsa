@@ -62,7 +62,7 @@ class PdfController extends Controller
 
         $pdf->SetFont('Arial', 'I', 8);
 // Agregar fecha de expedición
-        $date = Carbon::now();
+        $date = Carbon::now('America/Mexico_City');
         $pdf->Text($x + 5, $y + 85, 'Fecha de expedicion: ' . $date->format('d-m-Y'));
         $pdf->Image('img/usuario.jpg', $x + $anchoCredencial - 50, $y + 30, 40);
         $pdf->Rect($x + $anchoCredencial - 50, $y + 30, 40, 40, 'D');
