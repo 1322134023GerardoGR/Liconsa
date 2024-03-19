@@ -19,8 +19,8 @@ return new class extends Migration
             $table->string('curp',18);
             $table->string('rol',30);
             $table->string('rfc',13);
-            $table->string('codigo',10);
-            $table->unsignedBigInteger('cuenta_id');
+            $table->string('codigo',10)->nullable();
+            $table->unsignedBigInteger('cuenta_id')->nullable();
             $table->timestamps();
 
             $table->foreign('cuenta_id')->references('id')->on('cuentas');
@@ -32,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('trabajadors');
+        Schema::dropIfExists('trabajadores');
     }
 };
