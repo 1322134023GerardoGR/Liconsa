@@ -52,6 +52,10 @@ Route::get('/edit/{id}', function () {
     return view('liconsa.editBeneficiario');
 })->name('edit.ben');
 
+Route::get('/edit/{id}', function () {
+    return view('liconsa.editUser');
+})->name('edit.user');
+
 Route::get('/list', function () {
     return view('liconsa.listBene');
 })->name('list.ben');
