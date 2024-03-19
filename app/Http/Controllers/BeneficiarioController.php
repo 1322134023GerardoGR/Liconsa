@@ -24,8 +24,9 @@ class BeneficiarioController extends Controller
                 'num_lecheria' => 'required|string|max:10',
                 'd_recoleccion' => 'nullable|string|max:50',
             ]);
-            $valorCalculado = Str::random(10); // Generas el valor de la manera que necesites
-            $request->request->add(['folio_cb' => $valorCalculado]);
+            $valorCalculado = random_int(0,999999999); // Generas el valor de la manera que necesites
+            $folio=str_pad($valorCalculado, 9, "0", STR_PAD_LEFT);
+            $request->request->add(['folio_cb' => $folio.'']);
             $request->request->add(['Sancionado' => false]);
 
             // Crear y guardar el beneficiario usando asignación masiva
@@ -96,9 +97,9 @@ class BeneficiarioController extends Controller
             $beneficiario->delete();
 
             // Redireccionar con mensaje de éxito
-            return redirect()->route('nombreDeTuRuta')->with('success', 'Beneficiario eliminado con éxito.');
+            return redirect()->route('index')->with('success', 'Beneficiario eliminado con éxito.');
         } catch (\Exception $e) {
-            return redirect()->route('nombreDeTuRuta')->withErrors(['Error al eliminar el beneficiario: ' . $e->getMessage()]);
+            return redirect()->route('index')->withErrors(['Error al eliminar el beneficiario: ' . $e->getMessage()]);
         }
     }
 

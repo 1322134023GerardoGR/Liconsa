@@ -133,6 +133,11 @@
 </head>
 
 <body class="font-sans  antialiased">
+
+<header class="header">
+    <h1>Liconsa</h1>
+    <h2>Gobierno de México</h2>
+</header>
 @if(session('success'))
     <div class="alert alert-success">
         {{ session('success') }}
@@ -147,11 +152,6 @@
         </ul>
     </div>
 @endif
-<header class="header">
-    <h1>Liconsa</h1>
-    <h2>Gobierno de México</h2>
-</header>
-
 
 
 <div class="content">

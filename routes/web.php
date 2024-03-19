@@ -80,7 +80,7 @@ Route::post('/beneficiarios/store', [BeneficiarioController::class, 'store'])->n
 Route::match(['get','post'],'/beneficiarios/update/{id}', [BeneficiarioController::class, 'update'])->name('beneficiarios.update');
 Route::match(['get','post'],'/beneficiarios/editar/{id}', [BeneficiarioController::class, 'edit'])->name('beneficiarios.edit');
 Route::match(['get','post'],'/beneficiarios/detalles/{id}', [BeneficiarioController::class, 'show'])->name('beneficiarios.show');
-Route::post('/beneficiarios/eliminar/{id}', [BeneficiarioController::class, 'destroy'])->name('beneficiarios.destroy');
+Route::match(['get','post'],'/beneficiarios/eliminar/{id}', [BeneficiarioController::class, 'destroy'])->name('beneficiarios.destroy');
 
 
 
