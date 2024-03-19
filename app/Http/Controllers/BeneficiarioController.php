@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\beneficiario;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class BeneficiarioController extends Controller
@@ -111,24 +112,28 @@ class BeneficiarioController extends Controller
         }
     }
 
-    public function storePhoto(Request $request): \Illuminate\Http\JsonResponse
+
+    public function savePhoto(Request $request): \Illuminate\Http\JsonResponse
     {
-        // Validar y procesar la solicitud
-        $request->validate([
-            'photo' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Ajusta las reglas según tus necesidades
-        ]);
+        try {
+            // Obtener la foto capturada y el nombre de archivo de la imagen existente
+            $photo = $request->photo; // Foto capturada en formato base64
+            $existingPhoto = $request->existing_photo; // Nombre de archivo de la imagen existente
 
-        // Tomar la foto
-        $photo = $request->file('photo');
+            // Eliminar la imagen existente si hay una
+            if ($existingPhoto) {
+                Storage::delete('img/'.$existingPhoto);
+            }
 
-        // Definir la ruta donde se guardará la foto
-        $photoPath = 'img/barcode.png'; // Ruta donde deseas guardar la foto
+            // Guardar la nueva foto con el mismo nombre de archivo
+            $photoData = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $photo));
+            Storage::put('img/'.$existingPhoto, $photoData);
 
-        // Guardar la foto
-        $photo->move(public_path('img'), 'barcode.png');
+            // Devolver una respuesta
+               return response()->json(['success' => 'Foto guardada con éxito.']);
+        }catch (\Exception $e) {
+            return response()->json(['error' => 'Error al guardar la foto: ' . $e->getMessage()]);
+        }
 
-        // Devolver una respuesta
-        return response()->json(['message' => '¡Foto guardada con éxito!', 'photo_path' => $photoPath]);
     }
-    
 }

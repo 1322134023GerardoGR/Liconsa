@@ -203,15 +203,7 @@
                 <label for="num_lecheria" class="form-label">N° Lecheria:</label>
                 <input type="number" class="form-control" id="num_lecheria" name="num_lecheria" placeholder="Ej. 65469158647">
             </div>
-            <div class="btn-container text-center">
-                <video id="video" width="640" height="480" autoplay></video>
-                <button id="capture-btn">Capturar Foto</button>
-                <canvas id="canvas" style="display: none;"></canvas>
-                <img id="photo" src="" alt="Tu foto aquí">
 
-
-
-            </div>
             <div class="btn-container text-center">
                 <button type="submit" class="btn"><i class="fas fa-save"></i>Guardar</button>
                 <button type="reset" class="btn"><i class="fas fa-times"></i>Cancelar</button>
@@ -229,8 +221,10 @@
 <!-- Bootstrap JS (optional) -->
 
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
 <script>
     function toggleSidebar() {
         var sidebar = document.getElementById('sidebar');

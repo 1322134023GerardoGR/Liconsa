@@ -74,6 +74,7 @@ Route::match(['get','post'],'/beneficiarios/update/{id}', [BeneficiarioControlle
 Route::match(['get','post'],'/beneficiarios/editar/{id}', [BeneficiarioController::class, 'edit'])->name('beneficiarios.edit');
 Route::match(['get','post'],'/beneficiarios/detalles/{id}', [BeneficiarioController::class, 'show'])->name('beneficiarios.show');
 Route::match(['get','post'],'/beneficiarios/eliminar/{id}', [BeneficiarioController::class, 'destroy'])->name('beneficiarios.destroy');
+Route::match(['get','post'],'/beneficiarios/imagen', [BeneficiarioController::class, 'savePhoto'])->name('beneficiarios.imagen');
 
 
 Route::post('/trabajadores/store', [TrabajadorController::class, 'store'])->name('trabajadores.store');

@@ -138,14 +138,41 @@ MALB010101HDFXXXA2</textarea>
         <div class="btn-container">
             <a href="{{ route('beneficiarios.destroy', $beneficiario->id) }}" class="btn">Borrar</a>
             <a href="{{ route('beneficiarios.edit', $beneficiario->id) }}" class="btn">Editar</a>
+
         </div>
+
+        <div class="">
+            <div>
+                <video id="video" width="640" height="480" autoplay></video>
+                <button id="capture-btn">Capturar Foto</button>
+            </div>
+            <div>
+                <form action="{{ route('beneficiarios.store') }}" method="post" id="photo-form" style="display: none;">
+                    @csrf
+                    <input type="hidden" name="photo" id="photo-input">
+                    <input type="hidden" name="id" value="{{$beneficiario->id}}">
+                    <button type="submit" class="btn">Guardar Foto</button>
+                </form>
+            </div>
+            <div>
+                <canvas id="canvas" style="display: none;"></canvas>
+
+            </div>
+            <img id="photo-preview" width="600px" height="400px" src="" alt="Previsualización de la foto">
+
+        </div>
+
     </div>
+
 </div>
 <footer class="footer">
     <p>LICONSA  2024</p>
 </footer>
 
 <!-- Bootstrap JS (optional) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="{{ asset('JS/photo.js') }}"></script>
 </body>
 </html>
