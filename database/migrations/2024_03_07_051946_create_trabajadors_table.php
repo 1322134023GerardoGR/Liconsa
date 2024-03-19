@@ -20,10 +20,8 @@ return new class extends Migration
             $table->string('rol',30);
             $table->string('rfc',13);
             $table->string('codigo',10)->nullable();
-            $table->unsignedBigInteger('cuenta_id')->nullable();
             $table->timestamps();
 
-            $table->foreign('cuenta_id')->references('id')->on('cuentas');
         });
     }
 

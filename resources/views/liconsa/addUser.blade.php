@@ -12,7 +12,7 @@
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet"/>
 
     <!-- Styles -->
     <style>
@@ -21,6 +21,7 @@
             padding: 0;
             box-sizing: border-box;
         }
+
         .header {
             background-color: #13322B;
             color: white;
@@ -30,6 +31,7 @@
             height: 80px;
             padding: 20px;
         }
+
         .footer {
             background-color: #9D2449;
             color: white;
@@ -39,6 +41,7 @@
             height: 80px;
             padding: 20px;
         }
+
         .content {
             background-color: #D4C19C;
             min-height: calc(100vh - 160px);
@@ -46,6 +49,7 @@
             align-items: center;
             justify-content: center;
         }
+
         .form-container {
             width: 70%; /* Ajuste del ancho del formulario */
             max-width: 800px;
@@ -54,17 +58,21 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             background-color: white;
         }
+
         .form-group {
             margin-bottom: 20px;
         }
+
         .form-label {
             font-weight: bold;
         }
+
         .btn-container {
             display: flex;
             justify-content: center;
             margin-top: 20px;
         }
+
         .btn {
             margin: 0 10px;
             padding: 15px 30px;
@@ -76,8 +84,10 @@
             cursor: pointer;
             transition: background-color 0.3s ease;
         }
+
         .btn i {
         }
+
         .btn:hover {
             background-color: #4a0e27;
         }
@@ -89,13 +99,27 @@
     <h2>Gobierno de México</h2>
 </header>
 
-
+@if(session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
+@if($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
 
 <div class="content">
     <div class="form-container">
         <div class="card-header"><h2>Agregar Usuario</h2></div>
 
         <form action="{{route('trabajadores.store')}}" method="POST">
+            @csrf
             <div class="form-group">
                 <label for="nombre" class="form-label">Nombre(s):</label>
                 <input type="text" class="form-control" id="nombre" placeholder="Ej. Adrian Alejandro">
