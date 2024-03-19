@@ -46,7 +46,6 @@ class BeneficiarioController extends Controller
 
         } catch (\Exception $e) {
             dd($e->getMessage());
-            //return redirect()->route('add')->withErrors(['Error al crear el beneficiario']);
         }
     }
     public function edit($id): \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application
@@ -106,9 +105,9 @@ class BeneficiarioController extends Controller
             $beneficiario->delete();
 
             // Redireccionar con mensaje de éxito
-            return redirect()->route('index')->with('success', 'Beneficiario eliminado con éxito.');
+            return redirect()->route('beneficiarios.list')->with('success', 'Beneficiario eliminado con éxito.');
         } catch (\Exception $e) {
-            return redirect()->route('index')->withErrors(['Error al eliminar el beneficiario: ' . $e->getMessage()]);
+            return redirect()->route('beneficiarios.list')->withErrors(['Error al eliminar el beneficiario: ' . $e->getMessage()]);
         }
     }
 

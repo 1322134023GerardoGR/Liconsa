@@ -133,11 +133,8 @@
 
                     <td>
                         <a href="{{ route('beneficiarios.edit', $beneficiario->id) }}" class="btn btn-primary">Editar</a>
-                        <form action="{{ route('beneficiarios.destroy', $beneficiario->id) }}" method="POST" style="display:inline-block;">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger" onclick="return confirm('¿Estás seguro de querer eliminar este registro?')">Eliminar</button>
-                        </form>
+                        <a href="{{ route('beneficiarios.destroy', $beneficiario->id) }}" class="btn btn-primary">eliminar</a>
+
                     </td>
                 </tr>
             @endforeach

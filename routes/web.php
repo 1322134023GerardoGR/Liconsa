@@ -70,12 +70,15 @@ Route::match(['get','post'],'/beneficiarios/editar/{id}', [BeneficiarioControlle
 Route::match(['get','post'],'/beneficiarios/detalles/{id}', [BeneficiarioController::class, 'show'])->name('beneficiarios.show');
 Route::match(['get','post'],'/beneficiarios/eliminar/{id}', [BeneficiarioController::class, 'destroy'])->name('beneficiarios.destroy');
 
+
 Route::post('/trabajadores/store', [TrabajadorController::class, 'store'])->name('trabajadores.store');
 Route::match(['get','post'],'/trabajadores/update/{id}', [TrabajadorController::class, 'update'])->name('trabajadores.update');
 Route::match(['get','post'],'/trabajadores/editar/{id}', [TrabajadorController::class, 'edit'])->name('trabajadores.edit');
 Route::match(['get','post'],'/trabajadores/detalles/{id}', [TrabajadorController::class, 'show'])->name('trabajadores.show');
 Route::match(['get','post'],'/trabajadores/eliminar/{id}', [TrabajadorController::class, 'destroy'])->name('trabajadores.destroy');
 
-Route::match(['get','post'],'/beneficiarios/list', [BeneficiarioController::class, 'index'])->name('beneficiarios.list');
+
+Route::match(['get','post','delete'],'/beneficiarios/lista', [BeneficiarioController::class, 'index'])->name('beneficiarios.list');
+
 
 
