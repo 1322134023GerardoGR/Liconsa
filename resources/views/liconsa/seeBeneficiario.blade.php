@@ -147,7 +147,7 @@ MALB010101HDFXXXA2</textarea>
                 <button id="capture-btn">Capturar Foto</button>
             </div>
             <div>
-                <form action="{{ route('beneficiarios.store') }}" method="post" id="photo-form" style="display: none;">
+                <form action="{{ route('beneficiarios.imagen') }}" method="post" id="photo-form" style="display: none;">
                     @csrf
                     <input type="hidden" name="photo" id="photo-input">
                     <input type="hidden" name="id" value="{{$beneficiario->id}}">

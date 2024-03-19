@@ -21,6 +21,9 @@
             padding: 0;
             box-sizing: border-box;
         }
+        .alerta2{
+            margin: 0px;
+        }
         .header {
             background-color: #13322B;
             color: white;

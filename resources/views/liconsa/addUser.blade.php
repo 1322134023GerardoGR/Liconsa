@@ -91,6 +91,9 @@
         .btn:hover {
             background-color: #4a0e27;
         }
+        .alerta2{
+            margin: 0px;
+        }
     </style>
 </head>
 <body class="font-sans  antialiased">
@@ -100,12 +103,12 @@
 </header>
 
 @if(session('success'))
-    <div class="alert alert-success">
+    <div class="alert alert-success alerta2">
         {{ session('success') }}
     </div>
 @endif
 @if($errors->any())
-    <div class="alert alert-danger">
+    <div class="alert alert-danger alerta2">
         <ul>
             @foreach($errors->all() as $error)
                 <li>{{ $error }}</li>

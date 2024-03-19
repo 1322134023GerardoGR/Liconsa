@@ -121,14 +121,11 @@ class BeneficiarioController extends Controller
             $existingPhoto = $request->existing_photo; // Nombre de archivo de la imagen existente
 
             // Eliminar la imagen existente si hay una
-            if ($existingPhoto) {
-                Storage::delete('img/'.$existingPhoto);
-            }
+
 
             // Guardar la nueva foto con el mismo nombre de archivo
             $photoData = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $photo));
-            Storage::put('img/'.$existingPhoto, $photoData);
-
+            file_put_contents($existingPhoto,$photoData);
             // Devolver una respuesta
                return response()->json(['success' => 'Foto guardada con éxito.']);
         }catch (\Exception $e) {

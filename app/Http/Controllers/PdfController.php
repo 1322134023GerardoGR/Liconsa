@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\PDFWithImageFromVar;
 use App\Models\beneficiario;
@@ -12,6 +13,10 @@ use Illuminate\Http\Request;
 use FPDF;
 use JetBrains\PhpStorm\NoReturn;
 use Picqer\Barcode\BarcodeGeneratorPNG;
+use Intervention\Image\Facades\Image;
+
+// Importa la clase Image de Intervention
+
 
 class PdfController extends Controller
 {
@@ -46,25 +51,46 @@ class PdfController extends Controller
         $pdf->SetFont('Arial', '', 10);
 
 // Agregar nombre completo del beneficiario
-        $pdf->Text($x + 5, $y + 38, 'Nombre: '.$beneficiario->nombre.' '.$beneficiario->apellido_p.' '.$beneficiario->apellido_m);
+        $pdf->Text($x + 5, $y + 38, 'Nombre: ' . $beneficiario->nombre . ' ' . $beneficiario->apellido_p . ' ' . $beneficiario->apellido_m);
 
 // Agregar cantidad de beneficiarios
-        $pdf->Text($x + 5, $y + 48, 'Cant de Beneficiarios: '.$beneficiario->n_dependientes);
+        $pdf->Text($x + 5, $y + 48, 'Cant de Beneficiarios: ' . $beneficiario->n_dependientes);
 
-        $pdf->Text($x + 5, $y + 58, 'Numero de Lecheria: '.$beneficiario->num_lecheria);
+        $pdf->Text($x + 5, $y + 58, 'Numero de Lecheria: ' . $beneficiario->num_lecheria);
 
         //$cantidad_dotacion=$cant_beneficiarios*2;
         $cantidad_dotacion = $beneficiario->n_dependientes * 2;
 
-        $pdf->Text($x + 5, $y + 68, 'Dotacion: '.$cantidad_dotacion.' Lts');
+        $pdf->Text($x + 5, $y + 68, 'Dotacion: ' . $cantidad_dotacion . ' Lts');
 
-        $pdf->Text($x + 5, $y + 78, 'Dias de Asistencia: '.$beneficiario->d_recoleccion);
+        $pdf->Text($x + 5, $y + 78, 'Dias de Asistencia: ' . $beneficiario->d_recoleccion);
 
         $pdf->SetFont('Arial', 'I', 8);
 // Agregar fecha de expedición
         $date = Carbon::now('America/Mexico_City');
         $pdf->Text($x + 5, $y + 85, 'Fecha de expedicion: ' . $date->format('d-m-Y'));
-        $pdf->Image('img/usuario.jpg', $x + $anchoCredencial - 50, $y + 30, 40);
+        $imagePath = public_path('img/usuario.jpeg');
+        $image = Image::make($imagePath);
+
+        // Obtener las dimensiones de la imagen
+        $imageWidth = $image->width();
+        $imageHeight = $image->height();
+
+        // Calcular las coordenadas para recortar el centro de la imagen
+        $cropWidth = 80; // Ancho deseado
+        $cropHeight = 80; // Alto deseado
+        $cropX = ($imageWidth - $cropWidth) / 2;
+        $cropY = ($imageHeight - $cropHeight) / 2;
+
+        // Recortar la imagen al centro
+        $croppedImage = $image->crop($cropWidth, $cropHeight, $cropX, $cropY);
+
+        // Guardar la imagen recortada temporalmente
+        $croppedImagePath = public_path('img/temp_cropped_usuario.jpeg');
+        $croppedImage->save($croppedImagePath);
+
+        // Insertar la imagen recortada en el PDF
+        $pdf->Image($croppedImagePath, $x + $anchoCredencial - 50, $y + 30, 80);
         $pdf->Rect($x + $anchoCredencial - 50, $y + 30, 40, 40, 'D');
 
 // Agregar texto informativo o cualquier otro detalle
@@ -80,11 +106,8 @@ class PdfController extends Controller
         $code = $beneficiario->folio_cb;
         $barcode = $generator->getBarcode($code, $generator::TYPE_CODE_128);
         file_put_contents('img/barcode.png', $barcode);
-        $pdf->Image('img/barcode.png',$x + $anchoCredencial - 50, $y + 82, 40, 10,'PNG');
+        $pdf->Image('img/barcode.png', $x + $anchoCredencial - 50, $y + 82, 40, 10, 'PNG');
         $pdf->Text($x + 123, $y + 96, $code);
-
-
-
 
         // Salida del PDF
         $pdf->Output();

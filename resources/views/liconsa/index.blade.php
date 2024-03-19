@@ -157,6 +157,9 @@
         .asd{
             background-color: #285C4D;
         }
+        .alerta2{
+            margin-bottom: 0;
+        }
 
     </style>
     @vite(['resources/js/app.js'])
@@ -202,12 +205,12 @@
 
 </div>
 @if(session('success'))
-    <div class="alert alert-success" role="alert">
+        <div class="alert alert-success alerta2 " role="alert">
         {{ session('success') }}
     </div>
 @endif
 @if($errors->any())
-    <div class="alert alert-danger" role="alert">
+    <div class="alert alert-danger alerta2" role="alert">
         <ul>
             @foreach($errors->all() as $error)
                 <li>{{ $error }}</li>
