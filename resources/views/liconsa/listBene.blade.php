@@ -108,28 +108,40 @@
         <table class="user-table">
             <thead>
             <tr>
-                <th>Nombre(s)</th>
+                <th>Nombre</th>
                 <th>Apellido Paterno</th>
                 <th>Apellido Materno</th>
                 <th>CURP</th>
-                <th>Dirección</th>
                 <th>Fecha de Nacimiento</th>
                 <th>Número de Dependientes</th>
+                <th>Dirección</th>
+                <th>Número de Lechería</th>
+
+                <th>Acciones</th>
             </tr>
             </thead>
             <tbody>
-            @while($beneficiarios->count() > 0)
-            <tr>
-                <td>{{$beneficiarios->nombre}}</td>
-                <td>{{$beneficiarios->apellido_p}}</td>
-                <td>{{$beneficiarios->apellido_m}}</td>
-                <td>{{$beneficiarios->curp}}</td>
-                <td>{{$beneficiarios->direccion}}</td>
-                <td>1990-10-11</td>
-                <td>3</td>
-            </tr>
-            @endwhile
-            <!-- Agrega más filas con datos de ejemplo -->
+            @foreach ($beneficiarios as $beneficiario)
+                <tr>
+                    <td>{{ $beneficiario->nombre }}</td>
+                    <td>{{ $beneficiario->apellido_p }}</td>
+                    <td>{{ $beneficiario->apellido_m }}</td>
+                    <td>{{ $beneficiario->curp }}</td>
+                    <td>{{ $beneficiario->fecha_nac }}</td>
+                    <td>{{ $beneficiario->n_dependientes }}</td>
+                    <td>{{ $beneficiario->direccion }}</td>
+                    <td>{{ $beneficiario->num_lecheria }}</td>
+
+                    <td>
+                        <a href="{{ route('beneficiarios.edit', $beneficiario->id) }}" class="btn btn-primary">Editar</a>
+                        <form action="{{ route('beneficiarios.destroy', $beneficiario->id) }}" method="POST" style="display:inline-block;">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger" onclick="return confirm('¿Estás seguro de querer eliminar este registro?')">Eliminar</button>
+                        </form>
+                    </td>
+                </tr>
+            @endforeach
             </tbody>
         </table>
         <div class="pagination">

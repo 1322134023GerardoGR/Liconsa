@@ -63,7 +63,7 @@ Route::get('/edit/{id}', function () {
 
 Route::get('/list', function () {
     return view('liconsa.listBene');
-});
+})->name('list.ben');
 Route::get('/addU', function () {
     return view('liconsa.addUser');
 });
@@ -82,5 +82,6 @@ Route::match(['get','post'],'/beneficiarios/editar/{id}', [BeneficiarioControlle
 Route::match(['get','post'],'/beneficiarios/detalles/{id}', [BeneficiarioController::class, 'show'])->name('beneficiarios.show');
 Route::match(['get','post'],'/beneficiarios/eliminar/{id}', [BeneficiarioController::class, 'destroy'])->name('beneficiarios.destroy');
 
+Route::match(['get','post'],'/beneficiarios/list', [BeneficiarioController::class, 'index'])->name('beneficiarios.list');
 
 

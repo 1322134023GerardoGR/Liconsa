@@ -34,8 +34,8 @@ class BeneficiarioController extends Controller
                 'd_recoleccion' => 'nullable|string|max:50',
             ]);
             $valorCalculado = random_int(0,999999999); // Generas el valor de la manera que necesites
-            $folio=str_pad($valorCalculado, 9, "0", STR_PAD_LEFT);
-            $request->request->add(['folio_cb' => $folio.'']);
+            $folio=''.str_pad($valorCalculado, 9, "0", STR_PAD_LEFT);
+            $request->request->add(['folio_cb' => $folio]);
             $request->request->add(['Sancionado' => false]);
 
             // Crear y guardar el beneficiario usando asignación masiva
