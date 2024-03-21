@@ -83,9 +83,8 @@ class PdfController extends Controller
         $intervalo = new DateInterval('P1Y'); // Crea un intervalo de 1 mes
         $fecha_vencimiento->add($intervalo); // Añade el intervalo a la fecha
 
-        $pdf->Text($x + 5, $y + 90, 'Esta credencial es valida hasta la fecha de vencimiento: ');// Crea un objeto DateTime
-        $pdf->Text($x + 5, $y + 95, $fecha_vencimiento->format('d-m-Y'));  // Muestra la nueva fecha
-        // Generar código de barras
+        $pdf->Text($x + 5, $y + 90, 'Fecha de vencimiento: '.$fecha_vencimiento->format('d-m-Y'));  // Muestra la nueva fecha
+
 
         $generator = new BarcodeGeneratorPNG();
         $code = $beneficiario->folio_cb;
