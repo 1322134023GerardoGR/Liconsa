@@ -22,59 +22,6 @@
             box-sizing: border-box;
         }
 
-        .sidebar {
-            position: fixed;
-            top: 0;
-            left: -250px; /* Oculta la barra lateral al inicio */
-            width: 250px; /* Ancho original de la barra lateral */
-            min-width: 80px; /* Ancho mínimo para asegurar visibilidad de íconos */
-            height: 100%;
-            background-color: #13322B;
-            transition: all 0.3s ease;
-            z-index: 1000; /* Asegura que esté por encima de otros elementos */
-            padding-top: 80px; /* Ajusta para que no cubra el encabezado */
-        }
-
-        .sidebar.active {
-            left: 0; /* Muestra la barra lateral al activarse */
-        }
-
-        .sidebar .nav-item {
-            margin: 20px;
-        }
-
-        /* Estilo para el botón de alternancia */
-        #sidebarToggle {
-            position: absolute;
-            left: 20px;
-            top: 20px;
-            cursor: pointer;
-            z-index: 1500; /* Asegura que esté por encima de otros elementos */
-        }
-
-        /* Estilo para el icono de alternancia */
-        #sidebarToggle span {
-            background-color: white;
-            width: 30px;
-            height: 5px;
-            display: block;
-            margin-bottom: 5px;
-            transition: all 0.3s ease;
-        }
-
-        /* Estilo para el icono de alternancia cuando está activo */
-        #sidebarToggle.active span:nth-child(1) {
-            transform: rotate(45deg) translate(5px, 5px);
-        }
-
-        #sidebarToggle.active span:nth-child(2) {
-            opacity: 0;
-        }
-
-        #sidebarToggle.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(7px, -8px);
-        }
-
         .header {
             background-color: #13322B;
             color: white;
@@ -120,10 +67,9 @@
             margin-top: 20px;
         }
 
-        .btn {
+        .btn1 {
             margin: 0 10px;
             padding: 15px 30px;
-            border: none;
             border-radius: 5px;
             background-color: #621132;
             color: white;
@@ -131,11 +77,7 @@
             cursor: pointer;
             transition: background-color 0.3s ease;
         }
-
-        .btn i {
-        }
-
-        .btn:hover {
+        .btn1:hover {
             background-color: #4a0e27;
         }
 
@@ -195,7 +137,47 @@
         video {
             border-radius: 50px;
         }
+
+        .mynav{
+            background-color: #285C4D;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: right;
+            height: 80px;
+
+        }
+        .navbar {
+            background-color: #285C4D;
+        }
+        .navbar a {
+            color: white;
+            background-color: #285C4D;
+        }
+
+        .navbar a:hover {
+            color: #621132;
+            background-color: #285C4D;
+        }
+        .navbar-toggler {
+            background-color: #285C4D;
+            color: white;
+            border: none;
+        }
+        .navbar-toggler:hover {
+            background-color: #285C4D;
+            color: #621132;
+        }
+        .asd{
+            background-color: #285C4D;
+        }
+        .alerta2{
+            margin-bottom: 0;
+        }
     </style>
+
+    @vite(['resources/js/app.js'])
+
 </head>
 <body class="font-sans  antialiased">
 <header class="header">
@@ -207,37 +189,52 @@
     <nav class="navbar navbar-expand-lg ">
         <div class="container-fluid asd">
             <a class="navbar-brand" href="#"></a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse asd" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link " href="#">Inicio</a>
+                        <a class="nav-link "  href="{{route('index')}}">Inicio</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Lista de Beneficiarios</a>
+                        <a class="nav-link" href="{{route('beneficiarios.list')}}">Lista de Beneficiarios</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Registrar Beneficiario</a>
+                        <a class="nav-link" href="{{route('beneficiarios.nuevo')}}">Registrar Beneficiario</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Registrar Nueva Venta</a>
+                        <a class="nav-link" href="{{route('add.sell')}}">Registrar Nueva Venta</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Buscar Beneficiario</a>
+                        <a class="nav-link" href="">Buscar Beneficiario</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#"> Registrar Usuario</a>
+                        <a class="nav-link" href="{{route('user.nuevo')}}"> Registrar Usuario</a>
                     </li>
                 </ul>
 
             </div>
         </div>
     </nav>
+
 </div>
+@if(session('success'))
+    <div class="alert alert-success alerta2 " role="alert">
+        {{ session('success') }}
+    </div>
+@endif
+@if($errors->any())
+    <div class="alert alert-danger alerta2" role="alert">
+        <ul>
+            @foreach($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
+
 <form action="{{route('ventas.store')}}" method="POST">
     @csrf
     <div class="content">
@@ -260,8 +257,8 @@
                 <div id="interactive" class="viewport"></div>
             </div>
             <div class="btn-container">
-                <button type="submit" class="btn">Realizar Compra</button>
-                <button type="reset" class="btn" onclick="showForm()">Cancelar Compra</button>
+                <button type="submit" class="btn btn1">Realizar Compra</button>
+                <button type="reset" class="btn btn1" onclick="showForm()">Cancelar Compra</button>
             </div>
 
             <div class="overlay" id="overlay">

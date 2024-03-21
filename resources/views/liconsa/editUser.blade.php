@@ -76,7 +76,6 @@
         .btn {
             margin: 0 10px;
             padding: 15px 30px;
-            border: none;
             border-radius: 5px;
             background-color: #621132;
             color: white;
@@ -85,27 +84,98 @@
             transition: background-color 0.3s ease;
         }
 
-        .btn i {
-        }
+
 
         .btn:hover {
             background-color: #4a0e27;
         }
+        .mynav{
+            background-color: #285C4D;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: right;
+            height: 80px;
+
+        }
+        .navbar {
+            background-color: #285C4D;
+        }
+        .navbar a {
+            color: white;
+            background-color: #285C4D;
+        }
+
+        .navbar a:hover {
+            color: #621132;
+            background-color: #285C4D;
+        }
+        .navbar-toggler {
+            background-color: #285C4D;
+            color: white;
+            border: none;
+        }
+        .navbar-toggler:hover {
+            background-color: #285C4D;
+            color: #621132;
+        }
+        .asd{
+            background-color: #285C4D;
+        }
+        .alerta2{
+            margin-bottom: 0;
+        }
     </style>
+    @vite(['resources/js/app.js'])
+
 </head>
 <body class="font-sans  antialiased">
 <header class="header">
     <h1>Liconsa</h1>
     <h2>Gobierno de México</h2>
 </header>
+<div class="mynav">
 
+    <nav class="navbar navbar-expand-lg ">
+        <div class="container-fluid asd">
+            <a class="navbar-brand" href="#"></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse asd" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link "  href="{{route('index')}}">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{route('beneficiarios.list')}}">Lista de Beneficiarios</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{route('beneficiarios.nuevo')}}">Registrar Beneficiario</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{route('add.sell')}}">Registrar Nueva Venta</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="">Buscar Beneficiario</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{route('user.nuevo')}}"> Registrar Usuario</a>
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+    </nav>
+
+</div>
 @if(session('success'))
-    <div class="alert alert-success">
+    <div class="alert alert-success alerta2 " role="alert">
         {{ session('success') }}
     </div>
 @endif
 @if($errors->any())
-    <div class="alert alert-danger">
+    <div class="alert alert-danger alerta2" role="alert">
         <ul>
             @foreach($errors->all() as $error)
                 <li>{{ $error }}</li>

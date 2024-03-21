@@ -42,7 +42,7 @@ Route::get('/index', function () {
 
 Route::get('/add', function () {
     return view('liconsa.agrBeneficiario');
-})->name('add');
+})->name('beneficiarios.nuevo');
 
 Route::get('/see/{id}', function () {
     return view('liconsa.seeBeneficiario');
@@ -62,10 +62,10 @@ Route::get('/list', function () {
 
 Route::get('/addU', function () {
     return view('liconsa.addUser');
-});
+})->name('user.nuevo');
 Route::get('/addS', function () {
     return view('liconsa.addSell');
-});
+})->name('add.sell');
 
 Route::get('/card-pdf/{id}', [PdfController::class,'generatePDF'])->name('pdf.generate');
 
@@ -75,6 +75,7 @@ Route::match(['get','post'],'/beneficiarios/editar/{id}', [BeneficiarioControlle
 Route::match(['get','post'],'/beneficiarios/detalles/{id}', [BeneficiarioController::class, 'show'])->name('beneficiarios.show');
 Route::match(['get','post'],'/beneficiarios/eliminar/{id}', [BeneficiarioController::class, 'destroy'])->name('beneficiarios.destroy');
 Route::match(['get','post'],'/beneficiarios/imagen', [BeneficiarioController::class, 'savePhoto'])->name('beneficiarios.imagen');
+Route::match(['get','post','delete'],'/beneficiarios/lista', [BeneficiarioController::class, 'index'])->name('beneficiarios.list');
 
 
 Route::post('/trabajadores/store', [TrabajadorController::class, 'store'])->name('trabajadores.store');
@@ -90,7 +91,6 @@ Route::match(['get','post'],'/ventas/detalles/{id}', [VentaController::class, 's
 Route::match(['get','post'],'/ventas/eliminar/{id}', [VentaController::class, 'destroy'])->name('ventas.destroy');
 
 
-Route::match(['get','post','delete'],'/beneficiarios/lista', [BeneficiarioController::class, 'index'])->name('beneficiarios.list');
 
 
 

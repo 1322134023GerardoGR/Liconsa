@@ -7,9 +7,8 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+
         }
-
-
 
         .header {
             background-color: #13322B;
@@ -36,7 +35,6 @@
             background-color: #D4C19C;
             grid-template-columns: repeat(2, 1fr);
             grid-gap: 20px;
-            height: calc(100vh - 160px);
             padding: 20px;
         }
 
@@ -55,10 +53,9 @@
             margin-top: 20px;
         }
 
-        .btn {
+        .btn1 {
             margin: 0 10px;
             padding: 15px 30px;
-            border: none;
             border-radius: 5px;
             background-color: #621132;
             color: white;
@@ -66,11 +63,7 @@
             cursor: pointer;
             transition: background-color 0.3s ease;
         }
-
-        .btn i {
-        }
-
-        .btn:hover {
+        .btn1:hover {
             background-color: #4a0e27;
         }
 
@@ -163,11 +156,12 @@
 
     </style>
     @vite(['resources/js/app.js'])
+
 </head>
 <body class="font-sans  antialiased">
 <header class="header">
-        <h1>Liconsa</h1>
-        <h2>Gobierno de México</h2>
+    <h1>Liconsa</h1>
+    <h2>Gobierno de México</h2>
 </header>
 <div class="mynav">
 
@@ -180,22 +174,22 @@
             <div class="collapse navbar-collapse asd" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link "  href="#">Inicio</a>
+                        <a class="nav-link "  href="{{route('index')}}">Inicio</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Lista de Beneficiarios</a>
+                        <a class="nav-link" href="{{route('beneficiarios.list')}}">Lista de Beneficiarios</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Registrar Beneficiario</a>
+                        <a class="nav-link" href="{{route('beneficiarios.nuevo')}}">Registrar Beneficiario</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Registrar Nueva Venta</a>
+                        <a class="nav-link" href="{{route('add.sell')}}">Registrar Nueva Venta</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Buscar Beneficiario</a>
+                        <a class="nav-link" href="">Buscar Beneficiario</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#"> Registrar Usuario</a>
+                        <a class="nav-link" href="{{route('user.nuevo')}}"> Registrar Usuario</a>
                     </li>
                 </ul>
 
@@ -205,7 +199,7 @@
 
 </div>
 @if(session('success'))
-        <div class="alert alert-success alerta2 " role="alert">
+    <div class="alert alert-success alerta2 " role="alert">
         {{ session('success') }}
     </div>
 @endif
@@ -218,11 +212,13 @@
         </ul>
     </div>
 @endif
+
+
 <div class="content">
 
     <div class="panel">
         <div class="btn-container">
-            <button class="btn">Lista de Beneficiarios</button>
+            <a class=" btn1">Lista de Beneficiarios</a>
         </div>
         <div class="image-container">
             <img src="/img/bx-list-ul.svg" alt="Leche"/>
@@ -231,7 +227,7 @@
 
     <div class="panel">
         <div class="btn-container">
-            <button class="btn"><i class="fas fa-user-plus"></i>Registrar Beneficiario</button>
+            <button class="btn1"><i class="fas fa-user-plus"></i>Registrar Beneficiario</button>
         </div>
         <div class="image-container">
             <img src="/img/bx-user-plus.svg" class="" alt="Leche"/>
@@ -240,7 +236,7 @@
 
     <div class="panel">
         <div class="btn-container">
-            <button class="btn"><i class="fas fa-cart-plus"></i>Registrar Nueva Venta</button>
+            <button class=" btn1"><i class="fas fa-cart-plus"></i>Registrar Nueva Venta</button>
         </div>
         <div class="image-container">
             <img src="/img/bx-dollar-circle.svg" alt="Leche"/>
@@ -249,7 +245,7 @@
 
     <div class="panel">
         <div class="btn-container">
-            <button class="btn" onclick="showForm()"><i class="fas fa-search"></i>Buscar Beneficiario</button>
+            <button class=" btn1"  onclick="showForm()"><i class="fas fa-search"></i>Buscar Beneficiario</button>
         </div>
         <div class="image-container">
             <img src="/img/bx-search-alt-2.svg" alt="Leche"/>
@@ -259,7 +255,7 @@
     <!-- Panel centrado -->
     <div class="panel center-panel">
         <div class="btn-container">
-            <button class="btn">Registrar Usuario</button>
+            <button class=" btn1">Registrar Usuario</button>
         </div>
         <div class="image-container">
             <img src="/img/bx-user.svg" alt="Leche"/>
@@ -288,21 +284,6 @@
     <p>LICONSA © 2024</p>
 </footer>
 
-<script>
-    function showForm() {
-        document.getElementById('overlay').style.display = 'flex';
-    }
 
-    function hideForm() {
-        document.getElementById('overlay').style.display = 'none';
-    }
-
-    function toggleSidebar() {
-        var sidebar = document.getElementById('sidebar');
-        var sidebarToggle = document.getElementById('sidebarToggle');
-        sidebar.classList.toggle('active');
-        sidebarToggle.classList.toggle('active');
-    }
-</script>
 </body>
 </html>
