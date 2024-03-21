@@ -7,6 +7,8 @@ use App\Models\beneficiario;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Intervention\Image\Drivers\Gd\Driver;
+use Intervention\Image\ImageManager;
 
 class BeneficiarioController extends Controller
 {
@@ -126,6 +128,20 @@ class BeneficiarioController extends Controller
             // Guardar la nueva foto con el mismo nombre de archivo
             $photoData = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $photo));
             file_put_contents($existingPhoto,$photoData);
+            $manager = new ImageManager(Driver::class);
+            $image = $manager->read($existingPhoto);
+
+// crop the best fitting 5:3 (600x360) ratio and resize to 600x360 pixel
+
+            $image->cover(600, 360);
+
+// crop the best fitting 1:1 ratio (200x200) and resize to 200x200 pixel
+            $image->cover(200, 200);
+
+// cover a size of 300x300 and position crop on the left
+            $image->cover(300, 300, 'left'); // 300 x 300 px
+
+            $image->save($existingPhoto);
             // Devolver una respuesta
                return response()->json(['success' => 'Foto guardada con éxito.']);
         }catch (\Exception $e) {

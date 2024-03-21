@@ -13,8 +13,6 @@ use Illuminate\Http\Request;
 use FPDF;
 use JetBrains\PhpStorm\NoReturn;
 use Picqer\Barcode\BarcodeGeneratorPNG;
-use Intervention\Image\ImageManager;
-use Intervention\Image\Drivers\Gd\Driver;
 
 
 // Importa la clase Image de Intervention
@@ -75,20 +73,7 @@ class PdfController extends Controller
         $imagePath = public_path('img/usuario.jpeg');
         // create image manager with desired driver
         // create new image instance (800 x 600)
-        $manager = new ImageManager(Driver::class);
-        $image = $manager->read($imagePath);
 
-// crop the best fitting 5:3 (600x360) ratio and resize to 600x360 pixel
-
-        $image->cover(600, 360);
-
-// crop the best fitting 1:1 ratio (200x200) and resize to 200x200 pixel
-        $image->cover(200, 200);
-
-// cover a size of 300x300 and position crop on the left
-        $image->cover(300, 300, 'left'); // 300 x 300 px
-
-        $image->save($imagePath);
         // Insertar la imagen recortada en el PDF
         $pdf->Image($imagePath, $x + $anchoCredencial - 50, $y + 30, 40);
         $pdf->Rect($x + $anchoCredencial - 50, $y + 30, 40, 40, 'D');

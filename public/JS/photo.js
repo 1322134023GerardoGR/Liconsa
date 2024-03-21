@@ -1,4 +1,4 @@
-navigator.mediaDevices.getUserMedia({ video: true })
+navigator.mediaDevices.getUserMedia({ video: { width: 1280, height: 720 } })
     .then(stream => {
         const video = document.getElementById('video');
         video.srcObject = stream;
@@ -18,7 +18,7 @@ document.getElementById('capture-btn').addEventListener('click', () => {
     context.drawImage(video, 0, 0, canvas.width, canvas.height);
 
     // Obtener la foto como una URL de datos
-    const photoData = canvas.toDataURL('image/jpeg');
+    const photoData = canvas.toDataURL('image/jpeg', 0.8);
     photoPreview.src = photoData;
     // Obtener el nombre de archivo de la imagen existente (si hay una)
     const existingPhoto = 'img/usuario.jpeg'; // Reemplaza esto con el nombre de archivo existente
