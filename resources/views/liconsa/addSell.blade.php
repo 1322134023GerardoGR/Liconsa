@@ -204,7 +204,7 @@
                         <a class="nav-link" href="{{route('beneficiarios.nuevo')}}">Registrar Beneficiario</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{route('add.sell')}}">Registrar Nueva Venta</a>
+                        <a class="nav-link active" href="{{route('add.sell')}}">Registrar Nueva Venta</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="">Buscar Beneficiario</a>

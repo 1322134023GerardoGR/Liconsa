@@ -168,7 +168,7 @@
                         <a class="nav-link "  href="{{route('index')}}">Inicio</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{route('beneficiarios.list')}}">Lista de Beneficiarios</a>
+                        <a class="nav-link active" href="{{route('beneficiarios.list')}}">Lista de Beneficiarios</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{route('beneficiarios.nuevo')}}">Registrar Beneficiario</a>
@@ -230,8 +230,9 @@
                     <td>{{ $beneficiario->num_lecheria }}</td>
 
                     <td>
-                        <a href="{{ route('beneficiarios.edit', $beneficiario->id) }}" class="btn btn-primary">Editar</a>
-                        <a href="{{ route('beneficiarios.destroy', $beneficiario->id) }}" class="btn btn-primary">eliminar</a>
+                        <a href="{{ route('beneficiarios.edit', $beneficiario->id) }}" class="btn btn-warning">Editar</a>
+                        <a href="{{ route('beneficiarios.destroy', $beneficiario->id) }}" class="btn btn-danger">Eliminar</a>
+                        <a href="{{ route('beneficiarios.destroy', $beneficiario->id) }}" class="btn btn-primary">Detalles</a>
 
                     </td>
                 </tr>

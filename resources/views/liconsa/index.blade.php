@@ -63,6 +63,7 @@
             cursor: pointer;
             transition: background-color 0.3s ease;
         }
+
         .btn1:hover {
             background-color: #4a0e27;
         }
@@ -117,7 +118,8 @@
             margin: 0 450px; /* Margen añadido a los lados */
             grid-column: span 2;
         }
-        .mynav{
+
+        .mynav {
             background-color: #285C4D;
             color: white;
             display: flex;
@@ -126,9 +128,11 @@
             height: 80px;
 
         }
+
         .navbar {
             background-color: #285C4D;
         }
+
         .navbar a {
             color: white;
             background-color: #285C4D;
@@ -138,19 +142,23 @@
             color: #621132;
             background-color: #285C4D;
         }
+
         .navbar-toggler {
             background-color: #285C4D;
             color: white;
             border: none;
         }
+
         .navbar-toggler:hover {
             background-color: #285C4D;
             color: #621132;
         }
-        .asd{
+
+        .asd {
             background-color: #285C4D;
         }
-        .alerta2{
+
+        .alerta2 {
             margin-bottom: 0;
         }
 
@@ -168,13 +176,15 @@
     <nav class="navbar navbar-expand-lg ">
         <div class="container-fluid asd">
             <a class="navbar-brand" href="#"></a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse asd" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link "  href="{{route('index')}}">Inicio</a>
+                        <a class="nav-link active" href="{{route('index')}}">Inicio</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{route('beneficiarios.list')}}">Lista de Beneficiarios</a>
@@ -218,7 +228,9 @@
 
     <div class="panel">
         <div class="btn-container">
-            <a class=" btn1">Lista de Beneficiarios</a>
+            <button class=" btn1">
+                <a class=" btn1" href="{{route('beneficiarios.list')}}">Lista de Beneficiarios</a>
+            </button>
         </div>
         <div class="image-container">
             <img src="/img/bx-list-ul.svg" alt="Leche"/>
@@ -227,7 +239,10 @@
 
     <div class="panel">
         <div class="btn-container">
-            <button class="btn1"><i class="fas fa-user-plus"></i>Registrar Beneficiario</button>
+            <button class=" btn1">
+                <a class="btn1" href="{{route('beneficiarios.nuevo')}}"><i class="fas fa-user-plus"></i>Registrar
+                    Beneficiario</a>
+            </button>
         </div>
         <div class="image-container">
             <img src="/img/bx-user-plus.svg" class="" alt="Leche"/>
@@ -236,7 +251,9 @@
 
     <div class="panel">
         <div class="btn-container">
-            <button class=" btn1"><i class="fas fa-cart-plus"></i>Registrar Nueva Venta</button>
+            <button class=" btn1">
+                <a class=" btn1" href="{{route('add.sell')}}"><i class="fas fa-cart-plus"></i>Registrar Nueva Venta</a>
+            </button>
         </div>
         <div class="image-container">
             <img src="/img/bx-dollar-circle.svg" alt="Leche"/>
@@ -245,7 +262,9 @@
 
     <div class="panel">
         <div class="btn-container">
-            <button class=" btn1"  onclick="showForm()"><i class="fas fa-search"></i>Buscar Beneficiario</button>
+            <button class=" btn1">
+                <a class=" btn1" onclick="showForm()"><i class="fas fa-search"></i>Buscar Beneficiario</a>
+            </button>
         </div>
         <div class="image-container">
             <img src="/img/bx-search-alt-2.svg" alt="Leche"/>
@@ -255,7 +274,9 @@
     <!-- Panel centrado -->
     <div class="panel center-panel">
         <div class="btn-container">
-            <button class=" btn1">Registrar Usuario</button>
+            <button class=" btn1">
+                <a class=" btn1" href="{{route('user.nuevo')}}">Registrar Usuario</a>
+            </button>
         </div>
         <div class="image-container">
             <img src="/img/bx-user.svg" alt="Leche"/>
