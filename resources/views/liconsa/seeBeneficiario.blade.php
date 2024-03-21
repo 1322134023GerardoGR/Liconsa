@@ -219,8 +219,8 @@
 MALB010101HDFXXXA2</textarea>
         </div>
         <div class="btn-container">
-            <a href="{{ route('beneficiarios.destroy', $beneficiario->id) }}" class="btn">Borrar</a>
-            <a href="{{ route('beneficiarios.edit', $beneficiario->id) }}" class="btn">Editar</a>
+            <a href="{{ route('beneficiarios.edit', $beneficiario->id) }}" class="btn1">Editar</a>
+            <a href="{{ route('beneficiarios.destroy', $beneficiario->id) }}" class=" btn1">Borrar</a>
 
         </div>
 

@@ -73,9 +73,10 @@
             margin-top: 20px;
         }
 
-        .btn {
+        .btn1 {
             margin: 0 10px;
             padding: 15px 30px;
+
             border-radius: 5px;
             background-color: #621132;
             color: white;
@@ -83,10 +84,7 @@
             cursor: pointer;
             transition: background-color 0.3s ease;
         }
-
-
-
-        .btn:hover {
+        .btn1:hover {
             background-color: #4a0e27;
         }
         .mynav{
@@ -219,8 +217,8 @@
                 </select>
             </div>
             <div class="btn-container">
-                <button type="submit" class="btn"><i class="fas fa-save"></i>Guardar</button>
-                <button type="reset" class="btn"><i class="fas fa-times"></i>Cancelar</button>
+                <button type="submit" class="btn1"><i class="fas fa-save"></i>Guardar</button>
+                <button type="reset" class="btn1"><i class="fas fa-times"></i>Cancelar</button>
             </div>
         </form>
     </div>

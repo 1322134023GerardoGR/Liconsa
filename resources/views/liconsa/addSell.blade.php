@@ -257,8 +257,8 @@
                 <div id="interactive" class="viewport"></div>
             </div>
             <div class="btn-container">
-                <button type="submit" class="btn btn1">Realizar Compra</button>
-                <button type="reset" class="btn btn1" onclick="showForm()">Cancelar Compra</button>
+                <button type="submit" class=" btn1">Realizar Compra</button>
+                <button type="reset" class=" btn1" onclick="showForm()">Cancelar Compra</button>
             </div>
 
             <div class="overlay" id="overlay">

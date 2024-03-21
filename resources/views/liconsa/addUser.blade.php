@@ -216,8 +216,8 @@
                 </select>
             </div>
             <div class="btn-container">
-                <button type="submit" class="btn"><i class="fas fa-save"></i>Guardar</button>
-                <button type="reset" class="btn"><i class="fas fa-times"></i>Cancelar</button>
+                <button type="submit" class="btn1"><i class="fas fa-save"></i>Guardar</button>
+                <button type="reset" class="btn1"><i class="fas fa-times"></i>Cancelar</button>
             </div>
         </form>
     </div>
