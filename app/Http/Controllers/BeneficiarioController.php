@@ -21,7 +21,7 @@ class BeneficiarioController extends Controller
         return view('liconsa.listBene', compact('beneficiarios'));
     }
 
-    public function store(Request $request): \Illuminate\Http\RedirectResponse
+    public function store(Request $request): \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application
     {
         try {
             // Validar los datos del formulario
@@ -43,9 +43,14 @@ class BeneficiarioController extends Controller
 
             // Crear y guardar el beneficiario usando asignación masiva
             Beneficiario::create($request->all());
+            $id = Beneficiario::where('folio_cb', $folio)->first()->id;
+            $beneficiario = Beneficiario::findOrFail($id);
+
 
             // Redireccionar a una ruta deseada con un mensaje de éxito
-            return redirect()->route('add')->with('success', 'Beneficiario creado con éxito.');
+            //return redirect()->route('add')->with('success', 'Beneficiario creado con éxito.');
+            return view('liconsa.seeBeneficiario', compact('beneficiario'));
+
 
         } catch (\Exception $e) {
             dd($e->getMessage());

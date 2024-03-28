@@ -63,6 +63,7 @@ Route::get('/list', function () {
 Route::get('/addU', function () {
     return view('liconsa.addUser');
 })->name('user.nuevo');
+
 Route::get('/addS', function () {
     return view('liconsa.addSell');
 })->name('add.sell');
