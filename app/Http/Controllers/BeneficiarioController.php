@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Intervention\Image\Drivers\Gd\Driver;
 use Intervention\Image\ImageManager;
+use function PHPUnit\TestFixture\func;
 
 class BeneficiarioController extends Controller
 {
@@ -34,15 +35,20 @@ class BeneficiarioController extends Controller
                 'n_dependientes' => 'required|integer',
                 'direccion' => 'required|string|max:150',
                 'num_lecheria' => 'required|string|max:10',
-                'd_asist1' => 'nullable|string|max:50',
-                'd_asist2' => 'nullable|string|max:50',
-                'd_asist3' => 'nullable|string|max:50',
+
             ]);
-            $valorCalculado = random_int(0,999999999); // Generas el valor de la manera que necesites
-            $folio=''.str_pad($valorCalculado, 9, "0", STR_PAD_LEFT);
+            $valorCalculado = random_int(0, 999999999); // Generas el valor de la manera que necesites
+            $folio = '' . str_pad($valorCalculado, 9, "0", STR_PAD_LEFT);
+
+            $d_asist1 = $this->daysWeek($request->input('d_asist1'));
+            $d_asist2 = $this->daysWeek($request->input('d_asist2'));
+            $d_asist3 = $this->daysWeek($request->input('d_asist3'));
+
+            $request->request->add(['d_asist1' => $d_asist1]);
+            $request->request->add(['d_asist2' => $d_asist2]);
+            $request->request->add(['d_asist3' => $d_asist3]);
             $request->request->add(['folio_cb' => $folio]);
             $request->request->add(['Sancionado' => false]);
-
             // Crear y guardar el beneficiario usando asignación masiva
             Beneficiario::create($request->all());
             $id = Beneficiario::where('folio_cb', $folio)->first()->id;
@@ -58,6 +64,23 @@ class BeneficiarioController extends Controller
             dd($e->getMessage());
         }
     }
+    private function daysWeek($dayName)
+    {
+        $days = [
+            'Domingo' => 0,
+            'Lunes' => 1,
+            'Martes' => 2,
+            'Miercoles' => 3,
+            'Miércoles' => 3,
+            'Jueves' => 4,
+            'Viernes' => 5,
+            'Sabado' => 6,
+            'Sábado' => 6,
+        ];
+
+        return $days[$dayName];
+    }
+
     public function edit($id): \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application
     {
         $beneficiario = Beneficiario::findOrFail($id);
@@ -74,7 +97,7 @@ class BeneficiarioController extends Controller
                 'nombre' => 'required|string|max:50',
                 'apellido_p' => 'required|string|max:50',
                 'apellido_m' => 'required|string|max:50',
-                'curp' => 'required|string|max:18|unique:beneficiarios,curp,'.$beneficiario->id, // Excluir el beneficiario actual de la validación
+                'curp' => 'required|string|max:18|unique:beneficiarios,curp,' . $beneficiario->id, // Excluir el beneficiario actual de la validación
                 'fecha_nac' => 'required|date',
                 'n_dependientes' => 'required|integer',
                 'direccion' => 'required|string|max:150',
@@ -134,7 +157,7 @@ class BeneficiarioController extends Controller
 
             // Guardar la nueva foto con el mismo nombre de archivo
             $photoData = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $photo));
-            file_put_contents($existingPhoto,$photoData);
+            file_put_contents($existingPhoto, $photoData);
             $manager = new ImageManager(Driver::class);
             $image = $manager->read($existingPhoto);
 
@@ -150,8 +173,8 @@ class BeneficiarioController extends Controller
 
             $image->save($existingPhoto);
             // Devolver una respuesta
-               return response()->json(['success' => 'Foto guardada con éxito.']);
-        }catch (\Exception $e) {
+            return response()->json(['success' => 'Foto guardada con éxito.']);
+        } catch (\Exception $e) {
             return response()->json(['error' => 'Error al guardar la foto: ' . $e->getMessage()]);
         }
 

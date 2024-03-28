@@ -34,6 +34,16 @@ class VentaController extends Controller
                 return redirect()->route('index')->withErrors(['Código de beneficiario no encontrado']);
             }
 
+            // Verificar el día actual con horario CDMX
+            $currentDate = Carbon::now('America/Mexico_City');
+            $dayOfWeek = $currentDate->dayOfWeek;
+
+            // Verificar si el día actual no coincide con los días de asistencia en la base de datos
+            if (!in_array($dayOfWeek, [$beneficiario->d_asist1, $beneficiario->d_asist2, $beneficiario->d_asist3])) {
+                return redirect()->route('index')->withErrors(['El día de hoy no es un día de asistencia para este beneficiario.']);
+            }
+
+
             // Crear la venta
             $valorCalculado = random_int(0, 999999999);
             $folio = str_pad($valorCalculado, 9, "0", STR_PAD_LEFT);
