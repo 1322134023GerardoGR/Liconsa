@@ -81,6 +81,7 @@
             cursor: pointer;
             transition: background-color 0.3s ease;
         }
+
         .btn1:hover {
             background-color: #4a0e27;
         }
@@ -123,6 +124,7 @@
         .asd {
             background-color: #285C4D;
         }
+
         .alert-margin {
             margin-bottom: 0; /* Ajusta esto a tu preferencia */
         }
@@ -141,13 +143,15 @@
     <nav class="navbar navbar-expand-lg ">
         <div class="container-fluid asd">
             <a class="navbar-brand" href="#"></a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse asd" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link "  href="{{route('index')}}">Inicio</a>
+                        <a class="nav-link " href="{{route('index')}}">Inicio</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{route('beneficiarios.list')}}">Lista de Beneficiarios</a>
@@ -220,15 +224,21 @@
             </div>
             <div class="form-group">
                 <label for="n_dependientes" class="form-label">Número de dependientes:</label>
-                <input type="number" class="form-control" id="n_dependientes" name="n_dependientes" placeholder="Ej. 3">
+                <input type="number" class="form-control" id="n_dependientes" name="n_dependientes" placeholder="Ej. 3"
+                       onchange="showCurpsInputs(this.value)">
             </div>
             <div class="form-group">
                 <label for="curp_beneficiarios" class="form-label">CURP de los dependientes:</label>
-                <input class="form-control" id="curp_beneficiarios" name="curp_beneficiarios" placeholder="Ej. GURG080412HDFDRRA3">
+                <div id="curpsInputsContainer">
+                    <input class="form-control" id="curp_beneficiarios" name="curp_beneficiarios"
+                           placeholder="Ej. GURG080412HDFDRRA3">
+                </div>
+
             </div>
             <div class="form-group">
                 <label for="num_lecheria" class="form-label">N° Lecheria:</label>
-                <input type="number" class="form-control" id="num_lecheria" name="num_lecheria" placeholder="Ej. 65469158647">
+                <input type="number" class="form-control" id="num_lecheria" name="num_lecheria"
+                       placeholder="Ej. 65469158647">
             </div>
 
             <div class="btn-container text-center">
@@ -253,11 +263,34 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 <script>
-    function toggleSidebar() {
-        var sidebar = document.getElementById('sidebar');
-        var sidebarToggle = document.getElementById('sidebarToggle');
-        sidebar.classList.toggle('active');
-        sidebarToggle.classList.toggle('active');
+    // Función para mostrar u ocultar los inputs de CURP de dependientes
+    function showCurpsInputs(numDependientes) {
+        // Obtener el contenedor de los inputs de CURP
+        const curpsContainer = document.getElementById('curpsInputsContainer');
+        // Crear y mostrar los inputs según el número de dependientes
+        curpsContainer.innerHTML = '';
+        if (numDependientes <= 0) {
+            const inputCurp = document.createElement('input');
+            inputCurp.type = 'text';
+            inputCurp.className = 'form-control';
+            inputCurp.name = 'curp_beneficiarios[]'; // Usar corchetes para recibir varios valores en PHP
+            inputCurp.placeholder = 'Ej. GURG080412HDFDRRA3';
+
+            // Agregar input al contenedor
+            curpsContainer.appendChild(inputCurp);
+        } else {
+            for (let i = 0; i < numDependientes; i++) {
+                // Crear input de CURP
+                const inputCurp = document.createElement('input');
+                inputCurp.type = 'text';
+                inputCurp.className = 'form-control';
+                inputCurp.name = 'curp_beneficiarios[]'; // Usar corchetes para recibir varios valores en PHP
+                inputCurp.placeholder = 'Ej. GURG080412HDFDRRA3';
+
+                // Agregar input al contenedor
+                curpsContainer.appendChild(inputCurp);
+            }
+        }
     }
 </script>
 </body>
