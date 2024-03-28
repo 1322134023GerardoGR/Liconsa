@@ -40,9 +40,16 @@ class BeneficiarioController extends Controller
             $valorCalculado = random_int(0, 999999999); // Generas el valor de la manera que necesites
             $folio = '' . str_pad($valorCalculado, 9, "0", STR_PAD_LEFT);
 
-            $d_asist1 = $this->daysWeek($request->input('d_asist1'));
-            $d_asist2 = $this->daysWeek($request->input('d_asist2'));
-            $d_asist3 = $this->daysWeek($request->input('d_asist3'));
+            $d_asist1 = $request->input('d_asist1');
+            $d_asist2 = $request->input('d_asist2');
+            $d_asist3 = $request->input('d_asist3');
+
+            if ($d_asist1 == null || $d_asist1 == '' || $d_asist1 == 'NA' || $d_asist1 == 'N/A' || $d_asist1 == 'Na' || $d_asist1 == 'na') $d_asist1 = 0;
+            else $d_asist1 = $this->daysWeek($d_asist1);
+            if ($d_asist2 == null || $d_asist2 == '' || $d_asist2 == 'NA' || $d_asist2 == 'N/A' || $d_asist2 == 'Na' || $d_asist2 == 'na') $d_asist2 = 0;
+            else $d_asist2 = $this->daysWeek($d_asist2);
+            if ($d_asist3 == null || $d_asist3 == '' || $d_asist3 == 'NA' || $d_asist3 == 'N/A' || $d_asist3 == 'Na' || $d_asist3 == 'na') $d_asist3 = 0;
+            else $d_asist3 = $this->daysWeek($d_asist3);
 
             $request->request->add(['d_asist1' => $d_asist1]);
             $request->request->add(['d_asist2' => $d_asist2]);
@@ -64,20 +71,29 @@ class BeneficiarioController extends Controller
             dd($e->getMessage());
         }
     }
+
     private function daysWeek($dayName)
     {
         $days = [
             'Domingo' => 0,
+            'domingo' => 0,
             'Lunes' => 1,
+            'lunes' => 1,
             'Martes' => 2,
+            'martes' => 2,
             'Miercoles' => 3,
+            'miercoles' => 3,
             'Miércoles' => 3,
+            'miércoles' => 3,
             'Jueves' => 4,
+            'jueves' => 4,
             'Viernes' => 5,
+            'viernes' => 5,
             'Sabado' => 6,
+            'sabado' => 6,
             'Sábado' => 6,
+            'sábado' => 6,
         ];
-
         return $days[$dayName];
     }
 
