@@ -72,6 +72,7 @@
             background-color: #13322B;
             color: white;
         }
+
         .user-table tr:nth-child(even) {
             background-color: #f2f2f2;
         }

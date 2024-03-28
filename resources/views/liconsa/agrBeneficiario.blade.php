@@ -233,8 +233,18 @@
                     <input class="form-control" id="curp_beneficiarios" name="curp_beneficiarios"
                            placeholder="Ej. GURG080412HDFDRRA3">
                 </div>
-
             </div>
+
+            <div class="form-group">
+                <label for="d_asis" class="form-label">Dias de asistencia</label>
+                <input type="text" class="form-control" id="d_asist1" name="d_asist1"
+                       placeholder="Ej. Lunes">
+                <input type="text" class="form-control" id="d_asist2" name="d_asist2"
+                       placeholder="Ej. Miercoles">
+                <input type="text" class="form-control" id="d_asist3" name="d_asist3"
+                       placeholder="Ej. Viernes">
+            </div>
+
             <div class="form-group">
                 <label for="num_lecheria" class="form-label">N° Lecheria:</label>
                 <input type="number" class="form-control" id="num_lecheria" name="num_lecheria"

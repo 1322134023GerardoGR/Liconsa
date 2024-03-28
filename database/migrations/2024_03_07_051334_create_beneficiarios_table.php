@@ -22,9 +22,9 @@ return new class extends Migration
             $table->string('direccion', 150);
             $table->string('folio_cb', 10);
             $table->string('num_lecheria', 10);
-            $table->string('d_recoleccion1', 50)->nullable();
-            $table->string('d_recoleccion2', 50)->nullable();
-            $table->string('d_recoleccion3', 50)->nullable();
+            $table->string('d_asist1', 50)->nullable();
+            $table->string('d_asist2', 50)->nullable();
+            $table->string('d_asist3', 50)->nullable();
             $table->boolean('Sancionado');
             $table->timestamps();
         });

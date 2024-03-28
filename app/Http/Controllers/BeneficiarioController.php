@@ -34,7 +34,9 @@ class BeneficiarioController extends Controller
                 'n_dependientes' => 'required|integer',
                 'direccion' => 'required|string|max:150',
                 'num_lecheria' => 'required|string|max:10',
-                'd_recoleccion' => 'nullable|string|max:50',
+                'd_asist1' => 'nullable|string|max:50',
+                'd_asist2' => 'nullable|string|max:50',
+                'd_asist3' => 'nullable|string|max:50',
             ]);
             $valorCalculado = random_int(0,999999999); // Generas el valor de la manera que necesites
             $folio=''.str_pad($valorCalculado, 9, "0", STR_PAD_LEFT);
