@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\beneficiario;
 use App\Models\dependiente;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\NuevoBeneficiarioMail;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -83,6 +85,8 @@ class BeneficiarioController extends Controller
             // Redireccionar a una ruta deseada con un mensaje de éxito
             //return redirect()->route('add')->with('success', 'Beneficiario creado con éxito.');
             $dependientes = Dependiente::where('beneficiario_id', $id)->get();
+            $email = $request->input('email'); // Supongo que tienes un campo de correo electrónico en tu formulario
+            Mail::to($email)->send(new NuevoBeneficiarioMail());
             return view('liconsa.seeBeneficiario', compact('beneficiario', 'dependientes'));
 
 
@@ -138,10 +142,11 @@ class BeneficiarioController extends Controller
 
         $beneficiario = beneficiario::where('folio_cb', $code)->first();
         $dependientes = Dependiente::where('code', $code)->get();
+        $beneficiario->d_asist1 = $this->weekDays($beneficiario->d_asist1);
         $beneficiario->d_asist2 = $this->weekDays($beneficiario->d_asist2);
         $beneficiario->d_asist3 = $this->weekDays($beneficiario->d_asist3);
 
-        return view('liconsa.seeBeneficiario', compact('beneficiario', 'dependientes'));        $beneficiario->d_asist1 = $this->weekDays($beneficiario->d_asist1);
+        return view('liconsa.seeBeneficiario', compact('beneficiario', 'dependientes'));
     }
 
     public function edit($id): \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application
