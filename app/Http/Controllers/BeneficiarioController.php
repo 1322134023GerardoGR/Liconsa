@@ -113,6 +113,7 @@ class BeneficiarioController extends Controller
         ];
         return $days[$dayName];
     }
+
     public function buscar(Request $request): \Illuminate\Contracts\View\View|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\Foundation\Application
     {
         $code = $request->input('codigo');
@@ -151,15 +152,26 @@ class BeneficiarioController extends Controller
                 'nombre' => 'required|string|max:50',
                 'apellido_p' => 'required|string|max:50',
                 'apellido_m' => 'required|string|max:50',
-                'curp' => 'required|string|max:18|unique:beneficiarios,curp,' . $beneficiario->id, // Excluir el beneficiario actual de la validación
+                'curp' => 'required|string|max:18|unique:beneficiarios,curp,' . $beneficiario->id,
                 'fecha_nac' => 'required|date',
                 'n_dependientes' => 'required|integer',
                 'direccion' => 'required|string|max:150',
-                'num_lecheria' => 'required|string|max:10',
-                'd_recoleccion' => 'nullable|string|max:50',
+                'num_lecheria' => 'required|integer',
+                'd_asist1' => 'nullable|string|max:50',
+                'd_asist2' => 'nullable|string|max:50',
+                'd_asist3' => 'nullable|string|max:50',
             ]);
 
-            // Actualizar el beneficiario
+            // Actualizar los campos del beneficiario
+            $beneficiario->nombre = $request->input('nombre');
+            $beneficiario->apellido_p = $request->input('apellido_p');
+            $beneficiario->apellido_m = $request->input('apellido_m');
+            $beneficiario->curp = $request->input('curp');
+            $beneficiario->fecha_nac = $request->input('fecha_nac');
+            $beneficiario->n_dependientes = $request->input('n_dependientes');
+            $beneficiario->direccion = $request->input('direccion');
+            $beneficiario->num_lecheria = $request->input('num_lecheria');
+
             $d_asist1 = $request->input('d_asist1');
             $d_asist2 = $request->input('d_asist2');
             $d_asist3 = $request->input('d_asist3');
@@ -171,11 +183,11 @@ class BeneficiarioController extends Controller
             if ($d_asist3 == null || $d_asist3 == '' || $d_asist3 == 'NA' || $d_asist3 == 'N/A' || $d_asist3 == 'Na' || $d_asist3 == 'na') $d_asist3 = 0;
             else $d_asist3 = $this->daysWeek($d_asist3);
 
-            $request->request->add(['d_asist1' => $d_asist1]);
-            $request->request->add(['d_asist2' => $d_asist2]);
-            $request->request->add(['d_asist3' => $d_asist3]);
+            $beneficiario->d_asist1 = $d_asist1;
+            $beneficiario->d_asist2 = $d_asist2;
+            $beneficiario->d_asist3 = $d_asist3;
 
-            $beneficiario->update($request->all());
+            $beneficiario->save();
 
             // Redireccionar con mensaje de éxito
             return redirect()->route('index')->with('success', 'Beneficiario actualizado con éxito.');
