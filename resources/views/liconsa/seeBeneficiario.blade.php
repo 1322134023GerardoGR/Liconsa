@@ -145,6 +145,7 @@
         .alerta2 {
             margin-bottom: 0;
         }
+
         video {
             margin-top: 10px;
             border-radius: 50px;
@@ -249,8 +250,16 @@
         </div>
         <div class="form-group">
             <label for="curp_beneficiarios" class="form-label">CURP de los dependientes:</label>
-            <textarea class="form-control" id="curp_beneficiarios" rows="3" disabled>MALA010101HDFXXXA1
-MALB010101HDFXXXA2</textarea>
+            <textarea class="form-control" id="curp_beneficiarios" rows="3" disabled>MALA010101HDFXXXA1MALB010101HDFXXXA2</textarea>
+        </div>
+        <div class="form-group">
+            <label for="d_asis" class="form-label">Dias de asistencia</label>
+            <input disabled type="text" class="form-control" id="d_asist1" name="d_asist1"
+                   value="{{$beneficiario->d_asist1}}">
+            <input disabled type="text" class="form-control" id="d_asist2" name="d_asist2"
+                   value="{{$beneficiario->d_asist2}}">
+            <input disabled type="text" class="form-control" id="d_asist3" name="d_asist3"
+                   value="{{$beneficiario->d_asist3}}">
         </div>
         <div class="btn-container">
             <a href="{{ route('beneficiarios.edit', $beneficiario->id) }}" class="btn1">Editar</a>
@@ -296,7 +305,7 @@ MALB010101HDFXXXA2</textarea>
     const getCardBtn = document.getElementById('getCard');
 
     // Agrega un evento de clic al botón "Capturar Foto"
-    captureBtn.addEventListener('click', function() {
+    captureBtn.addEventListener('click', function () {
         // Tu lógica para capturar la foto aquí
 
         // Muestra el botón "Obtener tarjeta"
@@ -304,7 +313,7 @@ MALB010101HDFXXXA2</textarea>
     });
 
     // Agrega un evento de clic al botón "Obtener tarjeta"
-    getCardBtn.addEventListener('click', function() {
+    getCardBtn.addEventListener('click', function () {
         // Obtén el id del beneficiario
         const beneficiarioId = {{$beneficiario->id}};
 
@@ -317,7 +326,7 @@ MALB010101HDFXXXA2</textarea>
     const getCardBtn = document.getElementById('getCard');
 
     // Agrega un evento de clic al botón
-    getCardBtn.addEventListener('click', function() {
+    getCardBtn.addEventListener('click', function () {
         // Obtén el id del beneficiario
         const beneficiarioId = {{$beneficiario->id}};
 

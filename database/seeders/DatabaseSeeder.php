@@ -36,6 +36,9 @@ class DatabaseSeeder extends Seeder
                 'n_dependientes' => $faker->numberBetween(1, 10),
                 'direccion' => $faker->address,
                 'num_lecheria' => $faker->numerify('####-####'),
+                'd_asist1' => $faker->numberBetween(0, 6),
+                'd_asist2' => $faker->numberBetween(0, 6),
+                'd_asist3' => $faker->numberBetween(0, 6),
                 'folio_cb' => $faker->numberBetween(0, 999999999),
                 'Sancionado' => $faker->boolean(10) // 10% de los beneficiarios son sancionados
             ]);

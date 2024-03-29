@@ -63,7 +63,11 @@ class PdfController extends Controller
 
         $pdf->Text($x + 5, $y + 68, 'Dotacion: ' . $cantidad_dotacion . ' Lts');
 
-        $pdf->Text($x + 5, $y + 78, 'Dias de Asistencia: ' . $beneficiario->d_recoleccion);
+        if($beneficiario->d_asist1 === 0) $beneficiario->d_asist1 = ''; else $beneficiario->d_asist1 = $this->weekDays($beneficiario->d_asist1);
+        if($beneficiario->d_asist2 === 0) $beneficiario->d_asist2 = ''; else $beneficiario->d_asist2 = $this->weekDays($beneficiario->d_asist2);
+        if($beneficiario->d_asist3 === 0) $beneficiario->d_asist3 = ''; else $beneficiario->d_asist3 = $this->weekDays($beneficiario->d_asist3);
+
+        $pdf->Text($x + 5, $y + 78, 'Dias de Asistencia: ' . $beneficiario->d_asist1. ', ' . $beneficiario->d_asist2 . ', ' . $beneficiario->d_asist3);
 
         $pdf->SetFont('Arial', 'I', 8);
 // Agregar fecha de expedición
@@ -96,5 +100,17 @@ class PdfController extends Controller
         // Salida del PDF
         $pdf->Output();
         exit;
+    }
+    private function weekDays($dayName) {
+        $days = [
+            0 => 'Domingo',
+            1 => 'Lunes',
+            2 => 'Martes',
+            3 => 'Miércoles',
+            4 => 'Jueves',
+            5 => 'Viernes',
+            6 => 'Sábado',
+        ];
+        return $days[$dayName];
     }
 }
