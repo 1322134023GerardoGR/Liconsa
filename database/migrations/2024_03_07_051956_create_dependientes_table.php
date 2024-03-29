@@ -13,10 +13,11 @@ return new class extends Migration
     {
         Schema::create('dependientes', function (Blueprint $table) {
             $table->id();
-            $table->string('curp',18);
+            $table->string('curp',18)->unique();
+            $table->integer('code'); // Cambiado a unsignedBigInteger
             $table->unsignedBigInteger('beneficiario_id'); // Cambiado a unsignedBigInteger
             $table->timestamps();
-            $table->foreign('beneficiario_id')->references('id')->on('beneficiarios');
+            $table->foreign('beneficiario_id')->references('id')->on('beneficiarios')->onDelete('cascade');
         });
     }
 

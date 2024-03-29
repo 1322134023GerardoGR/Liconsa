@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('num_lecheria',10);
             $table->unsignedBigInteger('beneficiario_id');
             $table->timestamps();
-            $table->foreign('beneficiario_id')->references('id')->on('beneficiarios');
+            $table->foreign('beneficiario_id')->references('id')->on('beneficiarios')->onDelete('cascade');
         });
     }
 

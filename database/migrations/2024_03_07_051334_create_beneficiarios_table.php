@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('nombre', 50);
             $table->string('apellido_p', 50);
             $table->string('apellido_m', 50);
-            $table->string('curp', 18);
+            $table->string('curp', 18)->unique();
             $table->date('fecha_nac');
             $table->integer('n_dependientes');
             $table->string('direccion', 150);

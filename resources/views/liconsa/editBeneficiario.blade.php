@@ -212,18 +212,19 @@
                 <input type="text" class="form-control" id="fecha_nacimiento" name="fecha_nac" value="{{$beneficiario->fecha_nac}}">
             </div>
             <div class="form-group">
-                <label for="num_beneficiarios" class="form-label">Número de dependientes:</label>
-                <input type="text" class="form-control" id="num_beneficiarios" name="n_dependientes" value="{{$beneficiario->n_dependientes}}">
-            </div>
-            <div class="form-group">
                 <label for="num_lecheria" class="form-label">N° Lecheria:</label>
                 <input type="number" class="form-control" id="num_lecheria" name="num_lecheria" placeholder="Ej. 65469158647" value="{{$beneficiario->num_lecheria}}">
+            </div>
+            <div class="form-group">
+                <label for="num_beneficiarios" class="form-label">Número de dependientes:</label>
+                <input type="text" class="form-control" id="num_beneficiarios" name="n_dependientes" value="{{$beneficiario->n_dependientes}}">
             </div>
             <!-- No es necesario agregar name a curp_beneficiarios ya que está deshabilitado y no se enviará en el formulario -->
             <div class="form-group">
                 <label for="curp_beneficiarios" class="form-label">CURP de los dependientes:</label>
-                <textarea class="form-control" id="curp_beneficiarios" name="curp_beneficiarios" rows="3" disabled>MALA010101HDFXXXA1
-                MALB010101HDFXXXA2</textarea>
+                @foreach($dependientes as $dependiente)
+                    <input class="form-control" id="curp_dependiente_{{ $dependiente->id }}" name="curp_dependiente_{{ $dependiente->id }}" value="{{ $dependiente->curp }}">
+                @endforeach
             </div>
 
             <div class="form-group">

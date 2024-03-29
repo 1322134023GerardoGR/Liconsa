@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\beneficiario;
+use App\Models\dependiente;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -35,6 +36,8 @@ class BeneficiarioController extends Controller
                 'n_dependientes' => 'required|integer',
                 'direccion' => 'required|string|max:150',
                 'num_lecheria' => 'required|string|max:10',
+                'curp_beneficiarios.*' => 'nullable|string|max:18', // Validación para los CURPs de dependientes
+
 
             ]);
             $valorCalculado = random_int(0, 999999999); // Generas el valor de la manera que necesites
@@ -56,8 +59,20 @@ class BeneficiarioController extends Controller
             $request->request->add(['d_asist3' => $d_asist3]);
             $request->request->add(['folio_cb' => $folio]);
             $request->request->add(['Sancionado' => false]);
+
+
             // Crear y guardar el beneficiario usando asignación masiva
-            Beneficiario::create($request->all());
+            //Beneficiario::create($request->all());
+            $beneficiario = Beneficiario::create($request->except('curp_beneficiarios'));
+            foreach ($request->curp_beneficiarios as $curpDependiente) {
+                if (!empty($curpDependiente)) {
+                    $dependientes = new Dependiente();
+                    $dependientes->curp = $curpDependiente;
+                    $dependientes->code = $folio;
+                    $dependientes->beneficiario_id = $beneficiario->id; // Asignar la foreign key
+                    $dependientes->save();
+                }
+            }
             $id = Beneficiario::where('folio_cb', $folio)->first()->id;
             $beneficiario = Beneficiario::findOrFail($id);
 
@@ -66,7 +81,8 @@ class BeneficiarioController extends Controller
             $beneficiario->d_asist3 = $this->weekDays($beneficiario->d_asist3);
             // Redireccionar a una ruta deseada con un mensaje de éxito
             //return redirect()->route('add')->with('success', 'Beneficiario creado con éxito.');
-            return view('liconsa.seeBeneficiario', compact('beneficiario'));
+            $dependientes = Dependiente::where('beneficiario_id', $id)->get();
+            return view('liconsa.seeBeneficiario', compact('beneficiario', 'dependientes'));
 
 
         } catch (\Exception $e) {
@@ -119,16 +135,18 @@ class BeneficiarioController extends Controller
         $code = $request->input('codigo');
 
         $beneficiario = beneficiario::where('folio_cb', $code)->first();
-        $beneficiario->d_asist1 = $this->weekDays($beneficiario->d_asist1);
+        $dependientes = Dependiente::where('code', $code)->get();
         $beneficiario->d_asist2 = $this->weekDays($beneficiario->d_asist2);
         $beneficiario->d_asist3 = $this->weekDays($beneficiario->d_asist3);
 
-        return view('liconsa.seeBeneficiario', compact('beneficiario'));
+        return view('liconsa.seeBeneficiario', compact('beneficiario', 'dependientes'));        $beneficiario->d_asist1 = $this->weekDays($beneficiario->d_asist1);
     }
 
     public function edit($id): \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application
     {
         $beneficiario = Beneficiario::findOrFail($id);
+        $dependientes = Dependiente::where('beneficiario_id', $id)->get();
+
         if ($beneficiario->d_asist1 === 0) {
             $beneficiario->d_asist1 = $this->weekDays(9);
         } else $beneficiario->d_asist1 = $this->weekDays($beneficiario->d_asist1);
@@ -138,7 +156,7 @@ class BeneficiarioController extends Controller
         if ($beneficiario->d_asist3 === 0) {
             $beneficiario->d_asist3 = $this->weekDays(9);
         } else $beneficiario->d_asist3 = $this->weekDays($beneficiario->d_asist3);
-        return view('liconsa.editBeneficiario', compact('beneficiario'));
+        return view('liconsa.editBeneficiario', compact('beneficiario', 'dependientes'));
     }
 
 
@@ -146,7 +164,6 @@ class BeneficiarioController extends Controller
     {
         try {
             $beneficiario = Beneficiario::findOrFail($id);
-
             // Validar los datos del formulario
             $request->validate([
                 'nombre' => 'required|string|max:50',
@@ -187,7 +204,12 @@ class BeneficiarioController extends Controller
             $beneficiario->d_asist2 = $d_asist2;
             $beneficiario->d_asist3 = $d_asist3;
 
-            $beneficiario->save();
+            $dependientes = Dependiente::where('beneficiario_id', $id)->get();
+            foreach ($dependientes as $dependiente) {
+                $curpDependiente = $request->input('curp_dependiente_' . $dependiente->id);
+                $dependiente->curp = $curpDependiente;
+                $dependiente->save();
+            }
 
             // Redireccionar con mensaje de éxito
             return redirect()->route('index')->with('success', 'Beneficiario actualizado con éxito.');
@@ -201,12 +223,13 @@ class BeneficiarioController extends Controller
         try {
             // Buscar el beneficiario por su ID
             $beneficiario = Beneficiario::findOrFail($id);
+            $dependientes = Dependiente::where('beneficiario_id', $id)->get();
             $beneficiario->d_asist1 = $this->weekDays($beneficiario->d_asist1);
             if ($beneficiario->d_asist2 === 0) $beneficiario->d_asist2 = ''; else $beneficiario->d_asist2 = $this->weekDays($beneficiario->d_asist2);
             if ($beneficiario->d_asist3 === 0) $beneficiario->d_asist3 = ''; else $beneficiario->d_asist3 = $this->weekDays($beneficiario->d_asist3);
 
             // Pasar el beneficiario a la vista para mostrar sus detalles
-            return view('liconsa.seeBeneficiario', compact('beneficiario'));
+            return view('liconsa.seeBeneficiario', compact('beneficiario', 'dependientes'));
         } catch (\Exception $e) {
             // En caso de error, redireccionar a una ruta deseada con un mensaje de error
             return redirect()->route('index')->withErrors(['Error al buscar el beneficiario: ' . $e->getMessage()]);

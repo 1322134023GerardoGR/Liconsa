@@ -5,10 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class venta extends Model
+class Venta extends Model
 {
     use HasFactory;
-    protected $table = 'ventas'; // Asegúrate de que el nombre de la tabla coincida con tu base de datos
+
+    protected $table = 'ventas'; // Nombre de la tabla en la base de datos
 
     protected $fillable = [
         'code',
@@ -17,5 +18,12 @@ class venta extends Model
         'curp',
         'rol',
         'rfc',
+        'beneficiario_id',
     ];
+
+    // Definir la relación de venta pertenece a un beneficiario
+    public function beneficiario()
+    {
+        return $this->belongsTo(Beneficiario::class, 'beneficiario_id');
+    }
 }

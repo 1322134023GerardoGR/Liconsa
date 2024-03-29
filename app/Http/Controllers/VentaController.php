@@ -19,7 +19,7 @@ class VentaController extends Controller
         try {
             // Validar los datos del formulario
             $request->validate([
-                'litros_v' => 'required|int|max:3',
+                'litros_v' => 'required|int',
                 'num_lecheria' => 'required|int',
             ], [
                 'litros_v.required' => 'El campo Litros vendidos es obligatorio.',

@@ -26,4 +26,12 @@ class beneficiario extends Model
         'd_asist3',
         'Sancionado',
     ];
+    public function dependientes()
+    {
+        return $this->hasMany(Dependiente::class, 'beneficiario_id');
+    }
+    public function ventas()
+    {
+        return $this->hasMany(Venta::class, 'beneficiario_id')->withDefault();
+    }
 }

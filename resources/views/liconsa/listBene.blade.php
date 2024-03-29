@@ -258,7 +258,7 @@
                         <a href="{{ route('beneficiarios.edit', $beneficiario->id) }}"
                            class="btn btn-warning">Editar</a>
                         <a href="{{ route('beneficiarios.destroy', $beneficiario->id) }}" class="btn btn-danger">Eliminar</a>
-                        <a href="{{ route('beneficiarios.destroy', $beneficiario->id) }}" class="btn btn-primary">Detalles</a>
+                        <a href="{{ route('beneficiarios.show', $beneficiario->id) }}" class="btn btn-primary">Detalles</a>
 
                     </td>
                 </tr>

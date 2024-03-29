@@ -250,7 +250,9 @@
         </div>
         <div class="form-group">
             <label for="curp_beneficiarios" class="form-label">CURP de los dependientes:</label>
-            <textarea class="form-control" id="curp_beneficiarios" rows="3" disabled>MALA010101HDFXXXA1MALB010101HDFXXXA2</textarea>
+            @foreach($dependientes as $dependiente)
+                <input class="form-control" id="curp_beneficiarios" value="{{$dependiente->curp}}" disabled>
+            @endforeach
         </div>
         <div class="form-group">
             <label for="d_asis" class="form-label">Dias de asistencia</label>
