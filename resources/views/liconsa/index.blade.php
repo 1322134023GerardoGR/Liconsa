@@ -195,9 +195,7 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{route('add.sell')}}">Registrar Nueva Venta</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="">Buscar Beneficiario</a>
-                    </li>
+
                     <li class="nav-item">
                         <a class="nav-link" href="{{route('user.nuevo')}}"> Registrar Usuario</a>
                     </li>
@@ -222,13 +220,7 @@
         </ul>
     </div>
 @endif
-@if($errorMessage != null || $errorMessage->any())
-    <div class="alert alert-danger alerta2" role="alert">
-        <ul>
-            <li>{{ $errorMessage }}</li>
-        </ul>
-    </div>
-@endif
+
 
 <div class="content">
 

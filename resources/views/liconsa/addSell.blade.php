@@ -206,9 +206,7 @@
                     <li class="nav-item">
                         <a class="nav-link active" href="{{route('add.sell')}}">Registrar Nueva Venta</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="">Buscar Beneficiario</a>
-                    </li>
+
                     <li class="nav-item">
                         <a class="nav-link" href="{{route('user.nuevo')}}"> Registrar Usuario</a>
                     </li>
