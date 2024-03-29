@@ -9,7 +9,7 @@
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet"/>
 
     <!-- Styles -->
     <style>
@@ -18,9 +18,11 @@
             padding: 0;
             box-sizing: border-box;
         }
+
         body {
             font-family: 'figtree', sans-serif;
         }
+
         .header {
             background-color: #13322B;
             color: white;
@@ -30,6 +32,7 @@
             height: 80px;
             padding: 20px;
         }
+
         .footer {
             background-color: #9D2449;
             color: white;
@@ -39,6 +42,7 @@
             height: 80px;
             padding: 20px;
         }
+
         .content {
             background-color: #D4C19C;
             min-height: calc(100vh - 160px);
@@ -47,6 +51,7 @@
             align-items: center;
             justify-content: center;
         }
+
         .user-list {
             width: 80%;
             max-width: 1150px;
@@ -55,19 +60,23 @@
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
+
         .user-list h2 {
             margin-bottom: 20px;
             text-align: center;
         }
+
         .user-table {
             width: 100%;
             border-collapse: collapse;
         }
+
         .user-table th, .user-table td {
             border: 1px solid #ddd;
             padding: 8px;
             text-align: left;
         }
+
         .user-table th {
             background-color: #13322B;
             color: white;
@@ -76,14 +85,17 @@
         .user-table tr:nth-child(even) {
             background-color: #f2f2f2;
         }
+
         .user-table tr:hover {
             background-color: #ddd;
         }
+
         .pagination {
             margin-top: 20px;
             display: flex;
             justify-content: center;
         }
+
         .pagination button {
             padding: 5px 10px;
             margin: 0 5px;
@@ -93,9 +105,11 @@
             border-radius: 5px;
             cursor: pointer;
         }
+
         .pagination button:hover {
             background-color: #0b1b14;
         }
+
         .btn1 {
             margin: 0 10px;
             padding: 15px 30px;
@@ -106,10 +120,12 @@
             cursor: pointer;
             transition: background-color 0.3s ease;
         }
+
         .btn1:hover {
             background-color: #4a0e27;
         }
-        .mynav{
+
+        .mynav {
             background-color: #285C4D;
             color: white;
             display: flex;
@@ -118,9 +134,11 @@
             height: 80px;
 
         }
+
         .navbar {
             background-color: #285C4D;
         }
+
         .navbar a {
             color: white;
             background-color: #285C4D;
@@ -130,19 +148,23 @@
             color: #621132;
             background-color: #285C4D;
         }
+
         .navbar-toggler {
             background-color: #285C4D;
             color: white;
             border: none;
         }
+
         .navbar-toggler:hover {
             background-color: #285C4D;
             color: #621132;
         }
-        .asd{
+
+        .asd {
             background-color: #285C4D;
         }
-        .alerta2{
+
+        .alerta2 {
             margin-bottom: 0;
         }
     </style>
@@ -160,13 +182,15 @@
     <nav class="navbar navbar-expand-lg ">
         <div class="container-fluid asd">
             <a class="navbar-brand" href="#"></a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse asd" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link "  href="{{route('index')}}">Inicio</a>
+                        <a class="nav-link " href="{{route('index')}}">Inicio</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active" href="{{route('beneficiarios.list')}}">Lista de Beneficiarios</a>
@@ -231,7 +255,8 @@
                     <td>{{ $beneficiario->num_lecheria }}</td>
 
                     <td>
-                        <a href="{{ route('beneficiarios.edit', $beneficiario->id) }}" class="btn btn-warning">Editar</a>
+                        <a href="{{ route('beneficiarios.edit', $beneficiario->id) }}"
+                           class="btn btn-warning">Editar</a>
                         <a href="{{ route('beneficiarios.destroy', $beneficiario->id) }}" class="btn btn-danger">Eliminar</a>
                         <a href="{{ route('beneficiarios.destroy', $beneficiario->id) }}" class="btn btn-primary">Detalles</a>
 
@@ -241,8 +266,7 @@
             </tbody>
         </table>
         <div class="pagination">
-            <button>1</button>
-            <button>2</button>
+            {{ $beneficiarios->links() }}
             <!-- Agrega más botones de paginación si es necesario -->
         </div>
     </div>

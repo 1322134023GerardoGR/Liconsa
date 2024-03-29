@@ -43,6 +43,22 @@ class VentaController extends Controller
                 return redirect()->route('index')->withErrors(['El día de hoy no es un día de asistencia para este beneficiario.']);
             }
 
+            $n_dependientes = $beneficiario->n_dependientes;
+            $n_litros = $request->input('litros_v');
+            $litrosDisponibles = $n_dependientes * 2;
+            $litrosVendidos = Venta::where('beneficiario_id', $beneficiario->id)->sum('litros_v');
+
+            if(($litrosVendidos + $n_litros) > $litrosDisponibles) {
+                return redirect()->route('index')->withErrors(['La cantidad de litros vendidos supera la cantidad de litros disponibles para este beneficiario.']);
+            }
+            if ($n_litros > $litrosDisponibles) {
+                return redirect()->route('index')->withErrors(['La cantidad de litros vendidos supera la cantidad de litros disponibles para este beneficiario.']);
+            }
+            // Verificar si la cantidad de litros vendidos es mayor a la cantidad de litros disponibles
+            if ($n_litros > $litrosDisponibles) {
+                return redirect()->route('index')->withErrors(['La cantidad de litros vendidos supera la cantidad de litros disponibles para este beneficiario.']);
+            }
+
 
             // Crear la venta
             $valorCalculado = random_int(0, 999999999);

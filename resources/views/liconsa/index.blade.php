@@ -223,7 +223,6 @@
     </div>
 @endif
 
-
 <div class="content">
 
     <div class="panel">
@@ -261,11 +260,14 @@
     </div>
 
     <div class="panel">
-        <div class="btn-container">
-            <button class=" btn1">
-                <a class=" btn1" onclick="showForm()"><i class="fas fa-search"></i>Buscar Beneficiario</a>
-            </button>
-        </div>
+        <form action="{{ route('beneficiarios.buscar') }}" method="GET">
+            @csrf
+            <div class="form-group">
+                <h4>Código del Beneficiario:</h4>
+                <input type="text" class="form-control" id="codigo" name="codigo" required>
+            </div>
+            <button type="submit" class="btn1">Buscar</button>
+        </form>
         <div class="image-container">
             <img src="/img/bx-search-alt-2.svg" alt="Leche"/>
         </div>
@@ -283,23 +285,6 @@
         </div>
     </div>
 
-    <!-- Formulario flotante -->
-    <div class="overlay" id="overlay">
-        <div class="form-container">
-            <span class="close-btn" onclick="hideForm()">&times;</span>
-            <h2>Buscar Beneficiario</h2>
-            <form>
-                <div class="form-group">
-                    <label for="curp">Ingrese CURP:</label>
-                    <input type="text" id="curp" class="form-control">
-                </div>
-                <div class="btn-container">
-                    <button type="button" class="btn btn-primary">Buscar</button>
-                    <button type="button" class="btn btn-secondary" onclick="hideForm()">Cancelar</button>
-                </div>
-            </form>
-        </div>
-    </div>
 </div>
 <footer class="footer">
     <p>LICONSA © 2024</p>

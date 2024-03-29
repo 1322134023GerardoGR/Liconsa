@@ -246,11 +246,15 @@
             </div>
             <div class="form-group">
                 <label for="litros_v">Número de litros de leche:</label>
-                <input name="litros_v" type="number" class="form-control" id="litros_v">
+                <input onchange="changePrice(this.value)" name="litros_v" type="number" class="form-control" id="litros_v">
             </div>
             <div class="form-group">
                 <label for="num_lecheria">Número de Lechería:</label>
                 <input name="num_lecheria" type="number" class="form-control" id="num_lecheria">
+            </div>
+            <div class="form-group">
+                <label for="costo">Costo total:</label>
+                <input disabled name="costo" type="number" class="form-control" id="costo">
             </div>
 
             <div class="items-center">
@@ -286,6 +290,23 @@
 <script src="https://cdn.jsdelivr.net/npm/quagga/dist/quagga.min.js"></script>
 <script src="{{ asset('JS/script.js') }}"></script>
 <script>
+    function changePrice(value) {
+        // Obtener el valor del input litros_v y convertirlo a número
+        const litros = parseFloat(value);
+
+        // Verificar si litros es un número válido
+        if (!isNaN(litros)) {
+            // Calcular el costo multiplicando litros por 6.50
+            const costo = litros * 6.50;
+
+            // Actualizar el valor del input costo con el costo calculado
+            document.getElementById('costo').value = costo.toFixed(2); // Limitar a 2 decimales
+        } else {
+            // Si el valor ingresado no es un número válido, mostrar un mensaje de error o manejarlo según necesites
+            alert('Por favor ingrese un número válido de litros.');
+        }
+    }
+
     function showForm() {
         document.getElementById('overlay').style.display = 'flex';
     }

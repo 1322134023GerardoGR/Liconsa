@@ -16,7 +16,7 @@ class BeneficiarioController extends Controller
     public function index(): \Illuminate\Contracts\View\Factory|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\View
     {
         // Obtener todos los beneficiarios
-        $beneficiarios = Beneficiario::all();
+        $beneficiarios = Beneficiario::paginate(5);
 
         // Pasar los beneficiarios a la vista para mostrarlos
         return view('liconsa.listBene', compact('beneficiarios'));
@@ -113,6 +113,17 @@ class BeneficiarioController extends Controller
         ];
         return $days[$dayName];
     }
+    public function buscar(Request $request): \Illuminate\Contracts\View\View|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\Foundation\Application
+    {
+        $code = $request->input('codigo');
+
+        $beneficiario = beneficiario::where('folio_cb', $code)->first();
+        $beneficiario->d_asist1 = $this->weekDays($beneficiario->d_asist1);
+        $beneficiario->d_asist2 = $this->weekDays($beneficiario->d_asist2);
+        $beneficiario->d_asist3 = $this->weekDays($beneficiario->d_asist3);
+
+        return view('liconsa.seeBeneficiario', compact('beneficiario'));
+    }
 
     public function edit($id): \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application
     {
@@ -149,6 +160,21 @@ class BeneficiarioController extends Controller
             ]);
 
             // Actualizar el beneficiario
+            $d_asist1 = $request->input('d_asist1');
+            $d_asist2 = $request->input('d_asist2');
+            $d_asist3 = $request->input('d_asist3');
+
+            if ($d_asist1 == null || $d_asist1 == '' || $d_asist1 == 'NA' || $d_asist1 == 'N/A' || $d_asist1 == 'Na' || $d_asist1 == 'na') $d_asist1 = 0;
+            else $d_asist1 = $this->daysWeek($d_asist1);
+            if ($d_asist2 == null || $d_asist2 == '' || $d_asist2 == 'NA' || $d_asist2 == 'N/A' || $d_asist2 == 'Na' || $d_asist2 == 'na') $d_asist2 = 0;
+            else $d_asist2 = $this->daysWeek($d_asist2);
+            if ($d_asist3 == null || $d_asist3 == '' || $d_asist3 == 'NA' || $d_asist3 == 'N/A' || $d_asist3 == 'Na' || $d_asist3 == 'na') $d_asist3 = 0;
+            else $d_asist3 = $this->daysWeek($d_asist3);
+
+            $request->request->add(['d_asist1' => $d_asist1]);
+            $request->request->add(['d_asist2' => $d_asist2]);
+            $request->request->add(['d_asist3' => $d_asist3]);
+
             $beneficiario->update($request->all());
 
             // Redireccionar con mensaje de éxito

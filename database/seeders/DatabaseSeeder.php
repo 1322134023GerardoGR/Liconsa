@@ -33,9 +33,9 @@ class DatabaseSeeder extends Seeder
                 'apellido_m' => $faker->lastName,
                 'curp' => $faker->unique()->regexify('[A-Z]{4}[0-9]{6}[A-Z]{6}[0-9]{2}'),
                 'fecha_nac' => $faker->date,
-                'n_dependientes' => $faker->numberBetween(1, 10),
+                'n_dependientes' => $faker->numberBetween(1, 2),
                 'direccion' => $faker->address,
-                'num_lecheria' => $faker->numerify('####-####'),
+                'num_lecheria' => $faker->numberBetween(1, 100000),
                 'd_asist1' => $faker->numberBetween(0, 6),
                 'd_asist2' => $faker->numberBetween(0, 6),
                 'd_asist3' => $faker->numberBetween(0, 6),
@@ -67,8 +67,8 @@ class DatabaseSeeder extends Seeder
         foreach ($beneficiarios as $beneficiario) {
             // Generar ventas para cada beneficiario
             for ($i = 0; $i < 2; $i++) { // Genera 5 ventas por beneficiario, ajusta según tus necesidades
-                $litrosVendidos = $faker->numberBetween(1, 100);
-                $numLecheria = $faker->numberBetween(1, 10);
+                $litrosVendidos = $faker->numberBetween(1, 4);
+                $numLecheria = $faker->numberBetween(1, 100000);
                 $fecha = $faker->dateTimeThisYear();
                 $total = $litrosVendidos * 6.50;
 

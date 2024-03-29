@@ -226,6 +226,16 @@
                 MALB010101HDFXXXA2</textarea>
             </div>
 
+            <div class="form-group">
+                <label for="d_asis" class="form-label">Dias de asistencia</label>
+                <input type="text" class="form-control" id="d_asist1" name="d_asist1"
+                       value="{{$beneficiario->d_asist1}}">
+                <input type="text" class="form-control" id="d_asist2" name="d_asist2"
+                       value="{{$beneficiario->d_asist2}}">
+                <input type="text" class="form-control" id="d_asist3" name="d_asist3"
+                       value="{{$beneficiario->d_asist3}}">
+            </div>
+
             <div class="btn-container">
                 <button type="reset" class="btn1">Cancelar</button>
                 <button type="submit" class="btn1">Guardar</button>
