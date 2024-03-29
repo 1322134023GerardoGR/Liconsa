@@ -61,9 +61,9 @@ class BeneficiarioController extends Controller
             $id = Beneficiario::where('folio_cb', $folio)->first()->id;
             $beneficiario = Beneficiario::findOrFail($id);
 
-            if($beneficiario->d_asist1 === 0) $beneficiario->d_asist1 = ''; else $beneficiario->d_asist1 = $this->weekDays($beneficiario->d_asist1);
-            if($beneficiario->d_asist2 === 0) $beneficiario->d_asist2 = ''; else $beneficiario->d_asist2 = $this->weekDays($beneficiario->d_asist2);
-            if($beneficiario->d_asist3 === 0) $beneficiario->d_asist3 = ''; else $beneficiario->d_asist3 = $this->weekDays($beneficiario->d_asist3);
+            $beneficiario->d_asist1 = $this->weekDays($beneficiario->d_asist1);
+            $beneficiario->d_asist2 = $this->weekDays($beneficiario->d_asist2);
+            $beneficiario->d_asist3 = $this->weekDays($beneficiario->d_asist3);
             // Redireccionar a una ruta deseada con un mensaje de éxito
             //return redirect()->route('add')->with('success', 'Beneficiario creado con éxito.');
             return view('liconsa.seeBeneficiario', compact('beneficiario'));
@@ -99,26 +99,36 @@ class BeneficiarioController extends Controller
         return $days[$dayName];
     }
 
-    public function edit($id): \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application
+    private function weekDays($dayName)
     {
-        $beneficiario = Beneficiario::findOrFail($id);
-        $beneficiario->d_asist1 = $this->weekDays($beneficiario->d_asist1);
-        if($beneficiario->d_asist2 === 0) $beneficiario->d_asist2 = ''; else $beneficiario->d_asist2 = $this->weekDays($beneficiario->d_asist2);
-        if($beneficiario->d_asist3 === 0) $beneficiario->d_asist3 = ''; else $beneficiario->d_asist3 = $this->weekDays($beneficiario->d_asist3);
-        return view('liconsa.editBeneficiario', compact('beneficiario'));
-    }
-    private function weekDays($dayName) {
         $days = [
-            0 => 'Domingo',
+            0 => 'N/A',
             1 => 'Lunes',
             2 => 'Martes',
             3 => 'Miércoles',
             4 => 'Jueves',
             5 => 'Viernes',
             6 => 'Sábado',
+            9 => 'N/A',
         ];
         return $days[$dayName];
     }
+
+    public function edit($id): \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application
+    {
+        $beneficiario = Beneficiario::findOrFail($id);
+        if ($beneficiario->d_asist1 === 0) {
+            $beneficiario->d_asist1 = $this->weekDays(9);
+        } else $beneficiario->d_asist1 = $this->weekDays($beneficiario->d_asist1);
+        if ($beneficiario->d_asist2 === 0) {
+            $beneficiario->d_asist2 = $this->weekDays(9);
+        } else $beneficiario->d_asist2 = $this->weekDays($beneficiario->d_asist2);
+        if ($beneficiario->d_asist3 === 0) {
+            $beneficiario->d_asist3 = $this->weekDays(9);
+        } else $beneficiario->d_asist3 = $this->weekDays($beneficiario->d_asist3);
+        return view('liconsa.editBeneficiario', compact('beneficiario'));
+    }
+
 
     public function update(Request $request, $id): \Illuminate\Http\RedirectResponse
     {
@@ -154,8 +164,8 @@ class BeneficiarioController extends Controller
             // Buscar el beneficiario por su ID
             $beneficiario = Beneficiario::findOrFail($id);
             $beneficiario->d_asist1 = $this->weekDays($beneficiario->d_asist1);
-            if($beneficiario->d_asist2 === 0) $beneficiario->d_asist2 = ''; else $beneficiario->d_asist2 = $this->weekDays($beneficiario->d_asist2);
-            if($beneficiario->d_asist3 === 0) $beneficiario->d_asist3 = ''; else $beneficiario->d_asist3 = $this->weekDays($beneficiario->d_asist3);
+            if ($beneficiario->d_asist2 === 0) $beneficiario->d_asist2 = ''; else $beneficiario->d_asist2 = $this->weekDays($beneficiario->d_asist2);
+            if ($beneficiario->d_asist3 === 0) $beneficiario->d_asist3 = ''; else $beneficiario->d_asist3 = $this->weekDays($beneficiario->d_asist3);
 
             // Pasar el beneficiario a la vista para mostrar sus detalles
             return view('liconsa.seeBeneficiario', compact('beneficiario'));

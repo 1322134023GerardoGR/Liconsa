@@ -323,10 +323,10 @@
 </script>
 <script>
     // Obtén el botón por su id
-    const getCardBtn = document.getElementById('getCard');
+    const getCardBtn1 = document.getElementById('getCard');
 
     // Agrega un evento de clic al botón
-    getCardBtn.addEventListener('click', function () {
+    getCardBtn1.addEventListener('click', function () {
         // Obtén el id del beneficiario
         const beneficiarioId = {{$beneficiario->id}};
 
