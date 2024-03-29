@@ -10,7 +10,7 @@ use Carbon\Carbon;
 use DateInterval;
 use DateTime;
 use Illuminate\Http\Request;
-use FPDF;
+use tFPDF;
 use JetBrains\PhpStorm\NoReturn;
 use Picqer\Barcode\BarcodeGeneratorPNG;
 
@@ -51,7 +51,7 @@ class PdfController extends Controller
         $pdf->SetFont('Arial', '', 10);
 
 // Agregar nombre completo del beneficiario
-        $pdf->Text($x + 5, $y + 38, 'Nombre: ' . $beneficiario->nombre . ' ' . $beneficiario->apellido_p . ' ' . $beneficiario->apellido_m);
+        $pdf->Text($x + 5, $y + 38,  utf8_decode('Nombre: ' . $beneficiario->nombre . ' ' . $beneficiario->apellido_p . ' ' . $beneficiario->apellido_m));
 
 // Agregar cantidad de beneficiarios
         $pdf->Text($x + 5, $y + 48, 'Cant de Beneficiarios: ' . $beneficiario->n_dependientes);
@@ -111,6 +111,6 @@ class PdfController extends Controller
             5 => 'Viernes',
             6 => 'Sábado',
         ];
-        return $days[$dayName];
+        return  utf8_decode($days[$dayName]);
     }
 }

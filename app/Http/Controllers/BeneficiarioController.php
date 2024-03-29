@@ -87,8 +87,8 @@ class BeneficiarioController extends Controller
 
 
         } catch (\Exception $e) {
-            $errorMessage = 'Error al agregar el beneficiario, ya existe un beneficiario con ese CURP:';
-            return view('liconsa.index', compact('errorMessage'));
+            $errors = ['Error al agregar el beneficiario, ya existe un beneficiario con ese CURP:',''];
+            return view('liconsa.index', compact('errors'));
         }
     }
 

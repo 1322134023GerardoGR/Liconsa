@@ -16,6 +16,7 @@
         "picqer/php-barcode-generator": "^2.4",
         "setasign/fpdf": "^1.8",
         "setasign/fpdi-fpdf": "^2.3",
+        "setasign/tfpdf": "1.33",
         "twbs/bootstrap": "^5.3"
     },
     "require-dev": {

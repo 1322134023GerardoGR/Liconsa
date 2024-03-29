@@ -27,6 +27,7 @@ class DatabaseSeeder extends Seeder
         $faker = Faker::create();
 
         for ($i = 0; $i < 10; $i++) { // Genera 10 beneficiarios, puedes ajustar este número según tus necesidades
+            $numerosUnicos = $this->generarNumerosUnicos();
             Beneficiario::create([
                 'nombre' => $faker->firstName,
                 'apellido_p' => $faker->lastName,
@@ -36,9 +37,9 @@ class DatabaseSeeder extends Seeder
                 'n_dependientes' => $faker->numberBetween(1, 2),
                 'direccion' => $faker->address,
                 'num_lecheria' => $faker->numberBetween(1, 100000),
-                'd_asist1' => $faker->numberBetween(0, 6),
-                'd_asist2' => $faker->numberBetween(0, 6),
-                'd_asist3' => $faker->numberBetween(0, 6),
+                'd_asist1' => $numerosUnicos[0],
+                'd_asist2' => $numerosUnicos[1],
+                'd_asist3' => $numerosUnicos[2],
                 'folio_cb' => $faker->numberBetween(0, 999999999),
                 'Sancionado' => $faker->boolean(10) // 10% de los beneficiarios son sancionados
             ]);
@@ -86,5 +87,18 @@ class DatabaseSeeder extends Seeder
         }
 
 
+    }
+    protected function generarNumerosUnicos(): array
+    {
+        $numeros = [];
+
+        while (count($numeros) < 3) {
+            $numero = random_int(0, 6); // Ajustamos los límites a 0 y 6
+            if (!in_array($numero, $numeros)) {
+                $numeros[] = $numero;
+            }
+        }
+
+        return $numeros;
     }
 }

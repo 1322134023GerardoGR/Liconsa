@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use FPDF;
-class PDFWithImageFromVar extends FPDF
+use tFPDF;
+
+class PDFWithImageFromVar extends tFPDF
 {
     function MemImage($data, $x = null, $y = null, $w = 0, $h = 0, $type = 'PNG'): void {
         if ($x === null) {
