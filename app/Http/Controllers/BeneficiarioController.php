@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\beneficiario;
 use App\Models\dependiente;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Intervention\Image\Drivers\Gd\Driver;
@@ -86,7 +87,8 @@ class BeneficiarioController extends Controller
 
 
         } catch (\Exception $e) {
-            dd($e->getMessage());
+            $errorMessage = 'Error al agregar el beneficiario, ya existe un beneficiario con ese CURP:';
+            return view('liconsa.index', compact('errorMessage'));
         }
     }
 
