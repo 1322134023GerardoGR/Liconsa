@@ -234,12 +234,6 @@
             </div>
 
             <div class="form-group">
-                <label for="correo" class="form-label">Correo electrónico</label>
-                <input type="email" class="form-control" id="correo" name="correo"
-                       placeholder="Ej. ejemplo@gmail.com">
-            </div>
-
-            <div class="form-group">
                 <label for="d_asis" class="form-label">Dias de asistencia</label>
                 <input type="text" class="form-control" id="d_asist1" name="d_asist1"
                        placeholder="Ej. Lunes">
