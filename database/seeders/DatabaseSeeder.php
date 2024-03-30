@@ -37,7 +37,6 @@ class DatabaseSeeder extends Seeder
                 'n_dependientes' => $faker->numberBetween(1, 2),
                 'direccion' => $faker->address,
                 'num_lecheria' => $faker->numberBetween(1, 100000),
-                'correo' => $faker->email,
                 'd_asist1' => $numerosUnicos[0],
                 'd_asist2' => $numerosUnicos[1],
                 'd_asist3' => $numerosUnicos[2],
