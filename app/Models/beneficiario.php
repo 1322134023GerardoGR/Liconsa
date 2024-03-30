@@ -21,6 +21,7 @@ class beneficiario extends Model
         'direccion',
         'folio_cb',
         'num_lecheria',
+        'correo',
         'd_asist1',
         'd_asist2',
         'd_asist3',
