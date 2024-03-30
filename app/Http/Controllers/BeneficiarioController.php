@@ -40,7 +40,6 @@ class BeneficiarioController extends Controller
                 'direccion' => 'required|string|max:150',
                 'num_lecheria' => 'required|string|max:10',
                 'curp_beneficiarios.*' => 'nullable|string|max:18', // Validación para los CURPs de dependientes
-                'correo' => 'required',
 
             ]);
             $valorCalculado = random_int(0, 999999999); // Generas el valor de la manera que necesites
@@ -66,8 +65,7 @@ class BeneficiarioController extends Controller
 
             // Crear y guardar el beneficiario usando asignación masiva
             //Beneficiario::create($request->all());
-            $email = $request->input('correo'); // Supongo que tienes un campo de correo electrónico en tu formulario
-            Mail::to($email)->send(new NuevoBeneficiarioMail());
+
             $beneficiario = Beneficiario::create($request->except('curp_beneficiarios'));
             foreach ($request->curp_beneficiarios as $curpDependiente) {
                 if (!empty($curpDependiente)) {
@@ -92,8 +90,7 @@ class BeneficiarioController extends Controller
 
 
         } catch (\Exception $e) {
-            $errors = ['Error al agregar el beneficiario, ya existe un beneficiario con ese CURP:',''];
-            return view('liconsa.index', compact('errors'));
+            dd($e->getMessage());
         }
     }
 

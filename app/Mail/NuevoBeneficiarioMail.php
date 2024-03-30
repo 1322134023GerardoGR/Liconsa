@@ -5,6 +5,7 @@ namespace App\Mail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
+use Illuminate\Mail\Mailables\Address;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
@@ -27,6 +28,7 @@ class NuevoBeneficiarioMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
+            from: new Address('liconsagobiernodemexico@gmail.com', 'Liconsa Gobierno de México'),
             subject: 'Bienvenido al programa Liconsa',
         );
     }
@@ -37,7 +39,7 @@ class NuevoBeneficiarioMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'mail.nuevoBeneficiario',
+            html: 'mail.nuevoBeneficiario',
         );
     }
 

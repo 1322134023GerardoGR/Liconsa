@@ -35,7 +35,7 @@ return [
 
     'mailers' => [
         'smtp' => [
-            'transport' => 'smtp',
+            'transport' => 'mailgun',
             'url' => env('liconsagobiernodemexico@gmail.com'),
             'host' => env('MAIL_HOST', 'smtp.mailgun.org'),
             'port' => env('MAIL_PORT', 587),
@@ -43,7 +43,7 @@ return [
             'username' => env('liconsagobiernodemexico@gmail.com'),
             'password' => env('t86EHJB?kBgyCaMq'),
             'timeout' => null,
-            'local_domain' => env('MAIL_EHLO_DOMAIN'),
+            'local_domain' => env('MAIL_LOCAL_DOMAIN', null),
         ],
 
         'ses' => [
@@ -60,6 +60,9 @@ return [
 
         'mailgun' => [
             'transport' => 'mailgun',
+            'domain' => env('MAILGUN_DOMAIN'),
+            'secret' => env('MAILGUN_SECRET'),
+            'endpoint' => env('MAILGUN_ENDPOINT', 'api.eu.mailgun.net'),
             // 'client' => [
             //     'timeout' => 5,
             // ],
@@ -108,8 +111,8 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
-        'name' => env('MAIL_FROM_NAME', 'Example'),
+        'address' => env('liconsagobiernodemexico@gmail.com', 'liconsagobiernodemexico@gmail.com'),
+        'name' => env('liconsagobiernodemexico', 'liconsagobiernodemexico'),
     ],
 
     /*
