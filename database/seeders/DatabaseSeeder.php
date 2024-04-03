@@ -27,7 +27,6 @@ class DatabaseSeeder extends Seeder
 
         $faker = Faker::create('es_MX');
 
-
         for ($i = 0; $i < 50; $i++) { // Genera 10 beneficiarios, puedes ajustar este número según tus necesidades
             $numerosUnicos = $this->generarNumerosUnicos();
             Beneficiario::create([
