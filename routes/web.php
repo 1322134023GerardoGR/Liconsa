@@ -38,7 +38,7 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__ . '/auth.php';
 
-Route::get('/index', function () {
+Route::match(['get', 'post'],'/index', function () {
     return view('liconsa.index');
 })->name('index');
 

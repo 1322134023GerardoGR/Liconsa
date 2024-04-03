@@ -6,6 +6,7 @@ namespace Database\Seeders;
 use App\Models\beneficiario;
 use App\Models\trabajador;
 use App\Models\venta;
+
 use Faker\Factory as Faker;
 use Illuminate\Database\Seeder;
 
@@ -24,15 +25,16 @@ class DatabaseSeeder extends Seeder
              'password' => bcrypt('password'),
          ]);
 
-        $faker = Faker::create();
+        $faker = Faker::create('es_MX');
 
-        for ($i = 0; $i < 500; $i++) { // Genera 10 beneficiarios, puedes ajustar este número según tus necesidades
+
+        for ($i = 0; $i < 50; $i++) { // Genera 10 beneficiarios, puedes ajustar este número según tus necesidades
             $numerosUnicos = $this->generarNumerosUnicos();
             Beneficiario::create([
                 'nombre' => $faker->firstName,
                 'apellido_p' => $faker->lastName,
                 'apellido_m' => $faker->lastName,
-                'curp' => $faker->unique()->regexify('[A-Z]{4}[0-9]{6}[A-Z]{6}[0-9]{2}'),
+                'curp' => $faker->unique()->regexify('[A-Z]{4}[0-9]{6}[HM][A-Z]{5}[0-9]{2}'),
                 'fecha_nac' => $faker->date,
                 'n_dependientes' => $faker->numberBetween(1, 2),
                 'direccion' => $faker->address,
@@ -45,7 +47,7 @@ class DatabaseSeeder extends Seeder
             ]);
         }
 
-        $faker = Faker::create();
+        $faker = Faker::create('es_MX');
 
         $roles = ['vendedor', 'atencion_clientes', 'supervisor'];
 
@@ -60,7 +62,7 @@ class DatabaseSeeder extends Seeder
             ]);
         }
 
-        $faker = Faker::create();
+        $faker = Faker::create('es_MX');
 
         // Obtener todos los beneficiarios
         $beneficiarios = Beneficiario::all();

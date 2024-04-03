@@ -238,7 +238,7 @@
                 <th>Apellido Materno</th>
                 <th>CURP</th>
                 <th>Número de Dependientes</th>
-                <th>Número de Lechería</th>
+                <th>Num de Lechería</th>
                 <th>Acciones</th>
             </tr>
             </thead>
