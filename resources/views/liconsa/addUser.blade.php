@@ -163,9 +163,11 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{route('add.sell')}}">Registrar Nueva Venta</a>
                     </li>
-
                     <li class="nav-item">
                         <a class="nav-link active" href="{{route('user.nuevo')}}"> Registrar Usuario</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{route('trabajadores.list')}}">Lista De Usuarios</a>
                     </li>
                 </ul>
 
@@ -230,7 +232,8 @@
             </div>
             <div class="btn-container">
                 <button type="submit" class="btn1"><i class="fas fa-save"></i>Guardar</button>
-                <button type="reset" class="btn1" onclick="index()"><i class="fas fa-times" onclick="index()"></i>Cancelar</button>
+                <button type="reset" class="btn1" onclick="index()"><i class="fas fa-times" onclick="index()"></i>Cancelar
+                </button>
             </div>
         </form>
     </div>

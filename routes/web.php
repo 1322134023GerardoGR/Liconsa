@@ -27,6 +27,11 @@ Route::get('/1', function () {
 });
 
 Route::get('/', function () {
+    return view('liconsa.index');
+})->name('index');
+
+
+Route::get('/2', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
@@ -89,6 +94,8 @@ Route::match(['get', 'post'], '/trabajadores/update/{id}', [TrabajadorController
 Route::match(['get', 'post'], '/trabajadores/editar/{id}', [TrabajadorController::class, 'edit'])->name('trabajadores.edit');
 Route::match(['get', 'post'], '/trabajadores/detalles/{id}', [TrabajadorController::class, 'show'])->name('trabajadores.show');
 Route::match(['get', 'post'], '/trabajadores/eliminar/{id}', [TrabajadorController::class, 'destroy'])->name('trabajadores.destroy');
+Route::match(['get', 'post', 'delete'], '/trabajadores/lista', [TrabajadorController::class, 'index'])->name('trabajadores.list');
+
 
 Route::post('/ventas/store', [VentaController::class, 'store'])->name('ventas.store');
 Route::match(['get', 'post'], '/ventas/update/{id}', [VentaController::class, 'update'])->name('ventas.update');

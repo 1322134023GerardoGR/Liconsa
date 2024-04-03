@@ -9,6 +9,15 @@ use Illuminate\Http\Request;
 
 class TrabajadorController extends Controller
 {
+
+    public function index(): \Illuminate\Contracts\View\Factory|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\View
+    {
+        // Obtener todos los beneficiarios
+        $trabajadores = trabajador::paginate(5);
+
+        // Pasar los beneficiarios a la vista para mostrarlos
+        return view('liconsa.listUsers', compact('trabajadores'));
+    }
     public function store(Request $request): \Illuminate\Http\RedirectResponse
     {
         $fields = [

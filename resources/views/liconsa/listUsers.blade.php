@@ -193,7 +193,7 @@
                         <a class="nav-link " href="{{route('index')}}">Inicio</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="{{route('beneficiarios.list')}}">Lista de Beneficiarios</a>
+                        <a class="nav-link" href="{{route('beneficiarios.list')}}">Lista de Beneficiarios</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{route('beneficiarios.nuevo')}}">Registrar Beneficiario</a>
@@ -205,7 +205,7 @@
                         <a class="nav-link" href="{{route('user.nuevo')}}"> Registrar Usuario</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{route('trabajadores.list')}}">Lista De Usuarios</a>
+                        <a class="nav-link active" href="{{route('trabajadores.list')}}">Lista De Usuarios</a>
                     </li>
                 </ul>
 
@@ -231,7 +231,7 @@
 
 <div class="content">
     <div class="user-list">
-        <h2>Beneficiarios Registrados</h2>
+        <h2>Usuarios Registrados</h2>
         <table class="user-table">
             <thead>
             <tr>
@@ -239,34 +239,32 @@
                 <th>Apellido Paterno</th>
                 <th>Apellido Materno</th>
                 <th>CURP</th>
-                <th>Número de Dependientes</th>
-                <th>Num de Lechería</th>
+                <th>RFC</th>
+                <th>ROL</th>
                 <th>Acciones</th>
             </tr>
             </thead>
             <tbody>
-            @foreach ($beneficiarios as $beneficiario)
+            @foreach ($trabajadores as $trabajador)
                 <tr>
-                    <td>{{ $beneficiario->nombre }}</td>
-                    <td>{{ $beneficiario->apellido_p }}</td>
-                    <td>{{ $beneficiario->apellido_m }}</td>
-                    <td>{{ $beneficiario->curp }}</td>
-                    <td>{{ $beneficiario->n_dependientes }}</td>
-                    <td>{{ $beneficiario->num_lecheria }}</td>
-
+                    <td>{{ $trabajador->nombre }}</td>
+                    <td>{{ $trabajador->apellido_p }}</td>
+                    <td>{{ $trabajador->apellido_m }}</td>
+                    <td>{{ $trabajador->curp }}</td>
+                    <td>{{ $trabajador->rfc }}</td>
+                    <td>{{ $trabajador->rol }}</td>
                     <td>
-                        <a href="{{ route('beneficiarios.edit', $beneficiario->id) }}"
+                        <a href="{{ route('trabajadores.edit', $trabajador->id) }}"
                            class="btn btn-warning">Editar</a>
-                        <a href="{{ route('beneficiarios.destroy', $beneficiario->id) }}" class="btn btn-danger">Eliminar</a>
-                        <a href="{{ route('beneficiarios.show', $beneficiario->id) }}" class="btn btn-primary">Detalles</a>
-
+                        <a href="{{ route('trabajadores.destroy', $trabajador->id) }}"
+                           class="btn btn-danger">Eliminar</a>
                     </td>
                 </tr>
             @endforeach
             </tbody>
         </table>
         <div class="pagination">
-            {{ $beneficiarios->links() }}
+            {{ $trabajadores->links() }}
             <!-- Agrega más botones de paginación si es necesario -->
         </div>
     </div>
