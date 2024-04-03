@@ -260,24 +260,7 @@
             </div>
             <div class="btn-container">
                 <button type="submit" class=" btn1">Realizar Compra</button>
-                <button type="reset" class=" btn1" onclick="showForm()">Cancelar Compra</button>
-            </div>
-
-            <div class="overlay" id="overlay">
-                <div class="form-container">
-                    <span class="close-btn" onclick="hideForm()">&times;</span>
-                    <h2>Ingrese la contraseña del Supervisor</h2>
-                    <form>
-                        <div class="form-group">
-                            <label for="password">Contraseña:</label>
-                            <input type="password" id="password" class="form-control">
-                        </div>
-                        <div class="btn-container">
-                            <button type="submit" class="btn btn-primary">Confirmar</button>
-                            <button type="button" class="btn btn-secondary" onclick="hideForm()">Cancelar</button>
-                        </div>
-                    </form>
-                </div>
+                <button type="reset" class=" btn1" onclick="index()">Cancelar Compra</button>
             </div>
         </div>
     </div>
@@ -318,6 +301,9 @@
         var sidebarToggle = document.getElementById('sidebarToggle');
         sidebar.classList.toggle('active');
         sidebarToggle.classList.toggle('active');
+    }
+    function index(){
+        window.location.href = "{{ route('index') }}"; // Reemplaza 'route('index')' con la ruta adecuada en tu aplicación
     }
 </script>
 </body>

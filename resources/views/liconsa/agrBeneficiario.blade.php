@@ -196,34 +196,38 @@
             @csrf
             <div class="form-group">
                 <label for="nombre" class="form-label">Nombre del interesado:</label>
-                <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ej. Gerardo">
+                <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ej. Gerardo"
+                       value="{{isset($beneficiario->nombre)?$beneficiario->nombre:old('nombre')}}">
             </div>
             <div class="form-group">
                 <label for="apellido_p" class="form-label">Apellido paterno:</label>
-                <input type="text" class="form-control" id="apellido_p" name="apellido_p" placeholder="Ej. Gutiérrez">
+                <input type="text" class="form-control" id="apellido_p" name="apellido_p" placeholder="Ej. Gutiérrez"
+                       value="{{isset($beneficiario->apellido_p)?$beneficiario->apellido_p:old('apellido_p')}}">
             </div>
             <div class="form-group">
                 <label for="apellido_m" class="form-label">Apellido materno:</label>
-                <input type="text" class="form-control" id="apellido_m" name="apellido_m" placeholder="Ej. Ramírez">
+                <input type="text" class="form-control" id="apellido_m" name="apellido_m" placeholder="Ej. Ramírez"
+                       value="{{isset($beneficiario->apellido_m)?$beneficiario->apellido_m:old('apellido_m')}}">
             </div>
 
             <div class="form-group">
                 <label for="curp" class="form-label">CURP del interesado:</label>
-                <input type="text" class="form-control" id="curp" name="curp" placeholder="Ej. GURG080412HDFDRRA3">
+                <input type="text" class="form-control" id="curp" name="curp" placeholder="Ej. GURG080412HDFDRRA3"
+                       value="{{isset($beneficiario->curp)?$beneficiario->curp:old('curp')}}">
             </div>
             <div class="form-group">
                 <label for="direccion" class="form-label">Dirección:</label>
                 <input type="text" class="form-control" id="direccion" name="direccion"
-                       placeholder="Ej. Villa del Real, Canes 35, Tecámac Edo.Mex.">
+                       placeholder="Ej. Villa del Real, Canes 35, Tecámac Edo.Mex." value="{{isset($beneficiario->direccion)?$beneficiario->direccion:old('direccion')}}">
             </div>
             <div class="form-group">
                 <label for="fecha_nac" class="form-label">Fecha de nacimiento:</label>
-                <input type="date" class="form-control" id="fecha_nac" name="fecha_nac" placeholder="Ej. 12/08/2004">
+                <input type="date" class="form-control" id="fecha_nac" name="fecha_nac" placeholder="Ej. 12/08/2004" value="{{isset($beneficiario->fecha_nac)?$beneficiario->fecha_nac:old('fecha_nac')}}">
             </div>
             <div class="form-group">
                 <label for="n_dependientes" class="form-label">Número de dependientes:</label>
                 <input type="number" class="form-control" id="n_dependientes" name="n_dependientes" placeholder="Ej. 3"
-                       onchange="showCurpsInputs(this.value)">
+                       onchange="showCurpsInputs(this.value)" >
             </div>
             <div class="form-group">
                 <label for="curp_beneficiarios" class="form-label">CURP de los dependientes:</label>
@@ -236,22 +240,22 @@
             <div class="form-group">
                 <label for="d_asis" class="form-label">Dias de asistencia</label>
                 <input type="text" class="form-control" id="d_asist1" name="d_asist1"
-                       placeholder="Ej. Lunes">
+                       placeholder="Ej. Lunes" value="{{isset($beneficiario->d_asist1)?$beneficiario->d_asist1:old('d_asist1')}}">
                 <input type="text" class="form-control" id="d_asist2" name="d_asist2"
-                       placeholder="Ej. Miercoles">
+                       placeholder="Ej. Miercoles" value="{{isset($beneficiario->d_asist2)?$beneficiario->d_asist2:old('d_asist2')}}">
                 <input type="text" class="form-control" id="d_asist3" name="d_asist3"
-                       placeholder="Ej. Viernes">
+                       placeholder="Ej. Viernes" value="{{isset($beneficiario->d_asist3)?$beneficiario->d_asist3:old('d_asist3')}}">
             </div>
 
             <div class="form-group">
                 <label for="num_lecheria" class="form-label">N° Lecheria:</label>
                 <input type="number" class="form-control" id="num_lecheria" name="num_lecheria"
-                       placeholder="Ej. 65469158647">
+                       placeholder="Ej. 65469158647" value="{{isset($beneficiario->num_lecheria)?$beneficiario->num_lecheria:old('num_lecheria')}}">
             </div>
 
             <div class="btn-container text-center">
                 <button type="submit" class="btn1"><i class="fas fa-save"></i>Guardar</button>
-                <button type="reset" class="btn1"><i class="fas fa-times"></i>Cancelar</button>
+                <button type="reset" onclick="index()" class="btn1"><i class="fas fa-times"></i>Cancelar</button>
             </div>
 
 
@@ -299,6 +303,10 @@
                 curpsContainer.appendChild(inputCurp);
             }
         }
+    }
+
+    function index() {
+        window.location.href = "{{ route('index') }}"; // Reemplaza 'route('index')' con la ruta adecuada en tu aplicación
     }
 </script>
 </body>

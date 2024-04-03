@@ -216,7 +216,7 @@
             </div>
             <div class="btn-container">
                 <button type="submit" class="btn1"><i class="fas fa-save"></i>Guardar</button>
-                <button type="reset" class="btn1"><i class="fas fa-times"></i>Cancelar</button>
+                <button type="reset" class="btn1" onclick="index()"><i class="fas fa-times"></i>Cancelar</button>
             </div>
         </form>
     </div>
@@ -227,5 +227,10 @@
 
 <!-- Bootstrap JS (optional) -->
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+    function index(){
+        window.location.href = "{{ route('index') }}"; // Reemplaza 'route('index')' con la ruta adecuada en tu aplicación
+    }
+</script>
 </body>
 </html>

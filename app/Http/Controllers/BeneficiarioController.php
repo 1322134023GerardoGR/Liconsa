@@ -28,70 +28,86 @@ class BeneficiarioController extends Controller
 
     public function store(Request $request): \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application
     {
-        try {
-            // Validar los datos del formulario
-            $request->validate([
-                'nombre' => 'required|string|max:50',
-                'apellido_p' => 'required|string|max:50',
-                'apellido_m' => 'required|string|max:50',
-                'curp' => 'required|string|max:18|unique:beneficiarios', // Asegúrate de que el CURP sea único en la tabla
-                'fecha_nac' => 'required|date',
-                'n_dependientes' => 'required|integer',
-                'direccion' => 'required|string|max:150',
-                'num_lecheria' => 'required|string|max:10',
-                'curp_beneficiarios.*' => 'nullable|string|max:18', // Validación para los CURPs de dependientes
+        // Validar los datos del formulario
+        $fields = [
+            'nombre' => 'required|string|max:50',
+            'apellido_p' => 'required|string|max:50',
+            'apellido_m' => 'required|string|max:50',
+            'curp' => 'required|string|max:18', // Asegúrate de que el CURP sea único en la tabla
+            'fecha_nac' => 'required|date',
+            'n_dependientes' => 'required|integer',
+            'direccion' => 'required|string|max:150',
+            'num_lecheria' => 'required|string|max:10',
+            'curp_beneficiarios.*' => 'nullable|string|max:18', // Validación para los CURPs de dependientes
+        ];
+        $mensaje = [
+            //'required' => 'El campo :attribute es obligatorio.',
+            'nombre.required' => 'El campo Nombre es obligatorio.',
+            'apellido_p.required' => 'El campo Apellido Paterno es obligatorio.',
+            'apellido_m.required' => 'El campo Apellido Materno es obligatorio.',
+            'curp.required' => 'El campo CURP es obligatorio.',
+            'fecha_nac.required' => 'El campo Fecha de Nacimiento es obligatorio.',
+            'n_dependientes.required' => 'El campo Número de Dependientes es obligatorio.',
+            'direccion.required' => 'El campo Dirección es obligatorio.',
+            'num_lecheria.required' => 'El campo Número de Lechería es obligatorio.',
+            'curp_beneficiarios.*.required' => 'El campo CURP de Dependiente es obligatorio.',
+            'nombre.max' => 'El campo Nombre no debe exceder los 50 caracteres.',
+            'apellido_p.max' => 'El campo Apellido Paterno no debe exceder los 50 caracteres.',
+            'apellido_m.max' => 'El campo Apellido Materno no debe exceder los 50 caracteres.',
+            'curp.max' => 'El campo CURP no debe exceder los 18 caracteres.',
+            'n_dependientes.integer' => 'El campo Número de Dependientes debe ser un número entero.',
+            'direccion.max' => 'El campo Dirección no debe exceder los 150 caracteres.',
+            'num_lecheria.max' => 'El campo Número de Lechería no debe exceder los 10 caracteres.',
+        ];
+        $this->validate($request, $fields, $mensaje);
 
-            ]);
-            $valorCalculado = random_int(0, 999999999); // Generas el valor de la manera que necesites
-            $folio = '' . str_pad($valorCalculado, 9, "0", STR_PAD_LEFT);
 
-            $d_asist1 = $request->input('d_asist1');
-            $d_asist2 = $request->input('d_asist2');
-            $d_asist3 = $request->input('d_asist3');
+        $valorCalculado = random_int(0, 999999999); // Generas el valor de la manera que necesites
+        $folio = '' . str_pad($valorCalculado, 9, "0", STR_PAD_LEFT);
 
-            if ($d_asist1 == null || $d_asist1 == '' || $d_asist1 == 'NA' || $d_asist1 == 'N/A' || $d_asist1 == 'Na' || $d_asist1 == 'na') $d_asist1 = 0;
-            else $d_asist1 = $this->daysWeek($d_asist1);
-            if ($d_asist2 == null || $d_asist2 == '' || $d_asist2 == 'NA' || $d_asist2 == 'N/A' || $d_asist2 == 'Na' || $d_asist2 == 'na') $d_asist2 = 0;
-            else $d_asist2 = $this->daysWeek($d_asist2);
-            if ($d_asist3 == null || $d_asist3 == '' || $d_asist3 == 'NA' || $d_asist3 == 'N/A' || $d_asist3 == 'Na' || $d_asist3 == 'na') $d_asist3 = 0;
-            else $d_asist3 = $this->daysWeek($d_asist3);
+        $d_asist1 = $request->input('d_asist1');
+        $d_asist2 = $request->input('d_asist2');
+        $d_asist3 = $request->input('d_asist3');
 
-            $request->request->add(['d_asist1' => $d_asist1]);
-            $request->request->add(['d_asist2' => $d_asist2]);
-            $request->request->add(['d_asist3' => $d_asist3]);
-            $request->request->add(['folio_cb' => $folio]);
-            $request->request->add(['Sancionado' => false]);
+        if ($d_asist1 == null || $d_asist1 == '' || $d_asist1 == 'NA' || $d_asist1 == 'N/A' || $d_asist1 == 'Na' || $d_asist1 == 'na') $d_asist1 = 0;
+        else $d_asist1 = $this->daysWeek($d_asist1);
+        if ($d_asist2 == null || $d_asist2 == '' || $d_asist2 == 'NA' || $d_asist2 == 'N/A' || $d_asist2 == 'Na' || $d_asist2 == 'na') $d_asist2 = 0;
+        else $d_asist2 = $this->daysWeek($d_asist2);
+        if ($d_asist3 == null || $d_asist3 == '' || $d_asist3 == 'NA' || $d_asist3 == 'N/A' || $d_asist3 == 'Na' || $d_asist3 == 'na') $d_asist3 = 0;
+        else $d_asist3 = $this->daysWeek($d_asist3);
+
+        $request->request->add(['d_asist1' => $d_asist1]);
+        $request->request->add(['d_asist2' => $d_asist2]);
+        $request->request->add(['d_asist3' => $d_asist3]);
+        $request->request->add(['folio_cb' => $folio]);
+        $request->request->add(['Sancionado' => false]);
 
 
-            // Crear y guardar el beneficiario usando asignación masiva
-            //Beneficiario::create($request->all());
+        // Crear y guardar el beneficiario usando asignación masiva
+        //Beneficiario::create($request->all());
 
-            $beneficiario = Beneficiario::create($request->except('curp_beneficiarios'));
-            foreach ($request->curp_beneficiarios as $curpDependiente) {
-                if (!empty($curpDependiente)) {
-                    $dependientes = new Dependiente();
-                    $dependientes->curp = $curpDependiente;
-                    $dependientes->code = $folio;
-                    $dependientes->beneficiario_id = $beneficiario->id; // Asignar la foreign key
-                    $dependientes->save();
-                }
+        $beneficiario = Beneficiario::create($request->except('curp_beneficiarios'));
+        foreach ($request->curp_beneficiarios as $curpDependiente) {
+            if (!empty($curpDependiente)) {
+                $dependientes = new Dependiente();
+                $dependientes->curp = $curpDependiente;
+                $dependientes->code = $folio;
+                $dependientes->beneficiario_id = $beneficiario->id; // Asignar la foreign key
+                $dependientes->save();
             }
-            $id = Beneficiario::where('folio_cb', $folio)->first()->id;
-            $beneficiario = Beneficiario::findOrFail($id);
-
-            $beneficiario->d_asist1 = $this->weekDays($beneficiario->d_asist1);
-            $beneficiario->d_asist2 = $this->weekDays($beneficiario->d_asist2);
-            $beneficiario->d_asist3 = $this->weekDays($beneficiario->d_asist3);
-            // Redireccionar a una ruta deseada con un mensaje de éxito
-            //return redirect()->route('add')->with('success', 'Beneficiario creado con éxito.');
-            $dependientes = Dependiente::where('beneficiario_id', $id)->get();
-
-            return view('liconsa.seeBeneficiario', compact('beneficiario', 'dependientes'));
-
-
-        } catch (\Exception $e) {
-            dd($e->getMessage());
         }
+        $id = Beneficiario::where('folio_cb', $folio)->first()->id;
+        $beneficiario = Beneficiario::findOrFail($id);
+
+        $beneficiario->d_asist1 = $this->weekDays($beneficiario->d_asist1);
+        $beneficiario->d_asist2 = $this->weekDays($beneficiario->d_asist2);
+        $beneficiario->d_asist3 = $this->weekDays($beneficiario->d_asist3);
+        // Redireccionar a una ruta deseada con un mensaje de éxito
+        //return redirect()->route('add')->with('success', 'Beneficiario creado con éxito.');
+        $dependientes = Dependiente::where('beneficiario_id', $id)->get();
+
+        return view('liconsa.seeBeneficiario', compact('beneficiario', 'dependientes'));
+
     }
 
     private function daysWeek($dayName)
@@ -167,60 +183,76 @@ class BeneficiarioController extends Controller
 
     public function update(Request $request, $id): \Illuminate\Http\RedirectResponse
     {
-        try {
-            $beneficiario = Beneficiario::findOrFail($id);
-            // Validar los datos del formulario
-            $request->validate([
-                'nombre' => 'required|string|max:50',
-                'apellido_p' => 'required|string|max:50',
-                'apellido_m' => 'required|string|max:50',
-                'curp' => 'required|string|max:18|unique:beneficiarios,curp,' . $beneficiario->id,
-                'fecha_nac' => 'required|date',
-                'n_dependientes' => 'required|integer',
-                'direccion' => 'required|string|max:150',
-                'num_lecheria' => 'required|integer',
-                'd_asist1' => 'nullable|string|max:50',
-                'd_asist2' => 'nullable|string|max:50',
-                'd_asist3' => 'nullable|string|max:50',
-            ]);
+        $beneficiario = Beneficiario::findOrFail($id);
+        // Validar los datos del formulario
+        $fields = [
+            'nombre' => 'required|string|max:50',
+            'apellido_p' => 'required|string|max:50',
+            'apellido_m' => 'required|string|max:50',
+            'curp' => 'required|string|max:18', // Asegúrate de que el CURP sea único en la tabla
+            'fecha_nac' => 'required|date',
+            'n_dependientes' => 'required|integer',
+            'direccion' => 'required|string|max:150',
+            'num_lecheria' => 'required|string|max:10',
+            'curp_beneficiarios.*' => 'nullable|string|max:18', // Validación para los CURPs de dependientes
+        ];
+        $mensaje = [
+            //'required' => 'El campo :attribute es obligatorio.',
+            'nombre.required' => 'El campo Nombre es obligatorio.',
+            'apellido_p.required' => 'El campo Apellido Paterno es obligatorio.',
+            'apellido_m.required' => 'El campo Apellido Materno es obligatorio.',
+            'curp.required' => 'El campo CURP es obligatorio.',
+            'fecha_nac.required' => 'El campo Fecha de Nacimiento es obligatorio.',
+            'n_dependientes.required' => 'El campo Número de Dependientes es obligatorio.',
+            'direccion.required' => 'El campo Dirección es obligatorio.',
+            'num_lecheria.required' => 'El campo Número de Lechería es obligatorio.',
+            'curp_beneficiarios.*.required' => 'El campo CURP de Dependiente es obligatorio.',
+            'nombre.max' => 'El campo Nombre no debe exceder los 50 caracteres.',
+            'apellido_p.max' => 'El campo Apellido Paterno no debe exceder los 50 caracteres.',
+            'apellido_m.max' => 'El campo Apellido Materno no debe exceder los 50 caracteres.',
+            'curp.max' => 'El campo CURP no debe exceder los 18 caracteres.',
+            'n_dependientes.integer' => 'El campo Número de Dependientes debe ser un número entero.',
+            'direccion.max' => 'El campo Dirección no debe exceder los 150 caracteres.',
+            'num_lecheria.max' => 'El campo Número de Lechería no debe exceder los 10 caracteres.',
+        ];
+        $this->validate($request, $fields, $mensaje);
 
-            // Actualizar los campos del beneficiario
-            $beneficiario->nombre = $request->input('nombre');
-            $beneficiario->apellido_p = $request->input('apellido_p');
-            $beneficiario->apellido_m = $request->input('apellido_m');
-            $beneficiario->curp = $request->input('curp');
-            $beneficiario->fecha_nac = $request->input('fecha_nac');
-            $beneficiario->n_dependientes = $request->input('n_dependientes');
-            $beneficiario->direccion = $request->input('direccion');
-            $beneficiario->num_lecheria = $request->input('num_lecheria');
+        // Actualizar los campos del beneficiario
+        $beneficiario->nombre = $request->input('nombre');
+        $beneficiario->apellido_p = $request->input('apellido_p');
+        $beneficiario->apellido_m = $request->input('apellido_m');
+        $beneficiario->curp = $request->input('curp');
+        $beneficiario->fecha_nac = $request->input('fecha_nac');
+        $beneficiario->n_dependientes = $request->input('n_dependientes');
+        $beneficiario->direccion = $request->input('direccion');
+        $beneficiario->num_lecheria = $request->input('num_lecheria');
 
-            $d_asist1 = $request->input('d_asist1');
-            $d_asist2 = $request->input('d_asist2');
-            $d_asist3 = $request->input('d_asist3');
+        $d_asist1 = $request->input('d_asist1');
+        $d_asist2 = $request->input('d_asist2');
+        $d_asist3 = $request->input('d_asist3');
 
-            if ($d_asist1 == null || $d_asist1 == '' || $d_asist1 == 'NA' || $d_asist1 == 'N/A' || $d_asist1 == 'Na' || $d_asist1 == 'na') $d_asist1 = 0;
-            else $d_asist1 = $this->daysWeek($d_asist1);
-            if ($d_asist2 == null || $d_asist2 == '' || $d_asist2 == 'NA' || $d_asist2 == 'N/A' || $d_asist2 == 'Na' || $d_asist2 == 'na') $d_asist2 = 0;
-            else $d_asist2 = $this->daysWeek($d_asist2);
-            if ($d_asist3 == null || $d_asist3 == '' || $d_asist3 == 'NA' || $d_asist3 == 'N/A' || $d_asist3 == 'Na' || $d_asist3 == 'na') $d_asist3 = 0;
-            else $d_asist3 = $this->daysWeek($d_asist3);
+        if ($d_asist1 == null || $d_asist1 == '' || $d_asist1 == 'NA' || $d_asist1 == 'N/A' || $d_asist1 == 'Na' || $d_asist1 == 'na') $d_asist1 = 0;
+        else $d_asist1 = $this->daysWeek($d_asist1);
+        if ($d_asist2 == null || $d_asist2 == '' || $d_asist2 == 'NA' || $d_asist2 == 'N/A' || $d_asist2 == 'Na' || $d_asist2 == 'na') $d_asist2 = 0;
+        else $d_asist2 = $this->daysWeek($d_asist2);
+        if ($d_asist3 == null || $d_asist3 == '' || $d_asist3 == 'NA' || $d_asist3 == 'N/A' || $d_asist3 == 'Na' || $d_asist3 == 'na') $d_asist3 = 0;
+        else $d_asist3 = $this->daysWeek($d_asist3);
 
-            $beneficiario->d_asist1 = $d_asist1;
-            $beneficiario->d_asist2 = $d_asist2;
-            $beneficiario->d_asist3 = $d_asist3;
+        $beneficiario->d_asist1 = $d_asist1;
+        $beneficiario->d_asist2 = $d_asist2;
+        $beneficiario->d_asist3 = $d_asist3;
 
-            $dependientes = Dependiente::where('beneficiario_id', $id)->get();
-            foreach ($dependientes as $dependiente) {
-                $curpDependiente = $request->input('curp_dependiente_' . $dependiente->id);
-                $dependiente->curp = $curpDependiente;
-                $dependiente->save();
-            }
-
-            // Redireccionar con mensaje de éxito
-            return redirect()->route('index')->with('success', 'Beneficiario actualizado con éxito.');
-        } catch (\Exception $e) {
-            return redirect()->route('index')->withErrors(['Error al actualizar el beneficiario: ' . $e->getMessage()]);
+        $beneficiario->save();
+        $dependientes = Dependiente::where('beneficiario_id', $id)->get();
+        foreach ($dependientes as $dependiente) {
+            $curpDependiente = $request->input('curp_dependiente_' . $dependiente->id);
+            $dependiente->curp = $curpDependiente;
+            $dependiente->save();
         }
+
+        // Redireccionar con mensaje de éxito
+        return redirect()->route('index')->with('success', 'Beneficiario actualizado con éxito.');
+
     }
 
     public function show($id): \Illuminate\Contracts\View\Factory|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\View|\Illuminate\Http\RedirectResponse|\Illuminate\Contracts\Foundation\Application
@@ -237,7 +269,7 @@ class BeneficiarioController extends Controller
             return view('liconsa.seeBeneficiario', compact('beneficiario', 'dependientes'));
         } catch (\Exception $e) {
             // En caso de error, redireccionar a una ruta deseada con un mensaje de error
-            return redirect()->route('index')->withErrors(['Error al buscar el beneficiario: ' . $e->getMessage()]);
+            return redirect()->route('index')->withErrors(['El beneficiario con ese código no existe']);
         }
     }
 
