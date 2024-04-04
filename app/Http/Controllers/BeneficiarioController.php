@@ -82,14 +82,11 @@ class BeneficiarioController extends Controller
         $request->request->add(['folio_cb' => $folio]);
         $request->request->add(['Sancionado' => false]);
         $curpsDependientes = $request->input('curp_dependiente', []);
-
-
-
         // Crear y guardar el beneficiario usando asignación masiva
         //Beneficiario::create($request->all());
 
         $beneficiario = Beneficiario::create($request->except('curp_beneficiarios'));
-        foreach ($curpsDependientes as $curpDependiente) {
+        foreach ($request->curp_beneficiarios as $curpDependiente) {
             if (!empty($curpDependiente)) {
                 $dependientes = new Dependiente();
                 $dependientes->curp = $curpDependiente;
@@ -98,6 +95,7 @@ class BeneficiarioController extends Controller
                 $dependientes->save();
             }
         }
+
         $id = Beneficiario::where('folio_cb', $folio)->first()->id;
         $beneficiario = Beneficiario::findOrFail($id);
 
@@ -109,7 +107,6 @@ class BeneficiarioController extends Controller
         $dependientes = Dependiente::where('beneficiario_id', $id)->get();
 
         return view('liconsa.seeBeneficiario', compact('beneficiario', 'dependientes'));
-
     }
 
     private function daysWeek($dayName)

@@ -11,7 +11,7 @@
         }
 
         .header {
-            background-color: #13322B;
+            background-image: url('{{asset('/img/FondoV1.png')}}');
             color: white;
             display: flex;
             align-items: center;
@@ -21,7 +21,7 @@
         }
 
         .footer {
-            background-color: #9D2449;
+            background-image: url('{{asset('/img/FondoR1.png')}}');
             color: white;
             display: flex;
             align-items: center;
@@ -125,12 +125,13 @@
             display: flex;
             align-items: center;
             justify-content: right;
-            height: 80px;
+            height: 40px;
 
         }
 
         .navbar {
             background-color: #285C4D;
+            height: 40px;
         }
 
         .navbar a {
@@ -187,7 +188,6 @@
     <h2>Gobierno de México</h2>
 </header>
 <div class="mynav">
-
     <nav class="navbar navbar-expand-lg ">
         <div class="container-fluid asd">
             <a class="navbar-brand" href="#"></a>
@@ -216,8 +216,10 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{route('trabajadores.list')}}">Lista De Usuarios</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{route('ventas.list')}}">Lista De Ventas</a>
+                    </li>
                 </ul>
-
             </div>
         </div>
     </nav>

@@ -14,6 +14,28 @@ use Carbon\Carbon;
 
 class VentaController extends Controller
 {
+    public function index()
+    {
+        // Obtener todos los registros de ventas
+        $ventas = Venta::paginate(5);
+
+        // Inicializar un array para almacenar los beneficiarios asociados a las ventas
+        $beneficiarios = [];
+
+        // Iterar sobre cada registro de venta para obtener el beneficiario correspondiente
+        foreach ($ventas as $venta) {
+            // Obtener el beneficiario asociado a este registro de venta
+            $beneficiario = Beneficiario::find($venta->beneficiario_id);
+            // Verificar si se encontró un beneficiario y agregarlo al array de beneficiarios
+            if ($beneficiario) {
+                $beneficiarios[] = $beneficiario;
+            }
+        }
+
+        // Pasar los registros de ventas y los beneficiarios a la vista para mostrarlos
+        return view('liconsa.listSells', compact('ventas', 'beneficiarios'));
+    }
+
     public function store(Request $request): \Illuminate\Http\RedirectResponse
     {
         try {

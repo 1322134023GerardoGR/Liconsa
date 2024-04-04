@@ -23,7 +23,7 @@
         }
 
         .header {
-            background-color: #13322B;
+            background-image: url('{{asset('/img/FondoV1.png')}}');
             color: white;
             display: flex;
             align-items: center;
@@ -33,7 +33,7 @@
         }
 
         .footer {
-            background-color: #9D2449;
+            background-image: url('{{asset('/img/FondoR1.png')}}');
             color: white;
             display: flex;
             align-items: center;
@@ -109,12 +109,12 @@
             display: flex;
             align-items: center;
             justify-content: right;
-            height: 80px;
-
+            height: 40px;
         }
 
         .navbar {
             background-color: #285C4D;
+            height: 40px;
         }
 
         .navbar a {
@@ -204,8 +204,10 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{route('trabajadores.list')}}">Lista De Usuarios</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{route('ventas.list')}}">Lista De Ventas</a>
+                    </li>
                 </ul>
-
             </div>
         </div>
     </nav>
@@ -304,7 +306,8 @@
         <div class="items-center">
             <canvas id="canvas" style="display: none;"></canvas>
         </div>
-        <img hidden id="photo-preview" width="600px" height="400px" src="{{public_path('img/logo_liconsa.jpg')}}" alt="Previsualización de la foto">
+        <img hidden id="photo-preview" width="600px" height="400px" src="{{public_path('img/logo_liconsa.jpg')}}"
+             alt="Previsualización de la foto">
     </div>
 
 </div>

@@ -102,6 +102,7 @@ Route::match(['get', 'post'], '/ventas/update/{id}', [VentaController::class, 'u
 Route::match(['get', 'post'], '/ventas/editar/{id}', [VentaController::class, 'edit'])->name('ventas.edit');
 Route::match(['get', 'post'], '/ventas/detalles/{id}', [VentaController::class, 'show'])->name('ventas.show');
 Route::match(['get', 'post'], '/ventas/eliminar/{id}', [VentaController::class, 'destroy'])->name('ventas.destroy');
+Route::match(['get', 'post', 'delete'], '/ventas/lista', [VentaController::class, 'index'])->name('ventas.list');
 
 
 

@@ -7,9 +7,6 @@
 
     <title>LICONSA</title>
 
-    <!-- Bootstrap CSS -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet"/>
@@ -22,13 +19,18 @@
             box-sizing: border-box;
         }
 
+        body {
+            font-family: 'figtree', sans-serif;
+        }
+
         .header {
             background-image: url('{{asset('/img/FondoV1.png')}}');
             color: white;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            height: 80px;
+            height: 93px;
+            width: auto;
             padding: 20px;
         }
 
@@ -46,37 +48,72 @@
             background-color: #D4C19C;
             min-height: calc(100vh - 160px);
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
         }
 
-        .form-container {
-            width: 70%; /* Ajuste del ancho del formulario */
-            max-width: 800px;
+        .user-list {
+            width: 80%;
+            max-width: 1150px;
+            background-color: white;
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            background-color: white;
         }
 
-        .form-group {
+        .user-list h2 {
             margin-bottom: 20px;
+            text-align: center;
         }
 
-        .form-label {
-            font-weight: bold;
+        .user-table {
+            width: 100%;
+            border-collapse: collapse;
         }
 
-        .btn-container {
+        .user-table th, .user-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        .user-table th {
+            background-color: #13322B;
+            color: white;
+        }
+
+        .user-table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .user-table tr:hover {
+            background-color: #ddd;
+        }
+
+        .pagination {
+            margin-top: 20px;
             display: flex;
             justify-content: center;
-            margin-top: 20px;
+        }
+
+        .pagination button {
+            padding: 5px 10px;
+            margin: 0 5px;
+            background-color: #13322B;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .pagination button:hover {
+            background-color: #0b1b14;
         }
 
         .btn1 {
             margin: 0 10px;
             padding: 15px 30px;
-
             border-radius: 5px;
             background-color: #621132;
             color: white;
@@ -147,6 +184,7 @@
             border-radius: var(--bs-alert-border-radius);
         }
     </style>
+
     @vite(['resources/js/app.js'])
 
 </head>
@@ -156,7 +194,6 @@
     <h2>Gobierno de México</h2>
 </header>
 <div class="mynav">
-
     <nav class="navbar navbar-expand-lg ">
         <div class="container-fluid asd">
             <a class="navbar-brand" href="#"></a>
@@ -186,9 +223,10 @@
                         <a class="nav-link" href="{{route('trabajadores.list')}}">Lista De Usuarios</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{route('ventas.list')}}">Lista De Ventas</a>
+                        <a class="nav-link active" href="{{route('ventas.list')}}">Lista De Ventas</a>
                     </li>
                 </ul>
+
             </div>
         </div>
     </nav>
@@ -197,8 +235,8 @@
 @if(session('success'))
     <div class="alert alert-success alert-dismissible fade show" role="alert">
         {{ session('success') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 @endif
 @if($errors->any())
     <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -212,58 +250,46 @@
 @endif
 
 <div class="content">
-    <div class="form-container">
-        <div class="card-header"><h2>Editar Usuario {{$trabajadores->nombre}} {{$trabajadores->apellido_p}}</h2></div>
-
-        <form action="{{route('trabajadores.update',$trabajadores->id)}}" method="GET">
-            @csrf
-            <div class="form-group">
-                <label for="nombre" class="form-label">Nombre(s):</label>
-                <input type="text" name="nombre" class="form-control" id="nombre" value="{{$trabajadores->nombre}}">
-            </div>
-            <div class="form-group">
-                <label for="apellido_p" class="form-label">Apellido paterno:</label>
-                <input type="text" name="apellido_p" class="form-control" id="apellido_p"
-                       value="{{$trabajadores->apellido_p}}">
-            </div>
-            <div class="form-group">
-                <label for="apellido_m" class="form-label">Apellido materno:</label>
-                <input type="text" name="apellido_m" class="form-control" id="apellido_m"
-                       value="{{$trabajadores->apellido_m}}">
-            </div>
-            <div class="form-group">
-                <label for="curp" class="form-label">CURP:</label>
-                <input type="text" name="curp" class="form-control" id="curp" value="{{$trabajadores->curp}}">
-            </div>
-            <div class="form-group">
-                <label for="rfc" class="form-label">RFC:</label>
-                <input type="text" name="rfc" class="form-control" id="rfc" value="{{$trabajadores->rfc}}">
-            </div>
-            <div class="form-group">
-                <label for="rol" class="form-label">Rol:</label>
-                <select name="rol" class="form-control" id="rol">
-                    <option value="vendedor">Vendedor</option>
-                    <option value="atencion_clientes">At. Clientes</option>
-                    <option value="supervisor">Supervisor</option>
-                </select>
-            </div>
-            <div class="btn-container">
-                <button type="submit" class="btn1"><i class="fas fa-save"></i>Guardar</button>
-                <button type="reset" class="btn1" onclick="index()"><i class="fas fa-times"></i>Cancelar</button>
-            </div>
-        </form>
+    <div class="user-list">
+        <h2>Ventas Registradas</h2>
+        <table class="user-table">
+            <thead>
+            <tr>
+                <th>Folio de venta</th>
+                <th>Nombre del beneficiario</th>
+                <th>Código de beneficiario</th>
+                <th>Fecha</th>
+                <th>Hora</th>
+                <th>Litros vendidos</th>
+                <th>Costo total</th>
+                <th>Num de Lechería</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach ($ventas as $venta)
+                @foreach($beneficiarios as $beneficiario)
+                    <tr>
+                        <td>{{ $venta->folio }}</td>
+                        <td>{{ $beneficiario->nombre .' ' .$beneficiario->apellido_p .' '. $beneficiario->apellido_m }}</td>
+                        <td>{{ $beneficiario->folio_cb }}</td>
+                        <td>{{ $venta->fecha }}</td>
+                        <td>{{ $venta->hora }}</td>
+                        <td>{{ $venta->litros_v }}</td>
+                        <td>{{ $venta->total }}</td>
+                        <td>{{ $venta->num_lecheria }}</td>
+                    </tr>
+                @endforeach
+            @endforeach
+            </tbody>
+        </table>
+        <div class="pagination">
+            {{ $ventas->links() }}
+            <!-- Agrega más botones de paginación si es necesario -->
+        </div>
     </div>
 </div>
 <footer class="footer">
     <p>LICONSA © 2024</p>
 </footer>
-
-<!-- Bootstrap JS (optional) -->
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<script>
-    function index() {
-        window.location.href = "{{ route('index') }}"; // Reemplaza 'route('index')' con la ruta adecuada en tu aplicación
-    }
-</script>
 </body>
 </html>
