@@ -255,6 +255,10 @@
             <input type="text" class="form-control" id="curp" value="{{$beneficiario->curp}}" disabled>
         </div>
         <div class="form-group">
+            <label for="code" class="form-label">Código del Beneficiario:</label>
+            <input type="text" class="form-control" id="code" value="{{$beneficiario->folio_cb}}" disabled>
+        </div>
+        <div class="form-group">
             <label for="direccion" class="form-label">Dirección:</label>
             <input type="text" class="form-control" id="direccion" value="{{$beneficiario->direccion}}" disabled>
         </div>

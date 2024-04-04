@@ -95,4 +95,18 @@ class TrabajadorController extends Controller
         $trabajadores = trabajador::findOrFail($id);
         return view('liconsa.editUser', compact('trabajadores'));
     }
+    public function destroy($id): \Illuminate\Http\RedirectResponse
+    {
+        try {
+            $trabajador = Trabajador::findOrFail($id);
+
+            // Eliminar el trabajador
+            $trabajador->delete();
+
+            // Redireccionar con mensaje de éxito
+            return redirect()->route('trabajadores.list')->with('success', 'Usuario eliminado con éxito.');
+        } catch (\Exception $e) {
+            return redirect()->route('trabajadores.list')->withErrors(['Error al eliminar el usuario: ' . $e->getMessage()]);
+        }
+    }
 }
