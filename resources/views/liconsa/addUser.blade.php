@@ -128,7 +128,26 @@
         }
 
         .alerta2 {
-            margin-bottom: 0;
+            --bs-alert-bg: transparent;
+            --bs-alert-padding-x: 1rem;
+            --bs-alert-padding-y: 1rem;
+            --bs-alert-margin-bottom: 0;
+            --bs-alert-color: inherit;
+            --bs-alert-border-color: transparent;
+            --bs-alert-border: var(--bs-border-width) solid var(--bs-alert-border-color);
+            --bs-alert-border-radius: var(--bs-border-radius);
+            --bs-alert-link-color: inherit;
+            position: relative;
+            padding: var(--bs-alert-padding-y) var(--bs-alert-padding-x);
+            margin-bottom: var(--bs-alert-margin-bottom);
+            color: var(--bs-alert-color);
+            background-color: var(--bs-alert-bg);
+            border: var(--bs-alert-border);
+            border-radius: var(--bs-alert-border-radius);
+        }
+
+        .obligatorio {
+            color: red;
         }
     </style>
     @vite(['resources/js/app.js'])
@@ -177,53 +196,55 @@
 
 </div>
 @if(session('success'))
-    <div class="alert alert-success alerta2 " role="alert">
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
         {{ session('success') }}
     </div>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 @endif
 @if($errors->any())
-    <div class="alert alert-danger alerta2" role="alert">
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
         <ul>
             @foreach($errors->all() as $error)
                 <li>{{ $error }}</li>
             @endforeach
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </ul>
     </div>
 @endif
 
 <div class="content">
     <div class="form-container">
-        <div class="card-header"><h2>Agregar Usuario</h2></div>
+        <div class="card-header text-center"><h2>Agregar Usuario</h2></div>
 
         <form action="{{route('trabajadores.store')}}" method="POST">
             @csrf
             <div class="form-group">
-                <label for="nombre" class="form-label">Nombre(s):</label>
+                <b>Nombre(s):</b><label for="nombre" class="form-label obligatorio">*</label>
                 <input type="text" name="nombre" class="form-control" id="nombre" placeholder="Ej. Adrian Alejandro"
                        value="{{isset($trabajador->nombre)?$trabajador->nombre:old('nombre')}}">
             </div>
             <div class="form-group">
-                <label for="apellido_p" class="form-label">Apellido paterno:</label>
+                <b>Apellido paterno:</b><label for="apellido_p" class="form-label obligatorio">*</label>
                 <input type="text" name="apellido_p" class="form-control" id="apellido_p" placeholder="Ej. Gómez"
                        value="{{isset($trabajador->apellido_p)?$trabajador->apellido_p:old('apellido_p')}}">
             </div>
             <div class="form-group">
-                <label for="apellido_m" class="form-label">Apellido materno:</label>
+                <b>Apellido materno:</b><label for="apellido_m" class="form-label obligatorio">*</label>
                 <input type="text" name="apellido_m" class="form-control" id="apellido_m" placeholder="Ej. Rodriguez"
                        value="{{isset($trabajador->apellido_m)?$trabajador->apellido_m:old('apellido_m')}}">
             </div>
             <div class="form-group">
-                <label for="curp" class="form-label">CURP:</label>
+                <b>CURP:</b><label for="curp" class="form-label obligatorio">*</label>
                 <input type="text" name="curp" class="form-control" id="curp" placeholder="ROHM040812HDFDRRA3"
                        value="{{isset($trabajador->curp)?$trabajador->curp:old('curp')}}">
             </div>
             <div class="form-group">
-                <label for="rfc" class="form-label">RFC:</label>
+                <b>RFC:</b><label for="rfc" class="form-label obligatorio">*</label>
                 <input type="text" name="rfc" class="form-control" id="rfc" placeholder="ROHM040812"
                        value="{{isset($trabajador->rfc)?$trabajador->rfc:old('rfc')}}">
             </div>
             <div class="form-group">
-                <label for="rol" class="form-label">Rol:</label>
+                <b>Rol</b><label for="rol" class="form-label obligatorio">*</label>
                 <select name="rol" class="form-control" id="rol">
                     <option value="vendedor">Vendedor</option>
                     <option value="atencion_clientes">At. Clientes</option>

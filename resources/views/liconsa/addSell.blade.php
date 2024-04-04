@@ -77,6 +77,7 @@
             cursor: pointer;
             transition: background-color 0.3s ease;
         }
+
         .btn1:hover {
             background-color: #4a0e27;
         }
@@ -138,7 +139,7 @@
             border-radius: 50px;
         }
 
-        .mynav{
+        .mynav {
             background-color: #285C4D;
             color: white;
             display: flex;
@@ -147,9 +148,11 @@
             height: 80px;
 
         }
+
         .navbar {
             background-color: #285C4D;
         }
+
         .navbar a {
             color: white;
             background-color: #285C4D;
@@ -159,20 +162,43 @@
             color: #621132;
             background-color: #285C4D;
         }
+
         .navbar-toggler {
             background-color: #285C4D;
             color: white;
             border: none;
         }
+
         .navbar-toggler:hover {
             background-color: #285C4D;
             color: #621132;
         }
-        .asd{
+
+        .asd {
             background-color: #285C4D;
         }
-        .alerta2{
-            margin-bottom: 0;
+
+        .alerta2 {
+            --bs-alert-bg: transparent;
+            --bs-alert-padding-x: 1rem;
+            --bs-alert-padding-y: 1rem;
+            --bs-alert-margin-bottom: 0;
+            --bs-alert-color: inherit;
+            --bs-alert-border-color: transparent;
+            --bs-alert-border: var(--bs-border-width) solid var(--bs-alert-border-color);
+            --bs-alert-border-radius: var(--bs-border-radius);
+            --bs-alert-link-color: inherit;
+            position: relative;
+            padding: var(--bs-alert-padding-y) var(--bs-alert-padding-x);
+            margin-bottom: var(--bs-alert-margin-bottom);
+            color: var(--bs-alert-color);
+            background-color: var(--bs-alert-bg);
+            border: var(--bs-alert-border);
+            border-radius: var(--bs-alert-border-radius);
+        }
+
+        .obligatorio {
+            color: red;
         }
     </style>
 
@@ -189,13 +215,15 @@
     <nav class="navbar navbar-expand-lg ">
         <div class="container-fluid asd">
             <a class="navbar-brand" href="#"></a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse asd" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link "  href="{{route('index')}}">Inicio</a>
+                        <a class="nav-link " href="{{route('index')}}">Inicio</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{route('beneficiarios.list')}}">Lista de Beneficiarios</a>
@@ -220,16 +248,18 @@
 
 </div>
 @if(session('success'))
-    <div class="alert alert-success alerta2 " role="alert">
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
         {{ session('success') }}
     </div>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 @endif
 @if($errors->any())
-    <div class="alert alert-danger alerta2" role="alert">
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
         <ul>
             @foreach($errors->all() as $error)
                 <li>{{ $error }}</li>
             @endforeach
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </ul>
     </div>
 @endif
@@ -241,19 +271,20 @@
         <div class="panel"> <!-- Contenedor del panel blanco -->
             <h1>Registrar Venta</h1>
             <div class="form-group">
-                <label for="code">Código del Beneficiario:</label>
+                <b>Código del Beneficiario:</b><label for="code" class="form-label obligatorio">*</label>
                 <input name="code" type="text" class="form-control" id="code">
             </div>
             <div class="form-group">
-                <label for="litros_v">Número de litros de leche:</label>
-                <input onchange="changePrice(this.value)" name="litros_v" type="number" class="form-control" id="litros_v">
+                <b>Número de litros de leche:</b><label for="litros_v" class="form-label obligatorio">*</label>
+                <input onchange="changePrice(this.value)" name="litros_v" type="number" class="form-control"
+                       id="litros_v">
             </div>
             <div class="form-group">
-                <label for="num_lecheria">Número de Lechería:</label>
+                <b>Número de Lechería:</b><label for="num_lecheria" class="form-label obligatorio">*</label>
                 <input name="num_lecheria" type="number" class="form-control" id="num_lecheria">
             </div>
             <div class="form-group">
-                <label for="costo">Costo total:</label>
+                <label for="costo"><b>Costo total:</b></label>
                 <input disabled name="costo" type="number" class="form-control" id="costo">
             </div>
 
@@ -304,7 +335,8 @@
         sidebar.classList.toggle('active');
         sidebarToggle.classList.toggle('active');
     }
-    function index(){
+
+    function index() {
         window.location.href = "{{ route('index') }}"; // Reemplaza 'route('index')' con la ruta adecuada en tu aplicación
     }
 </script>

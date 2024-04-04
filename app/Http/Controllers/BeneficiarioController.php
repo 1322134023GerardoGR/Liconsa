@@ -81,13 +81,15 @@ class BeneficiarioController extends Controller
         $request->request->add(['d_asist3' => $d_asist3]);
         $request->request->add(['folio_cb' => $folio]);
         $request->request->add(['Sancionado' => false]);
+        $curpsDependientes = $request->input('curp_dependiente', []);
+
 
 
         // Crear y guardar el beneficiario usando asignación masiva
         //Beneficiario::create($request->all());
 
         $beneficiario = Beneficiario::create($request->except('curp_beneficiarios'));
-        foreach ($request->curp_beneficiarios as $curpDependiente) {
+        foreach ($curpsDependientes as $curpDependiente) {
             if (!empty($curpDependiente)) {
                 $dependientes = new Dependiente();
                 $dependientes->curp = $curpDependiente;

@@ -61,32 +61,6 @@ class DatabaseSeeder extends Seeder
             ]);
         }
 
-        $faker = Faker::create('es_MX');
-
-        // Obtener todos los beneficiarios
-        $beneficiarios = Beneficiario::all();
-
-        foreach ($beneficiarios as $beneficiario) {
-            // Generar ventas para cada beneficiario
-            for ($i = 0; $i < 2; $i++) { // Genera 5 ventas por beneficiario, ajusta según tus necesidades
-                $litrosVendidos = $faker->numberBetween(1, 4);
-                $numLecheria = $faker->numberBetween(1, 100000);
-                $fecha = $faker->dateTimeThisYear();
-                $total = $litrosVendidos * 6.50;
-
-                // Crear la venta
-                $venta = new Venta();
-                $venta->beneficiario_id = $beneficiario->id;
-                $venta->litros_v = $litrosVendidos;
-                $venta->num_lecheria = $numLecheria;
-                $venta->folio = $faker->unique()->randomNumber(9);
-                $venta->fecha = $fecha->format('Y-m-d');
-                $venta->hora = $fecha->format('H:i:s');
-                $venta->total = $total;
-                $venta->save();
-            }
-        }
-
 
     }
     protected function generarNumerosUnicos(): array

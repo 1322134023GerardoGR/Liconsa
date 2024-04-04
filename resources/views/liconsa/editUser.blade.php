@@ -84,10 +84,12 @@
             cursor: pointer;
             transition: background-color 0.3s ease;
         }
+
         .btn1:hover {
             background-color: #4a0e27;
         }
-        .mynav{
+
+        .mynav {
             background-color: #285C4D;
             color: white;
             display: flex;
@@ -96,9 +98,11 @@
             height: 80px;
 
         }
+
         .navbar {
             background-color: #285C4D;
         }
+
         .navbar a {
             color: white;
             background-color: #285C4D;
@@ -108,20 +112,39 @@
             color: #621132;
             background-color: #285C4D;
         }
+
         .navbar-toggler {
             background-color: #285C4D;
             color: white;
             border: none;
         }
+
         .navbar-toggler:hover {
             background-color: #285C4D;
             color: #621132;
         }
-        .asd{
+
+        .asd {
             background-color: #285C4D;
         }
-        .alerta2{
-            margin-bottom: 0;
+
+        .alerta2 {
+            --bs-alert-bg: transparent;
+            --bs-alert-padding-x: 1rem;
+            --bs-alert-padding-y: 1rem;
+            --bs-alert-margin-bottom: 0;
+            --bs-alert-color: inherit;
+            --bs-alert-border-color: transparent;
+            --bs-alert-border: var(--bs-border-width) solid var(--bs-alert-border-color);
+            --bs-alert-border-radius: var(--bs-border-radius);
+            --bs-alert-link-color: inherit;
+            position: relative;
+            padding: var(--bs-alert-padding-y) var(--bs-alert-padding-x);
+            margin-bottom: var(--bs-alert-margin-bottom);
+            color: var(--bs-alert-color);
+            background-color: var(--bs-alert-bg);
+            border: var(--bs-alert-border);
+            border-radius: var(--bs-alert-border-radius);
         }
     </style>
     @vite(['resources/js/app.js'])
@@ -137,13 +160,15 @@
     <nav class="navbar navbar-expand-lg ">
         <div class="container-fluid asd">
             <a class="navbar-brand" href="#"></a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse asd" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link "  href="{{route('index')}}">Inicio</a>
+                        <a class="nav-link " href="{{route('index')}}">Inicio</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{route('beneficiarios.list')}}">Lista de Beneficiarios</a>
@@ -168,16 +193,18 @@
 
 </div>
 @if(session('success'))
-    <div class="alert alert-success alerta2 " role="alert">
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
         {{ session('success') }}
     </div>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 @endif
 @if($errors->any())
-    <div class="alert alert-danger alerta2" role="alert">
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
         <ul>
             @foreach($errors->all() as $error)
                 <li>{{ $error }}</li>
             @endforeach
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </ul>
     </div>
 @endif
@@ -194,11 +221,13 @@
             </div>
             <div class="form-group">
                 <label for="apellido_p" class="form-label">Apellido paterno:</label>
-                <input type="text" name="apellido_p" class="form-control" id="apellido_p" value="{{$trabajadores->apellido_p}}">
+                <input type="text" name="apellido_p" class="form-control" id="apellido_p"
+                       value="{{$trabajadores->apellido_p}}">
             </div>
             <div class="form-group">
                 <label for="apellido_m" class="form-label">Apellido materno:</label>
-                <input type="text" name="apellido_m" class="form-control" id="apellido_m" value="{{$trabajadores->apellido_m}}">
+                <input type="text" name="apellido_m" class="form-control" id="apellido_m"
+                       value="{{$trabajadores->apellido_m}}">
             </div>
             <div class="form-group">
                 <label for="curp" class="form-label">CURP:</label>
@@ -206,7 +235,7 @@
             </div>
             <div class="form-group">
                 <label for="rfc" class="form-label">RFC:</label>
-                <input type="text" name="rfc" class="form-control" id="rfc"  value="{{$trabajadores->rfc}}">
+                <input type="text" name="rfc" class="form-control" id="rfc" value="{{$trabajadores->rfc}}">
             </div>
             <div class="form-group">
                 <label for="rol" class="form-label">Rol:</label>
@@ -230,7 +259,7 @@
 <!-- Bootstrap JS (optional) -->
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script>
-    function index(){
+    function index() {
         window.location.href = "{{ route('index') }}"; // Reemplaza 'route('index')' con la ruta adecuada en tu aplicación
     }
 </script>

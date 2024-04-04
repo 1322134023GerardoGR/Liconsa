@@ -165,7 +165,22 @@
         }
 
         .alerta2 {
-            margin-bottom: 0;
+            --bs-alert-bg: transparent;
+            --bs-alert-padding-x: 1rem;
+            --bs-alert-padding-y: 1rem;
+            --bs-alert-margin-bottom: 0;
+            --bs-alert-color: inherit;
+            --bs-alert-border-color: transparent;
+            --bs-alert-border: var(--bs-border-width) solid var(--bs-alert-border-color);
+            --bs-alert-border-radius: var(--bs-border-radius);
+            --bs-alert-link-color: inherit;
+            position: relative;
+            padding: var(--bs-alert-padding-y) var(--bs-alert-padding-x);
+            margin-bottom: var(--bs-alert-margin-bottom);
+            color: var(--bs-alert-color);
+            background-color: var(--bs-alert-bg);
+            border: var(--bs-alert-border);
+            border-radius: var(--bs-alert-border-radius);
         }
     </style>
 
@@ -215,16 +230,18 @@
 
 </div>
 @if(session('success'))
-    <div class="alert alert-success alerta2 " role="alert">
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
         {{ session('success') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 @endif
 @if($errors->any())
-    <div class="alert alert-danger alerta2" role="alert">
+    <div class="alerta2 alert-danger alert-dismissible fade show" role="alert">
         <ul>
             @foreach($errors->all() as $error)
                 <li>{{ $error }}</li>
             @endforeach
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </ul>
     </div>
 @endif
@@ -258,7 +275,8 @@
                         <a href="{{ route('beneficiarios.edit', $beneficiario->id) }}"
                            class="btn btn-warning">Editar</a>
                         <a href="{{ route('beneficiarios.destroy', $beneficiario->id) }}" class="btn btn-danger">Eliminar</a>
-                        <a href="{{ route('beneficiarios.show', $beneficiario->id) }}" class="btn btn-primary">Detalles</a>
+                        <a href="{{ route('beneficiarios.show', $beneficiario->id) }}"
+                           class="btn btn-primary">Detalles</a>
 
                     </td>
                 </tr>
