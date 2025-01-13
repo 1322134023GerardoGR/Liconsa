@@ -1,17 +1,13 @@
 services:
-    postgres:
+    upt-system-db:
         image: postgres:13
-        container_name: postgres_container
-        restart: always
+        container_name: postgres_liconsa
+        environment:
+            POSTGRES_DB: liconsa
+            POSTGRES_USER: upt_liconsa
+            POSTGRES_PASSWORD: liconsa123
         ports:
             - "5432:5432"
-        environment:
-            POSTGRES_USER: user1
-            POSTGRES_PASSWORD: 1234
-            POSTGRES_DB: liconsa
-        volumes:
-            - postgres_data:/var/lib/postgresql/data
 
 volumes:
-    postgres_data:
-        driver: local
+    db_data:
