@@ -184,7 +184,7 @@
 </head>
 <body class="font-sans  antialiased">
 <header class="header">
-    <h1>Liconsa</h1>
+    <h1>LICONSA</h1>
     <h2>Gobierno de México</h2>
 </header>
 <div class="mynav">

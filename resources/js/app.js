@@ -1,7 +1,5 @@
 import './bootstrap';
+import { createApp } from 'vue';
+import Index from './components/Index.vue'; //
 
-import Alpine from 'alpinejs';
-
-window.Alpine = Alpine;
-
-Alpine.start();
+createApp(Index).mount('#app');
