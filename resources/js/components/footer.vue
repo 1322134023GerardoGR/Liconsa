@@ -11,7 +11,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 90px;
+    height: 84px;
     padding: 20px;
 }
 </style>
