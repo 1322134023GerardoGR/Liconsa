@@ -1,6 +1,5 @@
 <template>
-    <Header />
-    <Navbar />
+    <HeaderNavbar/>
 
     <div class="content">
         <Panel
@@ -27,21 +26,28 @@
             imgSrc="/img/bx-user.svg"
             altText="Usuario"
         />
+        <Panel
+            isForm="true"
+            formAction="/beneficiarios/buscar"
+            formLabel="Código del Beneficiario:"
+            inputId="codigo"
+            inputName="codigo"
+            imgSrc="/img/bx-search-alt-2.svg"
+            altText="Buscar Beneficiario"
+        />
     </div>
 
     <Footer />
 </template>
 
 <script>
-import Header from "./Header.vue";
-import Navbar from "./Navbar.vue";
+import HeaderNavbar from "./header_navbar.vue";
 import Panel from "./Panel.vue";
 import Footer from "./Footer.vue";
 
 export default {
     components: {
-        Header,
-        Navbar,
+        HeaderNavbar,
         Panel,
         Footer
     }
@@ -52,9 +58,13 @@ export default {
 .content {
     display: grid;
     background-color: #D4C19C;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     grid-gap: 20px;
     padding: 20px;
     justify-items: center;
+}
+
+.content > :last-child {
+    grid-column: span 1;
 }
 </style>
