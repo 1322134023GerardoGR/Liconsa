@@ -42,7 +42,12 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__ . '/auth.php';
-
+Route::get('/inicio', function () {
+    return view('liconsav2/index');
+});
+Route::get('/agregarbeneficiario', function () {
+    return view('liconsav2/agregarbenef');
+});
 Route::match(['get', 'post'],'/index', function () {
     return view('liconsa.index');
 })->name('index');
