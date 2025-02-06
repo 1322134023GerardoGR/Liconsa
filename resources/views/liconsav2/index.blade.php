@@ -27,10 +27,10 @@
             color: #FFFFFF;
             z-index: 1;
         }
+
         .footer-text {
             font-family: 'Libre Baskerville', serif;
             font-size: 20px;
-            font-weight: bold;
             color: #FFFFFF;
         }
 
@@ -45,15 +45,17 @@
             justify-content: space-between;
             padding: 24px 50px;
         }
+
         .header::after {
             content: "";
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
-            height: 16vh;
-            background-color: rgba(0, 0, 0, 0.3); /* Ajusta la opacidad aquí */
+            height: 20vh;
+            background-color: rgba(0, 0, 0, 0.3);
         }
+
         .header img {
             height: 80px;
             width: auto;
@@ -64,19 +66,19 @@
         .header .logo-mexico {
             opacity: 1.5;
         }
+
         nav.navbar {
             background-color: #A57F2C;
             padding: 10px 20px;
             display: flex;
             gap: 15px;
             align-items: center;
-            justify-content: center;!important;
+            justify-content: center !important;
         }
 
         .navbar a {
             color: white;
             text-decoration: none;
-            font-weight: bold;
             font-size: 20px;
             padding: 10px 15px;
             border-radius: 5px;
@@ -91,8 +93,8 @@
         .content {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            padding: 20px;
+            gap: 33px;
+            padding: 100px 20px;
             max-width: 1200px;
             margin: auto;
         }
@@ -109,6 +111,14 @@
             justify-content: center;
         }
 
+        .wide-panel {
+            grid-column: span 2;
+        }
+
+        .centered-panel {
+            justify-self: center;
+        }
+
         .btn1 {
             background-color: #621132;
             color: white;
@@ -122,6 +132,11 @@
             display: inline-block;
             margin-bottom: 10px;
             margin-top: 20px;
+            height: 50px;
+        }
+
+        .btn1.buscar-btn {
+            margin-top: 10px;
         }
 
         .btn1:hover {
@@ -141,14 +156,41 @@
             color: white;
             text-align: center;
             padding: 15px;
-            margin-top: auto;
+            margin-top: 40px;
         }
-        .codigo-benef{
-         font-size: 20px;
+
+        .codigo-benef {
+            font-size: 20px;
         }
-        .num-benef{
+
+        .num-benef {
             font-family: 'Libre Baskerville', serif;
             height: 50px;
+            padding: 0 10px;
+            font-size: 18px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .form-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            width: 100%;
+            justify-content: center;
+        }
+
+        .wide-panel .form-container, .wide-panel .image-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .num-benef::placeholder {
+            color: #aaa;
+            font-size: 18px;
         }
     </style>
 </head>
@@ -158,7 +200,7 @@
     <img class="logo-mexico" src="{{ asset('img/logo_gobierno_mexico.png') }}" alt="logo de mexico">
 </header>
 <nav class="navbar">
-    <a href="{{route('index')}}">Inicio</a>
+    <a href="{{route('inicio')}}">Inicio</a>
     <a href="{{route('beneficiarios.list')}}">Lista de Beneficiarios</a>
     <a href="{{route('beneficiarios.nuevo')}}">Registrar Beneficiario</a>
     <a href="{{route('add.sell')}}">Registrar Nueva Venta</a>
@@ -189,16 +231,15 @@
         </div>
     </div>
 
-    <div class="panel">
-        <form action="{{ route('beneficiarios.buscar') }}" method="GET">
+    <div class="panel wide-panel">
+        <form class="form-container" action="{{ route('beneficiarios.buscar') }}" method="GET">
             @csrf
-            <label class="codigo-benef" for="codigo">Código del Beneficiario:</label>
-            <input class="num-benef" type="text" id="codigo" name="codigo" required>
-            <button type="submit" class="btn1">Buscar</button>
+            <input class="num-benef" type="text" id="codigo" name="codigo" placeholder="Código del Beneficiario" required>
+            <button type="submit" class="btn1 buscar-btn">Buscar</button>
+            <div class="image-container">
+                <img src="/img/bx-search-alt-2.svg" alt="Leche"/>
+            </div>
         </form>
-        <div class="image-container">
-            <img src="/img/bx-search-alt-2.svg" alt="Leche"/>
-        </div>
     </div>
 
     <div class="panel">

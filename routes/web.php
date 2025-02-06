@@ -42,19 +42,14 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__ . '/auth.php';
-Route::get('/inicio', function () {
-    return view('liconsav2/index');
-});
-Route::get('/agregarbeneficiario', function () {
-    return view('liconsav2/agregarbenef');
-});
-Route::match(['get', 'post'],'/index', function () {
-    return view('liconsa.index');
-})->name('index');
+Route::get('/', function () {
+    return view('liconsav2.index');
+})->name("inicio");
 
-Route::get('/add', function () {
-    return view('liconsa.agrBeneficiario');
+Route::get('/agregarbeneficiario', function () {
+    return view('liconsav2.agregarbenef');
 })->name('beneficiarios.nuevo');
+
 
 Route::get('/see/{id}', function () {
     return view('liconsa.seeBeneficiario');
