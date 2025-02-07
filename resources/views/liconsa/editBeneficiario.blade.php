@@ -177,7 +177,7 @@
             <div class="collapse navbar-collapse asd" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link " href="{{route('index')}}">Inicio</a>
+                        <a class="nav-link " href="{{route('inicio')}}">Inicio</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{route('beneficiarios.list')}}">Lista de Beneficiarios</a>
@@ -299,7 +299,7 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script>
     function index() {
-        window.location.href = "{{ route('index') }}"; // Reemplaza 'route('index')' con la ruta adecuada en tu aplicación
+        window.location.href = "{{ route('inicio') }}"; // Reemplaza 'route('index')' con la ruta adecuada en tu aplicación
     }
 </script>
 </body>
