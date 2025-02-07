@@ -22,36 +22,80 @@
             box-sizing: border-box;
         }
 
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #D4C19C;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .logo-text {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 50px;
+            font-weight: bold;
+            color: #FFFFFF;
+            z-index: 1;
+        }
+        .footer-text {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 20px;
+            font-weight: bold;
+            color: #FFFFFF;
+        }
+
         .header {
-            background-image: url('{{asset('/img/FondoV1.png')}}');
+            background-image: url("{{ asset('img/fondofootergob.png') }}");
+            background-size: contain;
+            background-position: center;
+            background-color: #611232;
             color: white;
             display: flex;
             align-items: center;
             justify-content: space-between;
+            padding: 24px 50px;
+        }
+        .header::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 20vh;
+            background-color: rgba(0, 0, 0, 0.3); /* Ajusta la opacidad aquí */
+        }
+        .header img {
             height: 80px;
-            padding: 20px;
+            width: auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .header .logo-mexico {
+            opacity: 1.5;
         }
 
         .footer {
-            background-image: url('{{asset('/img/FondoR1.png')}}');
+            background-color: #621132;
+            background-image: url("{{ asset('img/fondofootergob.png') }}");
+            background-size: cover;
+            background-position: center;
             color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 80px;
-            padding: 20px;
+            text-align: center;
+            padding: 15px;
         }
 
         .content {
             background-color: #D4C19C;
-            min-height: calc(100vh - 160px);
             display: flex;
+            padding: 100px 20px;
             align-items: center;
             justify-content: center;
         }
 
         .form-container {
-            width: 70%; /* Ajuste del ancho del formulario */
+            width: 100%; /* Ajuste del ancho del formulario */
             max-width: 800px;
             padding: 20px;
             border-radius: 10px;
@@ -59,28 +103,43 @@
             background-color: white;
         }
 
-        .form-group {
-            margin-bottom: 20px;
+        .form-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
         }
 
-        .form-label {
-            font-weight: bold;
+        .form-group {
+            flex: 1 1 calc(50% - 20px);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            font-weight: 600;
+        }
+
+        .form-control {
+            border-radius: 8px;
+            padding: 10px 15px;
         }
 
         .btn-container {
             display: flex;
-            justify-content: center;
-            margin-top: 20px;
+            justify-content: space-between;
+            gap: 20px;
+            margin-top: 30px;
         }
 
         .btn1 {
-            margin: 0 10px;
-            padding: 15px 30px;
-            border-radius: 5px;
+            flex: 1;
+            padding: 12px 0;
+            border-radius: 8px;
             background-color: #621132;
             color: white;
             font-size: 16px;
-            cursor: pointer;
+            font-weight: bold;
+            border: none;
             transition: background-color 0.3s ease;
         }
 
@@ -88,39 +147,30 @@
             background-color: #4a0e27;
         }
 
-        .mynav {
-            background-color: #285C4D;
-            color: white;
+        nav.navbar {
+            background-color: #A57F2C;
+            padding: 12px 20px;
             display: flex;
-            align-items: center;
-            justify-content: right;
-            height: 40px;
-        }
-
-        .navbar {
-            background-color: #285C4D;
-            height: 40px;
+            justify-content: center;
+            gap: 20px;
         }
 
         .navbar a {
             color: white;
-            background-color: #285C4D;
+            text-decoration: none;
+            font-size: 20px;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            justify-content: center;
         }
 
         .navbar a:hover {
-            color: #621132;
-            background-color: #285C4D;
+            background-color: #621132;
         }
 
-        .navbar-toggler {
-            background-color: #285C4D;
-            color: white;
-            border: none;
-        }
-
-        .navbar-toggler:hover {
-            background-color: #285C4D;
-            color: #621132;
+        .text-agregarbenif{
+            font-family: 'Libre Baskerville', serif;
         }
 
         .asd {
@@ -155,48 +205,18 @@
 </head>
 <body class="font-sans  antialiased">
 <header class="header">
-    <h1>Liconsa</h1>
-    <h2>Gobierno de México</h2>
+    <h1 class="logo-text">LICONSA</h1>
+    <img class="logo-mexico" src="{{ asset('img/logo_gobierno_mexico.png') }}" alt="logo de mexico">
 </header>
-<div class="mynav">
-
-    <nav class="navbar navbar-expand-lg ">
-        <div class="container-fluid asd">
-            <a class="navbar-brand" href="#"></a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse asd" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link " href="inicio">Inicio</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{route('beneficiarios.list')}}">Lista de Beneficiarios</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{route('beneficiarios.nuevo')}}">Registrar Beneficiario</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{route('add.sell')}}">Registrar Nueva Venta</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="{{route('user.nuevo')}}"> Registrar Usuario</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{route('trabajadores.list')}}">Lista De Usuarios</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{route('ventas.list')}}">Lista De Ventas</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-
-</div>
+<nav class="navbar">
+    <a href="{{route('inicio')}}">Inicio</a>
+    <a href="{{route('beneficiarios.list')}}">Lista de Beneficiarios</a>
+    <a href="{{route('beneficiarios.nuevo')}}">Registrar Beneficiario</a>
+    <a href="{{route('add.sell')}}">Registrar Nueva Venta</a>
+    <a href="{{route('user.nuevo')}}">Registrar Usuario</a>
+    <a href="{{route('trabajadores.list')}}">Lista de Usuarios</a>
+    <a href="{{route('ventas.list')}}">Lista de Ventas</a>
+</nav>
 @if(session('success'))
     <div class="alert alert-success alert-dismissible fade show" role="alert">
         {{ session('success') }}
@@ -216,47 +236,45 @@
 
 <div class="content">
     <div class="form-container">
-        <div class="card-header text-center"><h2>Agregar Usuario</h2></div>
+        <div class="card-header text-center mb-4 text-agregarbenif"><h2>Agregar Usuario</h2></div>
 
         <form action="{{route('trabajadores.store')}}" method="POST">
             @csrf
-            <div class="form-group">
-                <b>Nombre(s):</b><label for="nombre" class="form-label obligatorio">*</label>
-                <input type="text" name="nombre" class="form-control" id="nombre" placeholder="Ej. Adrian Alejandro"
-                       value="{{isset($trabajador->nombre)?$trabajador->nombre:old('nombre')}}">
-            </div>
-            <div class="form-group">
-                <b>Apellido paterno:</b><label for="apellido_p" class="form-label obligatorio">*</label>
-                <input type="text" name="apellido_p" class="form-control" id="apellido_p" placeholder="Ej. Gómez"
-                       value="{{isset($trabajador->apellido_p)?$trabajador->apellido_p:old('apellido_p')}}">
-            </div>
-            <div class="form-group">
-                <b>Apellido materno:</b><label for="apellido_m" class="form-label obligatorio">*</label>
-                <input type="text" name="apellido_m" class="form-control" id="apellido_m" placeholder="Ej. Rodriguez"
-                       value="{{isset($trabajador->apellido_m)?$trabajador->apellido_m:old('apellido_m')}}">
-            </div>
-            <div class="form-group">
-                <b>CURP:</b><label for="curp" class="form-label obligatorio">*</label>
-                <input type="text" name="curp" class="form-control" id="curp" placeholder="ROHM040812HDFDRRA3"
-                       value="{{isset($trabajador->curp)?$trabajador->curp:old('curp')}}">
-            </div>
-            <div class="form-group">
-                <b>RFC:</b><label for="rfc" class="form-label obligatorio">*</label>
-                <input type="text" name="rfc" class="form-control" id="rfc" placeholder="ROHM040812"
-                       value="{{isset($trabajador->rfc)?$trabajador->rfc:old('rfc')}}">
-            </div>
-            <div class="form-group">
-                <b>Rol</b><label for="rol" class="form-label obligatorio">*</label>
-                <select name="rol" class="form-control" id="rol">
-                    <option value="vendedor">Vendedor</option>
-                    <option value="atencion_clientes">At. Clientes</option>
-                    <option value="supervisor">Supervisor</option>
-                </select>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="nombre" class="text-agregarbenif">Nombre del interesado <span class="obligatorio">*</span></label>
+                    <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ej. Gerardo">
+                </div>
+
+                <div class="form-group">
+                    <label for="apellido_p" class="text-agregarbenif">Apellido paterno <span class="obligatorio">*</span></label>
+                    <input type="text" class="form-control" id="apellido_p" name="apellido_p" placeholder="Ej. Gutiérrez">
+                </div>
+
+                <div class="form-group">
+                    <label for="apellido_m" class="text-agregarbenif">Apellido materno <span class="obligatorio">*</span></label>
+                    <input type="text" class="form-control" id="apellido_m" name="apellido_m" placeholder="Ej. Ramírez">
+                </div>
+
+                <div class="form-group">
+                    <label for="curp" class="text-agregarbenif">CURP<span class="obligatorio">*</span></label>
+                    <input type="text" class="form-control" id="curp" name="curp" placeholder="Ej. GURG080412HDFDRRA3">
+                </div>
+
+                <div class="form-group">
+                    <label for="direccion" class="text-agregarbenif">RFC <span class="obligatorio">*</span></label>
+                    <input type="text" class="form-control" id="rfc" name="rfc" placeholder="Ej. GURG080412HD">
+                </div>
+
+                <div class="form-group">
+                    <label for="direccion" class="text-agregarbenif">Rol <span class="obligatorio">*</span></label>
+                    <input type="text" class="form-control" id="rol" name="rol" placeholder="Ej. Guardia">
+                </div>
+
             </div>
             <div class="btn-container">
-                <button type="submit" class="btn1"><i class="fas fa-save"></i>Guardar</button>
-                <button type="reset" class="btn1" onclick="index()"><i class="fas fa-times" onclick="index()"></i>Cancelar
-                </button>
+                <button type="submit" class="btn1">Guardar</button>
+                <button type="reset" class="btn1">Cancelar</button>
             </div>
         </form>
     </div>
