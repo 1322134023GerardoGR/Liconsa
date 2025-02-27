@@ -49,7 +49,7 @@ class TrabajadorController extends Controller
         trabajador::create($request->all());
 
         // Redireccionar a una ruta deseada con un mensaje de éxito
-        return redirect()->route('index')->with('success', 'Trabajador creado con éxito.');
+        return redirect()->route('inicio')->with('success', 'Trabajador creado con éxito.');
     }
 
     public function update(Request $request, $id): \Illuminate\Http\RedirectResponse
@@ -87,7 +87,7 @@ class TrabajadorController extends Controller
         $trabajador->update($request->all());
 
         // Redireccionar a una ruta deseada con un mensaje de éxito
-        return redirect()->route('index')->with('success', 'Trabajador actualizado con éxito.');
+        return redirect()->route('inicio')->with('success', 'Trabajador actualizado con éxito.');
     }
 
     public function edit($id): \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application

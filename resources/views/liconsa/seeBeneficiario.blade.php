@@ -187,7 +187,7 @@
             <div class="collapse navbar-collapse asd" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link " href="{{route('index')}}">Inicio</a>
+                        <a class="nav-link " href="{{route('inicio')}}">Inicio</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{route('beneficiarios.list')}}">Lista de Beneficiarios</a>

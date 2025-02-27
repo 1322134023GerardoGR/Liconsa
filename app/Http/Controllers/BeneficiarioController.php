@@ -250,7 +250,7 @@ class BeneficiarioController extends Controller
         }
 
         // Redireccionar con mensaje de éxito
-        return redirect()->route('index')->with('success', 'Beneficiario actualizado con éxito.');
+        return redirect()->route('inicio')->with('success', 'Beneficiario actualizado con éxito.');
 
     }
 
