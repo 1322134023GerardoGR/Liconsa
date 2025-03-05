@@ -11,341 +11,308 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
 
     <!-- Styles -->
     <style>
-        * {
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #D4C19C;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
 
-        canvas{
-            height: 0;
-            width: 0;
+        .logo-text {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 50px;
+            font-weight: bold;
+            color: #FFFFFF;
+            z-index: 1;
         }
 
+        .footer-text {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 20px;
+            color: #FFFFFF;
+        }
+
+        /* Encabezado */
         .header {
-            background-image: url('{{asset('/img/FondoV1.png')}}');
+            background-image: url("{{ asset('img/fondofootergob.png') }}");
             color: white;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            height: 80px;
-            padding: 20px;
+            padding: 24px 50px;
         }
 
-        .footer {
-            background-image: url('{{asset('/img/FondoR1.png')}}');
+        .header .logo-mexico {
+            opacity: 1.5;
+        }
+
+        .header::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 20vh;
+            background-color: rgba(0, 0, 0, 0.3);
+        }
+
+        .header img {
+            height: 80px;
+            width: auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .header h1,
+        .header h2 {
+            margin: 0;
+            font-family: 'Libre Baskerville', serif;
+        }
+
+        /* Barra de navegación */
+        nav.navbar {
+            background-color: #A57F2C;
+            padding: 10px 20px;
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            justify-content: center !important;
+        }
+
+        .navbar a:hover {
+            background-color: #621132;
+            color: #FFFFFF;
+        }
+
+        .navbar a {
             color: white;
-            display: flex;
-            align-items: center;
+            text-decoration: none;
+            font-size: 20px;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
             justify-content: center;
-            height: 80px;
-            padding: 20px;
         }
 
+        .nav-link {
+            position: relative;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border-radius: 4px;
+        }
+
+        .nav-link.active {
+            background: #621132 !important;
+            color: #FFFFFF !important;
+            font-weight: 700;
+            border: 1px solid #A57F2C;
+        }
+
+        .navbar a:not(.active):hover {
+            background-color: #621132;
+            color: #FFFFFF !important;
+        }
+
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+        }
+
+        .nav-link:hover::before {
+            width: 80%;
+        }
+
+        /* Contenido principal */
         .content {
-            background-color: #D4C19C;
-            min-height: calc(100vh - 160px);
             display: flex;
-            flex-direction: column;
-            align-items: center;
             justify-content: center;
+            align-items: flex-start;
+            padding: 50px 20px;
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
         }
 
-        .panel {
-            background-color: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 70%; /* Ajuste del ancho del panel */
-            max-width: 800px;
+        /* Tarjeta del formulario */
+        .form-card {
+            background-color: #FFFFFF;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .form-card h1 {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 28px;
             margin-bottom: 20px;
         }
 
-        .btn-container {
-            display: flex;
-            justify-content: center;
-            margin-top: 20px;
+        .form-group label {
+            font-weight: 600;
         }
 
+        .form-control {
+            border-radius: 6px;
+        }
+
+        /* Botones personalizados */
         .btn1 {
-            margin: 0 10px;
-            padding: 15px 30px;
-            border-radius: 5px;
             background-color: #621132;
             color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 6px;
             font-size: 16px;
             cursor: pointer;
-            transition: background-color 0.3s ease;
+            transition: 0.3s;
+            text-decoration: none;
+            margin: 5px;
         }
 
         .btn1:hover {
             background-color: #4a0e27;
         }
 
-        /* Estilos para el formulario flotante */
-        .overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            display: none;
-            align-items: center;
+        .btn-container {
+            margin-top: 20px;
+            display: flex;
+            gap: 10px;
             justify-content: center;
         }
 
-        .form-container {
-            background-color: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .close-btn {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            cursor: pointer;
-        }
-
-        h1 {
+        /* Footer */
+        .footer {
+            background-color: #621132;
+            background-image: url("{{ asset('img/fondofootergob.png') }}");
+            background-size: cover;
+            background-position: center;
+            color: white;
             text-align: center;
-        }
-
-        img {
-            width: 200px; /* Ajuste del ancho de la imagen */
-            margin-bottom: 20px;
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .items-center {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .viewport {
-            width: 100%;
-            max-width: 640px; /* Ajuste del ancho del lector */
-            height: 470px; /* Ajuste de la altura del lector */
-            margin-top: -6px;
-            border-radius: 2px;
-        }
-
-        video {
-            border-radius: 50px;
-        }
-
-        .mynav {
-            background-color: #285C4D;
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: right;
-            height: 40px;
-        }
-
-        .navbar {
-            background-color: #285C4D;
-            height: 40px;
-        }
-
-        .navbar a {
-            color: white;
-            background-color: #285C4D;
-        }
-
-        .navbar a:hover {
-            color: #621132;
-            background-color: #285C4D;
-        }
-
-        .navbar-toggler {
-            background-color: #285C4D;
-            color: white;
-            border: none;
-        }
-
-        .navbar-toggler:hover {
-            background-color: #285C4D;
-            color: #621132;
-        }
-
-        .asd {
-            background-color: #285C4D;
-        }
-
-        .alerta2 {
-            --bs-alert-bg: transparent;
-            --bs-alert-padding-x: 1rem;
-            --bs-alert-padding-y: 1rem;
-            --bs-alert-margin-bottom: 0;
-            --bs-alert-color: inherit;
-            --bs-alert-border-color: transparent;
-            --bs-alert-border: var(--bs-border-width) solid var(--bs-alert-border-color);
-            --bs-alert-border-radius: var(--bs-border-radius);
-            --bs-alert-link-color: inherit;
-            position: relative;
-            padding: var(--bs-alert-padding-y) var(--bs-alert-padding-x);
-            margin-bottom: var(--bs-alert-margin-bottom);
-            color: var(--bs-alert-color);
-            background-color: var(--bs-alert-bg);
-            border: var(--bs-alert-border);
-            border-radius: var(--bs-alert-border-radius);
-        }
-
-        .obligatorio {
-            color: red;
+            padding: 15px;
+            margin-top: auto; /* Para forzar el footer al fondo de la página */
         }
     </style>
 
     @vite(['resources/js/app.js'])
-
 </head>
-<body class="font-sans  antialiased">
+<body class="font-sans antialiased">
+
+<!-- HEADER (sin cambios) -->
 <header class="header">
-    <h1>Liconsa</h1>
-    <h2>Gobierno de México</h2>
+    <h1 class="logo-text">LICONSA</h1>
+    <img class="logo-mexico" src="{{ asset('img/logo_gobierno_mexico.png') }}" alt="logo de mexico">
 </header>
-<div class="mynav">
 
-    <nav class="navbar navbar-expand-lg ">
-        <div class="container-fluid asd">
-            <a class="navbar-brand" href="#"></a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse asd" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link " href="{{route('inicio')}}">Inicio</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{route('beneficiarios.list')}}">Lista de Beneficiarios</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{route('beneficiarios.nuevo')}}">Registrar Beneficiario</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="{{route('add.sell')}}">Registrar Nueva Venta</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{route('user.nuevo')}}"> Registrar Usuario</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{route('trabajadores.list')}}">Lista De Usuarios</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{route('ventas.list')}}">Lista De Ventas</a>
-                    </li>
-                </ul>
+<!-- NAVBAR (sin cambios) -->
+<nav class="navbar">
+    <a class="nav-link {{ Route::is('inicio') ? 'active' : '' }}" href="{{route('inicio')}}">Inicio</a>
+    <a class="nav-link {{ Route::is('beneficiarios.list') ? 'active' : '' }}" href="{{route('beneficiarios.list')}}">Lista de Beneficiarios</a>
+    <a class="nav-link {{ Route::is('beneficiarios.nuevo') ? 'active' : '' }}" href="{{route('beneficiarios.nuevo')}}">Registrar Beneficiario</a>
+    <a class="nav-link {{ Route::is('add.sell') ? 'active' : '' }}" href="{{route('add.sell')}}">Registrar Nueva Venta</a>
+    <a class="nav-link {{ Route::is('user.nuevo') ? 'active' : '' }}" href="{{route('user.nuevo')}}">Registrar Usuario</a>
+    <a class="nav-link {{ Route::is('trabajadores.list') ? 'active' : '' }}" href="{{route('trabajadores.list')}}">Lista de Usuarios</a>
+    <a class="nav-link {{ Route::is('ventas.list') ? 'active' : '' }}" href="{{route('ventas.list')}}">Lista de Ventas</a>
+</nav>
 
-            </div>
-        </div>
-    </nav>
-
-</div>
+<!-- Mensajes de éxito y error -->
 @if(session('success'))
     <div class="alert alert-success alert-dismissible fade show" role="alert">
         {{ session('success') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 @endif
+
 @if($errors->any())
     <div class="alert alert-danger alert-dismissible fade show" role="alert">
         <ul>
             @foreach($errors->all() as $error)
                 <li>{{ $error }}</li>
             @endforeach
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </ul>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 @endif
 
-
+<!-- CONTENIDO PRINCIPAL -->
 <form action="{{route('ventas.store')}}" method="POST">
     @csrf
     <div class="content">
-        <div class="panel"> <!-- Contenedor del panel blanco -->
+        <div class="form-card">
             <h1>Registrar Venta</h1>
             <div class="form-group">
-                <b>Código del Beneficiario:</b><label for="code" class="form-label obligatorio">*</label>
+                <label for="code">
+                    <strong>Código del Beneficiario</strong><span class="text-danger">*</span>
+                </label>
                 <input name="code" type="text" class="form-control" id="code">
             </div>
             <div class="form-group">
-                <b>Número de litros de leche:</b><label for="litros_v" class="form-label obligatorio">*</label>
-                <input onchange="changePrice(this.value)" name="litros_v" type="number" class="form-control"
-                       id="litros_v">
+                <label for="litros_v">
+                    <strong>Número de litros de leche</strong><span class="text-danger">*</span>
+                </label>
+                <input onchange="changePrice(this.value)" name="litros_v" type="number" class="form-control" id="litros_v">
             </div>
             <div class="form-group">
-                <b>Número de Lechería:</b><label for="num_lecheria" class="form-label obligatorio">*</label>
+                <label for="num_lecheria">
+                    <strong>Número de Lechería</strong><span class="text-danger">*</span>
+                </label>
                 <input name="num_lecheria" type="number" class="form-control" id="num_lecheria">
             </div>
             <div class="form-group">
-                <label for="costo"><b>Costo total:</b></label>
+                <label for="costo">
+                    <strong>Costo total</strong>
+                </label>
                 <input disabled name="costo" type="number" class="form-control" id="costo">
             </div>
 
-            <div class="items-center">
-                <div id="interactive" class="viewport"></div>
-            </div>
+            <div id="interactive" class="viewport" style="margin: 20px 0;"></div>
+
             <div class="btn-container">
-                <button type="submit" class=" btn1">Realizar Compra</button>
-                <button type="reset" class=" btn1" onclick="index()">Cancelar Compra</button>
+                <button type="submit" class="btn1">Realizar Compra</button>
+                <button type="reset" class="btn1" onclick="index()">Cancelar Compra</button>
             </div>
         </div>
     </div>
 </form>
+
+<!-- FOOTER (sin cambios) -->
 <footer class="footer">
-    <p>LICONSA © 2024</p>
+    <br>
+    <p class="footer-text">LICONSA © 2024</p>
 </footer>
+
+<!-- Scripts -->
 <script src="https://cdn.jsdelivr.net/npm/quagga/dist/quagga.min.js"></script>
 <script src="{{ asset('JS/script.js') }}"></script>
 <script>
     function changePrice(value) {
-        // Obtener el valor del input litros_v y convertirlo a número
         const litros = parseFloat(value);
-
-        // Verificar si litros es un número válido
         if (!isNaN(litros)) {
-            // Calcular el costo multiplicando litros por 6.50
             const costo = litros * 6.50;
-
-            // Actualizar el valor del input costo con el costo calculado
-            document.getElementById('costo').value = costo.toFixed(2); // Limitar a 2 decimales
+            document.getElementById('costo').value = costo.toFixed(2);
         } else {
-            // Si el valor ingresado no es un número válido, mostrar un mensaje de error o manejarlo según necesites
             alert('Por favor ingrese un número válido de litros.');
         }
     }
 
-    function showForm() {
-        document.getElementById('overlay').style.display = 'flex';
-    }
-
-    function hideForm() {
-        document.getElementById('overlay').style.display = 'none';
-    }
-
-    function toggleSidebar() {
-        var sidebar = document.getElementById('sidebar');
-        var sidebarToggle = document.getElementById('sidebarToggle');
-        sidebar.classList.toggle('active');
-        sidebarToggle.classList.toggle('active');
-    }
-
     function index() {
-        window.location.href = "{{ route('inicio') }}"; // Reemplaza 'route('index')' con la ruta adecuada en tu aplicación
+        window.location.href = "{{ route('inicio') }}";
     }
 </script>
 </body>
