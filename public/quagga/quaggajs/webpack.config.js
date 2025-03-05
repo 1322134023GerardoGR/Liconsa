@@ -35,7 +35,7 @@ module.exports = {
             library: 'Quagga'
         }),
         new webpack.DefinePlugin({
-            ENV: require(path.join(__dirname, './env/', process.env.BUILD_ENV))
+            ENV: require(path.join(__dirname, './.env/', process.env.BUILD_ENV))
         })
     ]
 };
