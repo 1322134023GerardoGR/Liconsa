@@ -208,6 +208,37 @@
             padding: 15px;
             margin-top: auto; /* Para forzar el footer al fondo de la página */
         }
+
+        /* Ajustes específicos para el viewport de la cámara */
+        #interactive {
+            width: 100%;
+            max-width: 600px; /* Mismo ancho máximo que el formulario */
+            height: 250px;
+            background: #000;
+            margin: 20px auto; /* Centrado como el formulario */
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Mensaje de orientación */
+        #camera-message {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            z-index: 100;
+            font-size: 1.2rem;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+        }
+
+        /* Ajuste responsivo del video */
+        #interactive video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
     </style>
 
     @vite(['resources/js/app.js'])
@@ -281,7 +312,9 @@
                 <input disabled name="costo" type="number" class="form-control" id="costo">
             </div>
 
-            <div id="interactive" class="viewport" style="margin: 20px 0;"></div>
+            <div id="interactive" class="viewport">
+                <p id="camera-message">Enfoca el código de barras del beneficiario</p>
+            </div>
 
             <div class="btn-container">
                 <button type="submit" class="btn1">Realizar Compra</button>
