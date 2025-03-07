@@ -498,6 +498,28 @@
         .modo-oscuro .side-menu {
             background-color: #292929;
         }
+
+        .modo-oscuro .reading-guide {
+            border-top: 3px solid #FFD700;
+            border-bottom: 3px solid #8B0000;
+        }
+
+        .reading-guide {
+            position: fixed;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: transparent;
+            border-top: 3px solid #A57F2C;
+            border-bottom: 3px solid #621132;
+            pointer-events: none;
+            transform: translateY(-50%);
+            display: none;
+            z-index: 10000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
         /* Estilo para el icono de escucha */
         .listening-icon {
             position: fixed;
@@ -542,6 +564,45 @@
         }
         .cursor-large a, .cursor-large button, .cursor-large .menu-option:hover, .cursor-large .floating-icon, .cursor-large .btn1.buscar-btn {
             cursor: url('{{ asset('img/cursores/pointer_large.png') }}'), auto;
+        }
+
+        /* Estilos para el zoom en cursor */
+        .zoom-cursor-active {
+            cursor: url('{{ asset('img/cursores/zoom_cursor.png') }}'), zoom-in;
+        }
+
+        .magnifier {
+            position: absolute;
+            border: 2px solid #621132;
+            background-color: white;
+            border-radius: 50%;
+            pointer-events: none;
+            transform: scale(0);
+            z-index: 9998;
+            transition: transform 0.1s ease;
+            display: none;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        .magnifier-content {
+            position: absolute;
+            transform-origin: 0 0;
+        }
+
+        .epilepsia-mode {
+            filter: grayscale(100%) contrast(120%);
+        }
+
+        .epilepsia-mode img,
+        .epilepsia-mode video,
+        .epilepsia-mode iframe {
+            filter: grayscale(100%) contrast(120%);
+            -webkit-filter: grayscale(100%) contrast(120%);
+        }
+
+        .epilepsia-mode .floating-icon {
+            position: fixed;
         }
     </style>
 
@@ -623,6 +684,7 @@
             {{ $beneficiarios->links() }}
         </div>
     </div>
+
     <div class="side-menu" id="sideMenu">
         <div class="reset-button" onclick="resetSettings()">
             <i class="bi bi-arrow-counterclockwise"></i> Restablecer
@@ -710,6 +772,7 @@
                 <div class="menu-option" onclick="cambiarTamanioCursor('cursor-large')"><i class="bi bi-record-circle"></i> Grande</div>
             </div>
         </div>
+
         <div class="menu-option" onclick="toggleDropdown('ayudasVisualesDropdown')">
             <i class="bi bi-eye"></i> Ayudas Visuales
         </div>
@@ -725,12 +788,23 @@
             <div class="reading-mask" id="readingMask">
                 <div class="reading-guide" id="readingGuide"></div>
             </div>
+
+            <div class="menu-option" id="toggleCursorZoom"><i class="bi bi-zoom-in"></i> Zoom en Cursor</div>
+
+            <div class="menu-option" onclick="toggleEpilepsiaMode()">
+                <i class="bi bi-shield-exclamation"></i> Modo Epilepsia
+            </div>
+
+            <div class="menu-option" id="toggleReadingGuide">
+                <i class="bi bi-book"></i> Guía de Lectura
+            </div>
         </div>
     </div>
 
     <div class="floating-icon" id="accessibilityBtn" onclick="toggleMenu()"aria-label="Abrir menú de accesibilidad">
         <i class="bi bi-universal-access-circle"></i>
     </div>
+
 </div>
 
 <!-- Footer -->
@@ -1025,6 +1099,181 @@
     function toggleCursorMenu() {
         var menu = document.getElementById('cursorDropdown');
         menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+    }
+
+    // Cursor
+
+    // Zoom en cursor
+    let zoomEnabled = false;
+    let magnifier = null;
+    let magnifierContent = null;
+    const ZOOM_LEVEL = 1.5; // Nivel de zoom (1.5 = 150%)
+    const MAGNIFIER_SIZE = 150; // Tamaño del magnificador en px
+
+    document.getElementById("toggleCursorZoom").addEventListener("click", function() {
+        zoomEnabled = !zoomEnabled;
+
+        if (zoomEnabled) {
+            // Crear magnificador si no existe
+            if (!magnifier) {
+                magnifier = document.createElement('div');
+                magnifier.className = 'magnifier';
+                magnifier.style.width = MAGNIFIER_SIZE + 'px';
+                magnifier.style.height = MAGNIFIER_SIZE + 'px';
+
+                magnifierContent = document.createElement('div');
+                magnifierContent.className = 'magnifier-content';
+                magnifier.appendChild(magnifierContent);
+
+                document.body.appendChild(magnifier);
+            }
+
+            document.body.classList.add('zoom-cursor-active');
+            magnifier.style.display = 'block';
+
+            // Agregar evento de movimiento
+            document.addEventListener('mousemove', handleZoomMouseMove);
+
+            // Mensaje de confirmación
+            alert("Zoom en cursor activado. Mueve el cursor sobre el texto para ampliarlo.");
+        } else {
+            document.body.classList.remove('zoom-cursor-active');
+            magnifier.style.display = 'none';
+
+            // Remover evento de movimiento
+            document.removeEventListener('mousemove', handleZoomMouseMove);
+        }
+    });
+
+    function handleZoomMouseMove(e) {
+        if (!zoomEnabled) return;
+
+        // Posición del cursor
+        const x = e.clientX;
+        const y = e.clientY;
+
+        // Posición del magnificador (centrado en el cursor)
+        magnifier.style.left = (x - MAGNIFIER_SIZE/2) + 'px';
+        magnifier.style.top = (y - MAGNIFIER_SIZE/2) + 'px';
+
+        // Clonar el contenido bajo el cursor
+        const elementsUnderCursor = document.elementsFromPoint(x, y);
+        let targetElement = null;
+
+        // Buscar el primer elemento de texto significativo
+        for (let el of elementsUnderCursor) {
+            if (el.textContent &&
+                el !== magnifier &&
+                !el.contains(magnifier) &&
+                !magnifier.contains(el) &&
+                el.nodeName !== 'BODY' &&
+                el.nodeName !== 'HTML') {
+                targetElement = el;
+                break;
+            }
+        }
+
+        if (targetElement) {
+            // Copiar el estilo y contenido
+            const rect = targetElement.getBoundingClientRect();
+            const computedStyle = window.getComputedStyle(targetElement);
+
+            // Establecer el contenido
+            magnifierContent.innerHTML = targetElement.outerHTML;
+
+            // Aplicar zoom
+            magnifierContent.style.transform = `scale(${ZOOM_LEVEL})`;
+
+            // Colocar el contenido correctamente dentro del magnificador
+            const offsetX = (x - rect.left) * ZOOM_LEVEL;
+            const offsetY = (y - rect.top) * ZOOM_LEVEL;
+
+            magnifierContent.style.left = (MAGNIFIER_SIZE/2 - offsetX) + 'px';
+            magnifierContent.style.top = (MAGNIFIER_SIZE/2 - offsetY) + 'px';
+
+            // Mostrar el magnificador con animación
+            magnifier.style.transform = 'scale(1)';
+        } else {
+            // Ocultar el magnificador si no hay elementos de texto
+            magnifier.style.transform = 'scale(0)';
+        }
+    }
+
+    // Actualizar la función resetSettings para incluir el zoom en cursor
+    const originalResetSettings = resetSettings;
+    resetSettings = function() {
+        originalResetSettings();
+
+        // Resetear zoom en cursor
+        if (zoomEnabled) {
+            zoomEnabled = false;
+            document.body.classList.remove('zoom-cursor-active');
+            if (magnifier) {
+                magnifier.style.display = 'none';
+            }
+            document.removeEventListener('mousemove', handleZoomMouseMove);
+        }
+    };
+
+    function toggleEpilepsiaMode() {
+        document.body.classList.toggle('epilepsia-mode');
+
+        const existingStyle = document.getElementById('epilepsia-styles');
+        if (document.body.classList.contains('epilepsia-mode')) {
+            if (existingStyle) existingStyle.remove();
+
+            const style = document.createElement('style');
+            style.id = 'epilepsia-styles';
+            style.innerHTML = `
+                *:not(.floating-icon):not(.floating-icon *) {
+                    transition: none !important;
+                    animation: none !important;
+                    scroll-behavior: auto !important;
+                }
+            `;
+            document.head.appendChild(style);
+        } else {
+            if (existingStyle) {
+                existingStyle.remove();
+            }
+        }
+    }
+
+    // Configuración de la Guía de Lectura
+    let guideActive = false;
+    const readingGuide = document.createElement('div');
+    readingGuide.className = 'reading-guide';
+    document.body.appendChild(readingGuide);
+
+    // Evento para activar/desactivar
+    document.getElementById("toggleReadingGuide").addEventListener("click", function() {
+        guideActive = !guideActive;
+        readingGuide.style.display = guideActive ? "block" : "none";
+
+        if(guideActive) {
+            document.addEventListener('mousemove', moveReadingGuide);
+            if(screenReaderEnabled) {
+                speakText("Guía de lectura activada. La línea te ayudará a mantener el enfoque durante la lectura.");
+            }
+        } else {
+            document.removeEventListener('mousemove', moveReadingGuide);
+        }
+    });
+
+    // Mover la guía con el cursor
+    function moveReadingGuide(e) {
+        const y = e.clientY;
+        readingGuide.style.top = `${y}px`;
+    }
+
+    // Actualizar función resetSettings
+    function resetSettings() {
+        // ... código existente ...
+
+        // Resetear Guía de Lectura
+        readingGuide.style.display = "none";
+        guideActive = false;
+        document.removeEventListener('mousemove', moveReadingGuide);
     }
 </script>
 </body>
