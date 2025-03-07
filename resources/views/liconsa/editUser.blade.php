@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>LICONSA</title>
+    <title>LICONSAAAA</title>
 
     <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
@@ -20,38 +20,97 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Libre Baskerville', serif;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #D4C19C;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            font-family: 'Libre Baskerville', serif;
+        }
+
+        .logo-text {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 50px;
+            font-weight: bold;
+            color: #FFFFFF;
+            z-index: 1;
+        }
+
+        .footer-text {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 20px;
+            font-weight: bold;
+            color: #FFFFFF;
         }
 
         .header {
-            background-image: url('{{asset('/img/FondoV1.png')}}');
+            background-image: url("{{ asset('img/fondofootergob.png') }}");
+            background-size: contain;
+            background-position: center;
+            background-color: #611232;
             color: white;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            height: 80px;
+            padding: 24px 50px;
+        }
+
+        .card {
+            width: 80%;
+            max-width: 900px;
             padding: 20px;
+            margin: auto;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+
+        .header::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 20vh;
+            background-color: rgba(0, 0, 0, 0.3); /* Ajusta la opacidad aquí */
+        }
+
+        .header img {
+            height: 80px;
+            width: auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .header .logo-mexico {
+            opacity: 1.5;
         }
 
         .footer {
-            background-image: url('{{asset('/img/FondoR1.png')}}');
+            background-color: #621132;
+            background-image: url("{{ asset('img/fondofootergob.png') }}");
+            background-size: cover;
+            background-position: center;
             color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 80px;
-            padding: 20px;
+            text-align: center;
+            padding: 15px;
         }
 
         .content {
             background-color: #D4C19C;
-            min-height: calc(100vh - 160px);
             display: flex;
+            padding: 100px 20px;
             align-items: center;
             justify-content: center;
         }
 
         .form-container {
-            width: 70%; /* Ajuste del ancho del formulario */
+            width: 100%; /* Ajuste del ancho del formulario */
             max-width: 800px;
             padding: 20px;
             border-radius: 10px;
@@ -59,29 +118,43 @@
             background-color: white;
         }
 
-        .form-group {
-            margin-bottom: 20px;
+        .form-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
         }
 
-        .form-label {
-            font-weight: bold;
+        .form-group {
+            flex: 1 1 calc(50% - 20px);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            font-weight: 600;
+        }
+
+        .form-control {
+            border-radius: 8px;
+            padding: 10px 15px;
         }
 
         .btn-container {
             display: flex;
-            justify-content: center;
-            margin-top: 20px;
+            justify-content: space-between;
+            gap: 20px;
+            margin-top: 30px;
         }
 
         .btn1 {
-            margin: 0 10px;
-            padding: 15px 30px;
-
-            border-radius: 5px;
+            flex: 1;
+            padding: 12px 0;
+            border-radius: 8px;
             background-color: #621132;
             color: white;
             font-size: 16px;
-            cursor: pointer;
+            font-weight: bold;
+            border: none;
             transition: background-color 0.3s ease;
         }
 
@@ -89,39 +162,30 @@
             background-color: #4a0e27;
         }
 
-        .mynav {
-            background-color: #285C4D;
-            color: white;
+        nav.navbar {
+            background-color: #A57F2C;
+            padding: 12px 20px;
             display: flex;
-            align-items: center;
-            justify-content: right;
-            height: 40px;
-        }
-
-        .navbar {
-            background-color: #285C4D;
-            height: 40px;
+            justify-content: center;
+            gap: 20px;
         }
 
         .navbar a {
             color: white;
-            background-color: #285C4D;
+            text-decoration: none;
+            font-size: 20px;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            justify-content: center;
         }
 
         .navbar a:hover {
-            color: #621132;
-            background-color: #285C4D;
+            background-color: #621132;
         }
 
-        .navbar-toggler {
-            background-color: #285C4D;
-            color: white;
-            border: none;
-        }
-
-        .navbar-toggler:hover {
-            background-color: #285C4D;
-            color: #621132;
+        .text-agregarbenif {
+            font-family: 'Libre Baskerville', serif;
         }
 
         .asd {
@@ -146,54 +210,28 @@
             border: var(--bs-alert-border);
             border-radius: var(--bs-alert-border-radius);
         }
+
+        .obligatorio {
+            color: red;
+        }
     </style>
     @vite(['resources/js/app.js'])
 
 </head>
 <body class="font-sans  antialiased">
 <header class="header">
-    <h1>Liconsa</h1>
-    <h2>Gobierno de México</h2>
+    <h1 class="logo-text">LICONSA</h1>
+    <img class="logo-mexico" src="{{ asset('img/logo_gobierno_mexico.png') }}" alt="logo de mexico">
 </header>
-<div class="mynav">
-
-    <nav class="navbar navbar-expand-lg ">
-        <div class="container-fluid asd">
-            <a class="navbar-brand" href="#"></a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse asd" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link " href="{{route('inicio')}}">Inicio</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{route('beneficiarios.list')}}">Lista de Beneficiarios</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{route('beneficiarios.nuevo')}}">Registrar Beneficiario</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{route('add.sell')}}">Registrar Nueva Venta</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{route('user.nuevo')}}"> Registrar Usuario</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{route('trabajadores.list')}}">Lista De Usuarios</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{route('ventas.list')}}">Lista De Ventas</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-
-</div>
+<nav class="navbar">
+    <a href="{{route('inicio')}}">Inicio</a>
+    <a href="{{route('beneficiarios.list')}}">Lista de Beneficiarios</a>
+    <a href="{{route('beneficiarios.nuevo')}}">Registrar Beneficiario</a>
+    <a href="{{route('add.sell')}}">Registrar Nueva Venta</a>
+    <a href="{{route('user.nuevo')}}">Registrar Usuario</a>
+    <a href="{{route('trabajadores.list')}}">Lista de Usuarios</a>
+    <a href="{{route('ventas.list')}}">Lista de Ventas</a>
+</nav>
 @if(session('success'))
     <div class="alert alert-success alert-dismissible fade show" role="alert">
         {{ session('success') }}
