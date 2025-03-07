@@ -7,15 +7,23 @@
 
     <title>LICONSA</title>
 
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
     <!-- Fonts -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-
-    <!-- Styles -->
+    <link rel="preconnect" href="https://fonts.bunny.net">
+    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
             font-family: Arial, sans-serif;
             background-color: #D4C19C;
@@ -25,7 +33,6 @@
             flex-direction: column;
             min-height: 100vh;
         }
-
         .logo-text {
             font-family: 'Libre Baskerville', serif;
             font-size: 50px;
@@ -33,20 +40,24 @@
             color: #FFFFFF;
             z-index: 1;
         }
+        .footer-text {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 20px;
+            font-weight: bold;
+            color: #FFFFFF;
+        }
 
-        /* Encabezado */
         .header {
-            background-image: url("{{ asset('img/fondofootergob.png') }}");            color: white;
+            background-image: url("{{ asset('img/fondofootergob.png') }}");
+            background-size: contain;
+            background-position: center;
+            background-color: #611232;
+            color: white;
             display: flex;
             align-items: center;
             justify-content: space-between;
             padding: 24px 50px;
         }
-
-        .header .logo-mexico {
-            opacity: 1.5;
-        }
-
         .header::after {
             content: "";
             position: absolute;
@@ -54,9 +65,8 @@
             left: 0;
             width: 100%;
             height: 20vh;
-            background-color: rgba(0, 0, 0, 0.3);
+            background-color: rgba(0, 0, 0, 0.3); /* Ajusta la opacidad aquí */
         }
-
         .header img {
             height: 80px;
             width: auto;
@@ -64,24 +74,87 @@
             z-index: 2;
         }
 
-        .header h1,
-        .header h2 {
-            margin: 0;
-            font-family: 'Libre Baskerville', serif;
+        .header .logo-mexico {
+            opacity: 1.5;
+        }
+
+        .footer {
+            background-color: #621132;
+            background-image: url("{{ asset('img/fondofootergob.png') }}");
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 15px;
+        }
+
+        .content {
+            background-color: #D4C19C;
+            display: flex;
+            padding: 100px 20px;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .form-container {
+            width: 100%; /* Ajuste del ancho del formulario */
+            max-width: 800px;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background-color: white;
+        }
+
+        .form-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .form-group {
+            flex: 1 1 calc(50% - 20px);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            font-weight: 600;
+        }
+
+        .form-control {
+            border-radius: 8px;
+            padding: 10px 15px;
+        }
+
+        .btn-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .btn1 {
+            flex: 1;
+            padding: 12px 0;
+            border-radius: 8px;
+            background-color: #621132;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn1:hover {
+            background-color: #4a0e27;
         }
 
         nav.navbar {
             background-color: #A57F2C;
-            padding: 10px 20px;
+            padding: 12px 20px;
             display: flex;
-            gap: 15px;
-            align-items: center;
-            justify-content: center !important;
-        }
-
-        .navbar a:hover {
-            background-color: #621132;
-            color: #FFFFFF;
+            justify-content: center;
+            gap: 20px;
         }
 
         .navbar a {
@@ -94,167 +167,42 @@
             justify-content: center;
         }
 
-        .nav-link {
-            position: relative;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            border-radius: 4px;
-        }
-
-        .nav-link.active {
-            background: #621132 !important;
-            color: #FFFFFF !important; /* Agrega !important aquí */
-            font-weight: 700;
-            border: 1px solid #A57F2C; /* Opcional: para mejor contraste */
-        }
-
-        .navbar a:not(.active):hover {
+        .navbar a:hover {
             background-color: #621132;
-            color: #FFFFFF !important;
         }
 
-        .nav-link::before {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            width: 0;
-            height: 2px;
-        }
-
-        .nav-link:hover::before {
-            width: 80%;
-        }
-
-        /* Contenido principal */
-        .content {
-            flex: 1; /* Para que el footer se mantenga abajo */
-            max-width: 1200px;
-            margin: auto;
-            padding: 40px 20px;
-        }
-
-        .user-list {
-            background-color: #fff;
-            border-radius: 10px;
-            padding: 30px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        .user-list h2 {
-            margin-bottom: 20px;
+        .text-agregarbenif{
             font-family: 'Libre Baskerville', serif;
         }
 
-        /* Estilos mejorados para el header de la tabla */
-        table.user-table thead {
-            color: #fff;
-            border-bottom: 3px solid #621132;
+        .asd {
+            background-color: #285C4D;
         }
 
-        table.user-table thead th {
-            font-family: 'Libre Baskerville', serif;
-            text-transform: uppercase;
-            letter-spacing: 0.8px;
-            font-size: 12px;
-            padding: 1rem 1.2rem;
-            vertical-align: middle;
-            border: none;
+        .alerta2 {
+            --bs-alert-bg: transparent;
+            --bs-alert-padding-x: 1rem;
+            --bs-alert-padding-y: 1rem;
+            --bs-alert-margin-bottom: 0;
+            --bs-alert-color: inherit;
+            --bs-alert-border-color: transparent;
+            --bs-alert-border: var(--bs-border-width) solid var(--bs-alert-border-color);
+            --bs-alert-border-radius: var(--bs-border-radius);
+            --bs-alert-link-color: inherit;
             position: relative;
+            padding: var(--bs-alert-padding-y) var(--bs-alert-padding-x);
+            margin-bottom: var(--bs-alert-margin-bottom);
+            color: var(--bs-alert-color);
+            background-color: var(--bs-alert-bg);
+            border: var(--bs-alert-border);
+            border-radius: var(--bs-alert-border-radius);
         }
 
-        /* Ajustes para las celdas del cuerpo */
-        table.user-table tbody td {
-            padding: 10px 15px;
-            vertical-align: middle;
-            border-bottom: 1px solid #dee2e6;
-            white-space: nowrap; /* Mantener en una línea */
+        .obligatorio {
+            color: red;
         }
 
-        /* Tabla con clases de Bootstrap + personalización */
-        .table-responsive {
-            border-radius: 8px;
-            overflow: hidden;
-        }
-
-        table.user-table thead {
-            background-color: #A57F2C;
-            color: #fff;
-        }
-
-        table.user-table thead th {
-            border: none;
-        }
-
-        table.user-table tbody tr:hover {
-            background-color: #f9f9f9;
-        }
-
-        /* Botones de la tabla */
-        .table .btn {
-            margin-right: 5px;
-        }
-
-        .btn-warning {
-            color: #fff;
-        }
-
-        /* Paginación centrada */
-        .pagination {
-            margin-top: 20px;
-            display: flex;
-            justify-content: center;
-        }
-
-        /* Footer */
-        .footer {
-            background-color: #621132;
-            background-image: url("{{ asset('img/fondofootergob.png') }}");
-            background-size: cover;
-            background-position: center;
-            color: white;
-            text-align: center;
-            padding: 15px;
-            margin-top: 8px;
-        }
-
-        .footer-text {
-            font-family: 'Libre Baskerville', serif;
-            font-size: 20px;
-            color: #FFFFFF;
-        }
-        .codigo-benef {
-            font-size: 20px;
-        }
-
-        .num-benef {
-            font-family: 'Libre Baskerville', serif;
-            height: 50px;
-            padding: 0 10px;
-            font-size: 18px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            display: inline-flex;
-            align-items: center;
-        }
-
-        .form-container {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            width: 100%;
-            justify-content: center;
-        }
-
-        .wide-panel .form-container, .wide-panel .image-container {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .num-benef::placeholder {
-            color: #aaa;
-            font-size: 18px;
-        }
+        /* Estilos para accesibilidad */
         .floating-icon {
             position: fixed;
             bottom: 20px;
@@ -271,7 +219,7 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
             border: 2px solid white;
             z-index: 1000;
-            transition: opacity 0.3s ease-in-out; /* Animación suave */
+            transition: opacity 0.3s ease-in-out;
         }
 
         .floating-icon i {
@@ -280,7 +228,6 @@
             font-size: 54px;
         }
 
-        /* Estilos del menú lateral */
         .side-menu {
             position: fixed;
             top: 0;
@@ -300,6 +247,7 @@
             scrollbar-width: thin;
             scrollbar-color: #B85E7D #E5E5E5;
         }
+
         .side-menu::-webkit-scrollbar {
             width: 8px;
         }
@@ -353,7 +301,6 @@
             text-align: center;
             cursor: pointer;
         }
-        /* Botones para ajustar tamaño del texto */
         .text-size-controls {
             display: flex;
             justify-content: space-around;
@@ -383,49 +330,46 @@
             letter-spacing: 0.05em;
             line-height: 1.5;
         }
-        /* Contenedor de la máscara (inicialmente oculto) */
         .reading-mask {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.7); /* Oscurece todo */
+            background: rgba(0, 0, 0, 0.7);
             pointer-events: none;
             z-index: 9999;
-            display: none; /* Oculta al inicio */
+            display: none;
             clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
         }
         .reading-guide {
             position: absolute;
             left: 0;
             width: 100%;
-            height: 120px; /* Tamaño del rectángulo */
-            background: rgba(0, 0, 0, 0); /* Totalmente transparente */
+            height: 120px;
+            background: rgba(0, 0, 0, 0);
             pointer-events: none;
-            z-index: 10000; /* Asegura que esté encima */
+            z-index: 10000;
         }
 
-        /* Borde superior dorado */
         .reading-guide::before {
             content: "";
             position: absolute;
             top: -10px;
             left: 0;
             width: 100%;
-            height: 20px; /* Grosor del borde */
-            background: #A57F2C; /* Color dorado */
+            height: 20px;
+            background: #A57F2C;
         }
 
-        /* Borde inferior vino */
         .reading-guide::after {
             content: "";
             position: absolute;
             bottom: -10px;
             left: 0;
             width: 100%;
-            height: 20px; /* Grosor del borde */
-            background: #621132; /* Color vino */
+            height: 20px;
+            background: #621132;
         }
         .tooltip-container {
             position: relative;
@@ -450,7 +394,6 @@
             visibility: visible;
             opacity: 1;
         }
-        /* Filtros de daltonismo */
         .protanopia {
             filter: url(#protanopia);
         }
@@ -460,13 +403,12 @@
         .tritanopia {
             filter: url(#tritanopia);
         }
-        /* Modo Oscuro Mejorado */
         .modo-oscuro {
             background-color: #111B22;
-            color: #0D161C;
+            color: #E0E0E0;
         }
         .modo-oscuro .panel {
-            background-color: #E0E0E0;
+            background-color: #292929;
             box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
         }
         .modo-oscuro .navbar {
@@ -498,10 +440,19 @@
         .modo-oscuro .side-menu {
             background-color: #292929;
         }
-
-        .modo-oscuro .reading-guide {
-            border-top: 3px solid #FFD700;
-            border-bottom: 3px solid #8B0000;
+        .modo-oscuro form {
+            background-color: #292929;
+            color: #E0E0E0;
+        }
+        .modo-oscuro input,
+        .modo-oscuro select,
+        .modo-oscuro textarea {
+            background-color: #3a3a3a;
+            color: #E0E0E0;
+            border-color: #555;
+        }
+        .modo-oscuro label {
+            color: #E0E0E0;
         }
 
         .reading-guide {
@@ -520,7 +471,6 @@
             box-shadow: 0 2px 5px rgba(0,0,0,0.2);
         }
 
-        /* Estilo para el icono de escucha */
         .listening-icon {
             position: fixed;
             bottom: 20px;
@@ -545,7 +495,6 @@
             100% { transform: scale(1); }
         }
 
-        /* Estilos para cambiar el tamaño del cursor con imágenes personalizadas */
         .cursor-small {
             cursor: url('{{ asset('img/cursores/cursor_small.png') }}'), auto;
         }
@@ -555,18 +504,16 @@
         .cursor-large {
             cursor: url('{{ asset('img/cursores/cursor_large.png') }}'), auto;
         }
-        /* Aplicar cursor pointer con el mismo tamaño seleccionado */
-        a, button, .menu-option:hover, .floating-icon, .btn1.buscar-btn  {
+        a, button, .menu-option:hover, .floating-icon, .btn1 {
             cursor: url('{{ asset('img/cursores/pointer_small.png') }}'), auto;
         }
-        .cursor-medium a, .cursor-medium button, .cursor-medium .menu-option:hover, .cursor-medium .floating-icon ,.cursor-medium .btn1.buscar-btn{
+        .cursor-medium a, .cursor-medium button, .cursor-medium .menu-option:hover, .cursor-medium .floating-icon, .cursor-medium .btn1 {
             cursor: url('{{ asset('img/cursores/pointer_medium.png') }}'), auto;
         }
-        .cursor-large a, .cursor-large button, .cursor-large .menu-option:hover, .cursor-large .floating-icon, .cursor-large .btn1.buscar-btn {
+        .cursor-large a, .cursor-large button, .cursor-large .menu-option:hover, .cursor-large .floating-icon, .cursor-large .btn1 {
             cursor: url('{{ asset('img/cursores/pointer_large.png') }}'), auto;
         }
 
-        /* Estilos para el zoom en cursor */
         .zoom-cursor-active {
             cursor: url('{{ asset('img/cursores/zoom_cursor.png') }}'), zoom-in;
         }
@@ -605,32 +552,29 @@
             position: fixed;
         }
     </style>
-
     @vite(['resources/js/app.js'])
+
 </head>
-<body>
+<body class="font-sans  antialiased">
 <header class="header">
     <h1 class="logo-text">LICONSA</h1>
     <img class="logo-mexico" src="{{ asset('img/logo_gobierno_mexico.png') }}" alt="logo de mexico">
 </header>
-
-<!-- NAVBAR -->
 <nav class="navbar">
-    <a class="nav-link {{ Route::is('inicio') ? 'active' : '' }}" href="{{route('inicio')}}">Inicio</a>
-    <a class="nav-link {{ Route::is('beneficiarios.list') ? 'active' : '' }}" href="{{route('beneficiarios.list')}}">Lista de Beneficiarios</a>
-    <a class="nav-link {{ Route::is('beneficiarios.nuevo') ? 'active' : '' }}" href="{{route('beneficiarios.nuevo')}}">Registrar Beneficiario</a>
-    <a class="nav-link {{ Route::is('add.sell') ? 'active' : '' }}" href="{{route('add.sell')}}">Registrar Nueva Venta</a>
-    <a class="nav-link {{ Route::is('user.nuevo') ? 'active' : '' }}" href="{{route('user.nuevo')}}">Registrar Usuario</a>
-    <a class="nav-link {{ Route::is('trabajadores.list') ? 'active' : '' }}" href="{{route('trabajadores.list')}}">Lista de Usuarios</a>
-    <a class="nav-link {{ Route::is('ventas.list') ? 'active' : '' }}" href="{{route('ventas.list')}}">Lista de Ventas</a>
+    <a href="{{route('inicio')}}">Inicio</a>
+    <a href="{{route('beneficiarios.list')}}">Lista de Beneficiarios</a>
+    <a href="{{route('beneficiarios.nuevo')}}">Registrar Beneficiario</a>
+    <a href="{{route('add.sell')}}">Registrar Nueva Venta</a>
+    <a href="{{route('user.nuevo')}}">Registrar Usuario</a>
+    <a href="{{route('trabajadores.list')}}">Lista de Usuarios</a>
+    <a href="{{route('ventas.list')}}">Lista de Ventas</a>
 </nav>
 
-<!-- Mensajes de éxito y errores -->
 @if(session('success'))
     <div class="alert alert-success alert-dismissible fade show" role="alert">
         {{ session('success') }}
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 @endif
 @if($errors->any())
     <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -638,181 +582,244 @@
             @foreach($errors->all() as $error)
                 <li>{{ $error }}</li>
             @endforeach
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </ul>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 @endif
 
-<!-- Contenido principal -->
 <div class="content">
-    <div class="user-list">
-        <h2>Beneficiarios Registrados</h2>
-        <div class="table-responsive">
-            <!-- Usamos clases de Bootstrap: table, table-hover, etc. -->
-            <table class="table table-hover user-table">
-                <thead>
-                <tr>
-                    <th>Nombre</th>
-                    <th>Apellido Paterno</th>
-                    <th>Apellido Materno</th>
-                    <th>CURP</th>
-                    <th>Número de Dependientes</th>
-                    <th>Num de Lechería</th>
-                    <th>Acciones</th>
-                </tr>
-                </thead>
-                <tbody>
-                @foreach ($beneficiarios as $beneficiario)
-                    <tr>
-                        <td>{{ $beneficiario->nombre }}</td>
-                        <td>{{ $beneficiario->apellido_p }}</td>
-                        <td>{{ $beneficiario->apellido_m }}</td>
-                        <td>{{ $beneficiario->curp }}</td>
-                        <td>{{ $beneficiario->n_dependientes }}</td>
-                        <td>{{ $beneficiario->num_lecheria }}</td>
-                        <td>
-                            <a href="{{ route('beneficiarios.edit', $beneficiario->id) }}" class="btn btn-warning btn-sm">Editar</a>
-                            <a href="{{ route('beneficiarios.destroy', $beneficiario->id) }}" class="btn btn-danger btn-sm">Eliminar</a>
-                            <a href="{{ route('beneficiarios.show', $beneficiario->id) }}" class="btn btn-primary btn-sm">Detalles</a>
-                        </td>
-                    </tr>
-                @endforeach
-                </tbody>
-            </table>
-        </div>
-        <div class="pagination">
-            {{ $beneficiarios->links() }}
-        </div>
-    </div>
-
-    <div class="side-menu" id="sideMenu">
-        <div class="reset-button" onclick="resetSettings()">
-            <i class="bi bi-arrow-counterclockwise"></i> Restablecer
-        </div>
-
-        <div class="menu-option" onclick="toggleDropdown('vozDropdown')">
-            <i class="bi bi-mic"></i> Control de Voz
-        </div>
-        <div class="submenu" id="vozDropdown">
-            <div class="menu-option" onclick="iniciarReconocimientoVoz()">
-                <i class="bi bi-mic"></i> Activar Control de Voz
+    <div class="form-container">
+    <h2 class="text-center mb-4 text-agregarbenif">Agregar Beneficiario</h2>
+    <form action="../beneficiarios/store" method="POST">
+        @csrf
+        <div class="form-row">
+            <div class="form-group">
+                <label for="nombre" class="text-agregarbenif">Nombre del interesado <span class="obligatorio">*</span></label>
+                <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ej. Gerardo">
             </div>
-            <div class="menu-option" onclick="detenerReconocimientoVoz()">
-                <i class="bi bi-mic-mute"></i> Detener Control de Voz
+
+            <div class="form-group">
+                <label for="apellido_p" class="text-agregarbenif">Apellido paterno <span class="obligatorio">*</span></label>
+                <input type="text" class="form-control" id="apellido_p" name="apellido_p" placeholder="Ej. Gutiérrez">
             </div>
-            <div id="listeningIcon" class="listening-icon">
-                <i class="bi bi-mic-fill"></i>
+
+            <div class="form-group">
+                <label for="apellido_m" class="text-agregarbenif">Apellido materno <span class="obligatorio">*</span></label>
+                <input type="text" class="form-control" id="apellido_m" name="apellido_m" placeholder="Ej. Ramírez">
             </div>
-            <div class="menu-option"><i class="bi bi-sliders"></i> Configurar Comandos</div>
-        </div>
 
-        <div class="menu-option" onclick="toggleDropdown('personalizacionDropdown')">
-            <i class="bi bi-palette"></i> Personalización
-        </div>
-        <div class="submenu" id="personalizacionDropdown">
-            <div class="menu-option" onclick="toggleModoOscuro()"><i class="bi bi-moon"></i> Modo Oscuro</div>
-            <div class="menu-option" onclick="toggleDaltonismoMenu()"><i class="bi bi-eye"></i>Modo Daltonico</div>
-            <div class="submenu" id="daltonismoDropdown" style="display: none;">
-                <svg xmlns="http://www.w3.org/2000/svg" version="1.1" style="display: none;">
-                    <defs>
-                        <!-- Protanopia (deficiencia del rojo) -->
-                        <filter id="protanopia">
-                            <feColorMatrix type="matrix" values="
-                0.567 0.433 0 0 0
-                0.558 0.442 0 0 0
-                0 0.242 0.758 0 0
-                0 0 0 1 0" />
-                        </filter>
+            <div class="form-group">
+                <label for="curp" class="text-agregarbenif">CURP del interesado <span class="obligatorio">*</span></label>
+                <input type="text" class="form-control" id="curp" name="curp" placeholder="Ej. GURG080412HDFDRRA3">
+            </div>
 
-                        <!-- Deuteranopia (deficiencia del verde) -->
-                        <filter id="deuteranopia">
-                            <feColorMatrix type="matrix" values="
-                0.625 0.375 0 0 0
-                0.7 0.3 0 0 0
-                0 0.3 0.7 0 0
-                0 0 0 1 0" />
-                        </filter>
+            <div class="form-group">
+                <label for="direccion" class="text-agregarbenif">Dirección <span class="obligatorio">*</span></label>
+                <input type="text" class="form-control" id="direccion" name="direccion" placeholder="Ej. Villa del Real, Canes 35, Tecámac Edo.Mex.">
+            </div>
 
-                        <!-- Tritanopia (deficiencia del azul) -->
-                        <filter id="tritanopia">
-                            <feColorMatrix type="matrix" values="
-                0.95 0.05 0 0 0
-                0 0.433 0.567 0 0
-                0 0.475 0.525 0 0
-                0 0 0 1 0" />
-                        </filter>
-                    </defs>
-                </svg>
-                <div class="menu-option" onclick="activarDaltonismo('protanopia')">
-                    <i class="bi bi-circle-fill" style="color: red;"></i> Protanopia (Rojo)
-                </div>
-                <div class="menu-option" onclick="activarDaltonismo('deuteranopia')">
-                    <i class="bi bi-circle-fill" style="color: green;"></i> Deuteranopia (Verde)
-                </div>
-                <div class="menu-option" onclick="activarDaltonismo('tritanopia')">
-                    <i class="bi bi-circle-fill" style="color: blue;"></i> Tritanopia (Azul)
-                </div>
-                <div class="menu-option" onclick="activarDaltonismo('')">
-                    <i class="bi bi-eye-slash"></i> Desactivar Filtro
-                </div>
+            <div class="form-group">
+                <label for="fecha_nac" class="text-agregarbenif">Fecha de nacimiento <span class="obligatorio">*</span></label>
+                <input type="date" class="form-control" id="fecha_nac" name="fecha_nac">
+            </div>
+
+            <div class="form-group">
+                <label for="n_dependientes" class="text-agregarbenif">Número de dependientes <span class="obligatorio">*</span></label>
+                <input type="number" class="form-control" id="n_dependientes" name="n_dependientes" placeholder="Ej. 3">
+            </div>
+
+            <div class="form-group">
+                <label for="curp_beneficiarios" class="text-agregarbenif">CURP de los dependientes <span class="obligatorio">*</span></label>
+                <input type="text" class="form-control" id="curp_beneficiarios" name="curp_beneficiarios" placeholder="Ej. GURG080412HDFDRRA3">
+            </div>
+
+            <div class="form-group">
+                <label for="dias_asistencia" class="text-agregarbenif">Días de asistencia <span class="obligatorio">*</span></label>
+                <input type="text" class="form-control mb-2" id="d_asist1" name="d_asist1" placeholder="Ej. Lunes">
+                <input type="text" class="form-control mb-2" id="d_asist2" name="d_asist2" placeholder="Ej. Miércoles">
+                <input type="text" class="form-control" id="d_asist3" name="d_asist3" placeholder="Ej. Viernes">
+            </div>
+
+            <div class="form-group">
+                <label for="num_lecheria" class="text-agregarbenif">N° Lechería <span class="obligatorio">*</span></label>
+                <input type="number" class="form-control" id="num_lecheria" name="num_lecheria" placeholder="Ej. 65469158647">
             </div>
         </div>
 
-        <div class="menu-option" onclick="toggleDropdown('accesibilidadDropdown')">
-            <i class="bi bi-universal-access"></i> Accesibilidad
+        <div class="btn-container">
+            <button type="submit" class="btn1">Guardar</button>
+            <button type="reset" class="btn1">Cancelar</button>
         </div>
-        <div class="submenu" id="accesibilidadDropdown">
-            <div class="menu-option"><i class="bi bi-volume-up"></i> Lector de Pantalla</div>
-            <div class="menu-option" onclick="toggleCursorMenu()">
-                <i class="bi bi-arrow-up-right-circle"></i> Cambiar tamaño del Cursor
-            </div>
-            <div class="submenu" id="cursorDropdown" style="display: none;">
-                <div class="menu-option" onclick="cambiarTamanioCursor('cursor-small')"><i class="bi bi-circle"></i> Pequeño</div>
-                <div class="menu-option" onclick="cambiarTamanioCursor('cursor-medium')"><i class="bi bi-circle-fill"></i> Mediano</div>
-                <div class="menu-option" onclick="cambiarTamanioCursor('cursor-large')"><i class="bi bi-record-circle"></i> Grande</div>
-            </div>
-        </div>
-
-        <div class="menu-option" onclick="toggleDropdown('ayudasVisualesDropdown')">
-            <i class="bi bi-eye"></i> Ayudas Visuales
-        </div>
-        <div class="submenu" id="ayudasVisualesDropdown">
-            <div class="menu-option"><i class="bi bi-zoom-in"></i> Aumentar Tamaño de Texto</div>
-            <div class="text-size-controls">
-                <div class="text-size-btn" onclick="adjustTextSize(-1)"><i class="bi bi-zoom-out"></i></div>
-                <div class="text-size-btn" onclick="adjustTextSize(1)"><i class="bi bi-zoom-in"></i></div>
-            </div>
-            <div class="menu-option" id="highlightToggle"><i class="bi bi-brush"></i> Resaltar Enlaces</div>
-            <div class="menu-option" id="toggleDyslexiaFont"><i class="bi bi-fonts"></i> Cambio de Tipografia Dislexia</div>
-            <div class="menu-option" id="toggleReadingMask"><i class="bi bi-distribute-vertical"></i> Mascara de Lectura</div>
-            <div class="reading-mask" id="readingMask">
-                <div class="reading-guide" id="readingGuide"></div>
-            </div>
-
-            <div class="menu-option" id="toggleCursorZoom"><i class="bi bi-zoom-in"></i> Zoom en Cursor</div>
-
-            <div class="menu-option" onclick="toggleEpilepsiaMode()">
-                <i class="bi bi-shield-exclamation"></i> Modo Epilepsia
-            </div>
-
-            <div class="menu-option" id="toggleReadingGuide">
-                <i class="bi bi-book"></i> Guía de Lectura
-            </div>
-        </div>
-    </div>
-
-    <div class="floating-icon" id="accessibilityBtn" onclick="toggleMenu()"aria-label="Abrir menú de accesibilidad">
-        <i class="bi bi-universal-access-circle"></i>
-    </div>
-
+    </form>
+</div>
 </div>
 
-<!-- Footer -->
+<!-- SVG para filtros de daltonismo -->
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" style="display: none;">
+    <defs>
+        <!-- Protanopia (deficiencia del rojo) -->
+        <filter id="protanopia">
+            <feColorMatrix type="matrix" values="
+        0.567 0.433 0 0 0
+        0.558 0.442 0 0 0
+        0 0.242 0.758 0 0
+        0 0 0 1 0" />
+        </filter>
+
+        <!-- Deuteranopia (deficiencia del verde) -->
+        <filter id="deuteranopia">
+            <feColorMatrix type="matrix" values="
+        0.625 0.375 0 0 0
+        0.7 0.3 0 0 0
+        0 0.3 0.7 0 0
+        0 0 0 1 0" />
+        </filter>
+
+        <!-- Tritanopia (deficiencia del azul) -->
+        <filter id="tritanopia">
+            <feColorMatrix type="matrix" values="
+        0.95 0.05 0 0 0
+        0 0.433 0.567 0 0
+        0 0.475 0.525 0 0
+        0 0 0 1 0" />
+        </filter>
+    </defs>
+</svg>
+
+<!-- Elementos para accesibilidad -->
+<div class="side-menu" id="sideMenu">
+    <div class="reset-button" onclick="resetSettings()">
+        <i class="bi bi-arrow-counterclockwise"></i> Restablecer
+    </div>
+
+    <div class="menu-option" onclick="toggleDropdown('vozDropdown')">
+        <i class="bi bi-mic"></i> Control de Voz
+    </div>
+    <div class="submenu" id="vozDropdown">
+        <div class="menu-option" onclick="iniciarReconocimientoVoz()">
+            <i class="bi bi-mic"></i> Activar Control de Voz
+        </div>
+        <div class="menu-option" onclick="detenerReconocimientoVoz()">
+            <i class="bi bi-mic-mute"></i> Detener Control de Voz
+        </div>
+    </div>
+
+    <div class="menu-option" onclick="toggleDropdown('personalizacionDropdown')">
+        <i class="bi bi-palette"></i> Personalización
+    </div>
+    <div class="submenu" id="personalizacionDropdown">
+        <div class="menu-option" onclick="toggleModoOscuro()"><i class="bi bi-moon"></i> Modo Oscuro</div>
+        <div class="menu-option" onclick="toggleDaltonismoMenu()"><i class="bi bi-eye"></i>Modo Daltonico</div>
+        <div class="submenu" id="daltonismoDropdown" style="display: none;">
+            <div class="menu-option" onclick="activarDaltonismo('protanopia')">
+                <i class="bi bi-circle-fill" style="color: red;"></i> Protanopia (Rojo)
+            </div>
+            <div class="menu-option" onclick="activarDaltonismo('deuteranopia')">
+                <i class="bi bi-circle-fill" style="color: green;"></i> Deuteranopia (Verde)
+            </div>
+            <div class="menu-option" onclick="activarDaltonismo('tritanopia')">
+                <i class="bi bi-circle-fill" style="color: blue;"></i> Tritanopia (Azul)
+            </div>
+            <div class="menu-option" onclick="activarDaltonismo('')">
+                <i class="bi bi-eye-slash"></i> Desactivar Filtro
+            </div>
+        </div>
+    </div>
+
+    <div class="menu-option" onclick="toggleDropdown('accesibilidadDropdown')">
+        <i class="bi bi-universal-access"></i> Accesibilidad
+    </div>
+    <div class="submenu" id="accesibilidadDropdown">
+        <div class="menu-option"><i class="bi bi-volume-up"></i> Lector de Pantalla</div>
+        <div class="menu-option" onclick="toggleCursorMenu()">
+            <i class="bi bi-arrow-up-right-circle"></i> Cambiar tamaño del Cursor
+        </div>
+        <div class="submenu" id="cursorDropdown" style="display: none;">
+            <div class="menu-option" onclick="cambiarTamanioCursor('cursor-small')"><i class="bi bi-circle"></i> Pequeño</div>
+            <div class="menu-option" onclick="cambiarTamanioCursor('cursor-medium')"><i class="bi bi-circle-fill"></i> Mediano</div>
+            <div class="menu-option" onclick="cambiarTamanioCursor('cursor-large')"><i class="bi bi-record-circle"></i> Grande</div>
+        </div>
+    </div>
+
+    <div class="menu-option" onclick="toggleDropdown('ayudasVisualesDropdown')">
+        <i class="bi bi-eye"></i> Ayudas Visuales
+    </div>
+    <div class="submenu" id="ayudasVisualesDropdown">
+        <div class="menu-option"><i class="bi bi-zoom-in"></i> Aumentar Tamaño de Texto</div>
+        <div class="text-size-controls">
+            <div class="text-size-btn" onclick="adjustTextSize(-1)"><i class="bi bi-zoom-out"></i></div>
+            <div class="text-size-btn" onclick="adjustTextSize(1)"><i class="bi bi-zoom-in"></i></div>
+        </div>
+        <div class="menu-option" id="highlightToggle"><i class="bi bi-brush"></i> Resaltar Enlaces</div>
+        <div class="menu-option" id="toggleDyslexiaFont"><i class="bi bi-fonts"></i> Cambio de Tipografia Dislexia</div>
+        <div class="menu-option" id="toggleReadingMask"><i class="bi bi-distribute-vertical"></i> Mascara de Lectura</div>
+        <div class="reading-mask" id="readingMask">
+            <div class="reading-guide" id="readingGuide"></div>
+        </div>
+        <div class="menu-option" id="toggleCursorZoom"><i class="bi bi-zoom-in"></i> Zoom en Cursor</div>
+        <div class="menu-option" onclick="toggleEpilepsiaMode()">
+            <i class="bi bi-shield-exclamation"></i> Modo Epilepsia
+        </div>
+        <div class="menu-option" id="toggleReadingGuide">
+            <i class="bi bi-book"></i> Guía de Lectura
+        </div>
+    </div>
+</div>
+
+<div class="floating-icon" id="accessibilityBtn" onclick="toggleMenu()" aria-label="Abrir menú de accesibilidad">
+    <i class="bi bi-universal-access-circle"></i>
+</div>
+
+<div id="listeningIcon" class="listening-icon">
+    <i class="bi bi-mic-fill"></i>
+</div>
+
 <footer class="footer">
-    <br>
-    <p class="footer-text">LICONSA © 2024</p>
+    <p class="footer-text">LICONSA © 2025</p>
 </footer>
+
+<!-- Bootstrap JS (optional) -->
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
 <script>
+    // Función para mostrar u ocultar los inputs de CURP de dependientes
+    function showCurpsInputs(numDependientes) {
+        // Obtener el contenedor de los inputs de CURP
+        const curpsContainer = document.getElementById('curpsInputsContainer');
+        // Crear y mostrar los inputs según el número de dependientes
+        curpsContainer.innerHTML = '';
+        if (numDependientes <= 0) {
+            const inputCurp = document.createElement('input');
+            inputCurp.type = 'text';
+            inputCurp.className = 'form-control';
+            inputCurp.name = 'curp_beneficiarios[]'; // Usar corchetes para recibir varios valores en PHP
+            inputCurp.placeholder = 'Ej. GURG080412HDFDRRA3';
+
+            // Agregar input al contenedor
+            curpsContainer.appendChild(inputCurp);
+        } else {
+            for (let i = 0; i < numDependientes; i++) {
+                // Crear input de CURP
+                const inputCurp = document.createElement('input');
+                inputCurp.type = 'text';
+                inputCurp.className = 'form-control';
+                inputCurp.name = 'curp_beneficiarios[]'; // Usar corchetes para recibir varios valores en PHP
+                inputCurp.placeholder = 'Ej. GURG080412HDFDRRA3';
+
+                // Agregar input al contenedor
+                curpsContainer.appendChild(inputCurp);
+            }
+        }
+    }
+
+    function index() {
+        window.location.href = "{{ route('inicio') }}";
+    }
+
     function toggleMenu() {
         let menu = document.getElementById('sideMenu');
         let button = document.getElementById('accessibilityBtn');

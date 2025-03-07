@@ -53,7 +53,7 @@ class VentaController extends Controller
             $beneficiario = Beneficiario::where('folio_cb', $code)->first();
 
             if (!$beneficiario) {
-                return redirect()->route('index')->withErrors(['Código de beneficiario no encontrado']);
+                return redirect()->route('inicio')->withErrors(['Código de beneficiario no encontrado']);
             }
 
             // Verificar el día actual con horario CDMX
@@ -62,7 +62,7 @@ class VentaController extends Controller
 
             // Verificar si el día actual no coincide con los días de asistencia en la base de datos
             if (!in_array($dayOfWeek, [$beneficiario->d_asist1, $beneficiario->d_asist2, $beneficiario->d_asist3])) {
-                return redirect()->route('index')->withErrors(['El día de hoy no es un día de asistencia para este beneficiario.']);
+                return redirect()->route('inicio')->withErrors(['El día de hoy no es un día de asistencia para este beneficiario.']);
             }
 
             $n_dependientes = $beneficiario->n_dependientes;
@@ -71,14 +71,14 @@ class VentaController extends Controller
             $litrosVendidos = Venta::where('beneficiario_id', $beneficiario->id)->sum('litros_v');
 
             if(($litrosVendidos + $n_litros) > $litrosDisponibles) {
-                return redirect()->route('index')->withErrors(['La cantidad de litros vendidos supera la cantidad de litros disponibles para este beneficiario.']);
+                return redirect()->route('inicio')->withErrors(['La cantidad de litros vendidos supera la cantidad de litros disponibles para este beneficiario.']);
             }
             if ($n_litros > $litrosDisponibles) {
-                return redirect()->route('index')->withErrors(['La cantidad de litros vendidos supera la cantidad de litros disponibles para este beneficiario.']);
+                return redirect()->route('inicio')->withErrors(['La cantidad de litros vendidos supera la cantidad de litros disponibles para este beneficiario.']);
             }
             // Verificar si la cantidad de litros vendidos es mayor a la cantidad de litros disponibles
             if ($n_litros > $litrosDisponibles) {
-                return redirect()->route('index')->withErrors(['La cantidad de litros vendidos supera la cantidad de litros disponibles para este beneficiario.']);
+                return redirect()->route('inicio')->withErrors(['La cantidad de litros vendidos supera la cantidad de litros disponibles para este beneficiario.']);
             }
 
 
@@ -99,7 +99,7 @@ class VentaController extends Controller
             $venta->save();
 
             // Redireccionar a una ruta deseada con un mensaje de éxito
-            return redirect()->route('index')->with('success', 'Venta agregada con éxito.');
+            return redirect()->route('inicio')->with('success', 'Venta agregada con éxito.');
 
         } catch (\Exception $e) {
             dd($e->getMessage());

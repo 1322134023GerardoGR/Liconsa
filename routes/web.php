@@ -26,9 +26,6 @@ Route::get('/1', function () {
     return view('welcome');
 });
 
-Route::get('/', function () {
-    return view('liconsa.index');
-})->name('index');
 
 
 Route::get('/2', function () {
@@ -41,15 +38,15 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__ . '/auth.php';
 
-Route::match(['get', 'post'],'/index', function () {
-    return view('liconsa.index');
-})->name('index');
+Route::get('/', function () {
+    return view('liconsav2.index');
+})->name("inicio");
 
-Route::get('/add', function () {
-    return view('liconsa.agrBeneficiario');
+Route::get('/agregarbeneficiario', function () {
+    return view('liconsav2.agregarbenef');
 })->name('beneficiarios.nuevo');
+
 
 Route::get('/see/{id}', function () {
     return view('liconsa.seeBeneficiario');
@@ -67,7 +64,7 @@ Route::get('/list', function () {
     return view('liconsa.listBene');
 })->name('list.ben');
 
-Route::get('/addU', function () {
+Route::get('/addUser', function () {
     return view('liconsa.addUser');
 })->name('user.nuevo');
 

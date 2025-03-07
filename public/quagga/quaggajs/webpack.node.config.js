@@ -22,7 +22,7 @@ module.exports.output.libraryTarget = "umd";
 module.exports.output.library = "Quagga";
 module.exports.plugins = [
     new webpack.DefinePlugin({
-        ENV: require(path.join(__dirname, './env/', process.env.BUILD_ENV))
+        ENV: require(path.join(__dirname, './.env/', process.env.BUILD_ENV))
     })
 ];
 module.exports.output.path = __dirname + '/lib';

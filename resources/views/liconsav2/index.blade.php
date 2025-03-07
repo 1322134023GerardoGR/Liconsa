@@ -1,21 +1,17 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LICONSA</title>
-
-    <!-- Fonts -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-
-    <!-- Styles -->
+    @vite(['resources/js/app.js'])
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@400;700&display=swap');
         body {
             font-family: Arial, sans-serif;
             background-color: #D4C19C;
@@ -34,17 +30,22 @@
             z-index: 1;
         }
 
-        /* Encabezado */
+        .footer-text {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 20px;
+            color: #FFFFFF;
+        }
+
         .header {
-            background-image: url("{{ asset('img/fondofootergob.png') }}");            color: white;
+            background-image: url("{{ asset('img/fondofootergob.png') }}");
+            background-size: contain;
+            background-position: center;
+            background-color: #611232;
+            color: white;
             display: flex;
             align-items: center;
             justify-content: space-between;
             padding: 24px 50px;
-        }
-
-        .header .logo-mexico {
-            opacity: 1.5;
         }
 
         .header::after {
@@ -64,10 +65,8 @@
             z-index: 2;
         }
 
-        .header h1,
-        .header h2 {
-            margin: 0;
-            font-family: 'Libre Baskerville', serif;
+        .header .logo-mexico {
+            opacity: 1.5;
         }
 
         nav.navbar {
@@ -77,11 +76,6 @@
             gap: 15px;
             align-items: center;
             justify-content: center !important;
-        }
-
-        .navbar a:hover {
-            background-color: #621132;
-            color: #FFFFFF;
         }
 
         .navbar a {
@@ -94,118 +88,69 @@
             justify-content: center;
         }
 
-        .nav-link {
-            position: relative;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            border-radius: 4px;
-        }
-
-        .nav-link.active {
-            background: #621132 !important;
-            color: #FFFFFF !important; /* Agrega !important aquí */
-            font-weight: 700;
-            border: 1px solid #A57F2C; /* Opcional: para mejor contraste */
-        }
-
-        .navbar a:not(.active):hover {
+        .navbar a:hover {
             background-color: #621132;
-            color: #FFFFFF !important;
         }
 
-        .nav-link::before {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            width: 0;
-            height: 2px;
-        }
-
-        .nav-link:hover::before {
-            width: 80%;
-        }
-
-        /* Contenido principal */
         .content {
-            flex: 1; /* Para que el footer se mantenga abajo */
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 33px;
+            padding: 100px 20px;
             max-width: 1200px;
             margin: auto;
-            padding: 40px 20px;
         }
 
-        .user-list {
-            background-color: #fff;
+        .panel {
+            background-color: white;
+            padding: 20px;
             border-radius: 10px;
-            padding: 30px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        .user-list h2 {
-            margin-bottom: 20px;
-            font-family: 'Libre Baskerville', serif;
-        }
-
-        /* Estilos mejorados para el header de la tabla */
-        table.user-table thead {
-            color: #fff;
-            border-bottom: 3px solid #621132;
-        }
-
-        table.user-table thead th {
-            font-family: 'Libre Baskerville', serif;
-            text-transform: uppercase;
-            letter-spacing: 0.8px;
-            font-size: 12px;
-            padding: 1rem 1.2rem;
-            vertical-align: middle;
-            border: none;
-            position: relative;
-        }
-
-        /* Ajustes para las celdas del cuerpo */
-        table.user-table tbody td {
-            padding: 10px 15px;
-            vertical-align: middle;
-            border-bottom: 1px solid #dee2e6;
-            white-space: nowrap; /* Mantener en una línea */
-        }
-
-        /* Tabla con clases de Bootstrap + personalización */
-        .table-responsive {
-            border-radius: 8px;
-            overflow: hidden;
-        }
-
-        table.user-table thead {
-            background-color: #A57F2C;
-            color: #fff;
-        }
-
-        table.user-table thead th {
-            border: none;
-        }
-
-        table.user-table tbody tr:hover {
-            background-color: #f9f9f9;
-        }
-
-        /* Botones de la tabla */
-        .table .btn {
-            margin-right: 5px;
-        }
-
-        .btn-warning {
-            color: #fff;
-        }
-
-        /* Paginación centrada */
-        .pagination {
-            margin-top: 20px;
+            text-align: center;
             display: flex;
+            flex-direction: column;
+            align-items: center;
             justify-content: center;
         }
 
-        /* Footer */
+        .wide-panel {
+            grid-column: span 2;
+        }
+
+        .centered-panel {
+            justify-self: center;
+        }
+
+        .btn1 {
+            background-color: #621132;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 20px;
+            cursor: pointer;
+            transition: 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            margin-bottom: 10px;
+            margin-top: 20px;
+            height: 50px;
+            font-family: 'Libre Baskerville', serif;
+        }
+
+        .btn1.buscar-btn {
+            margin-top: 10px;
+        }
+
+        .btn1:hover {
+            background-color: #4a0e27;
+        }
+
+        .image-container img {
+            width: 50px;
+            height: auto;
+        }
+
         .footer {
             background-color: #621132;
             background-image: url("{{ asset('img/fondofootergob.png') }}");
@@ -214,14 +159,9 @@
             color: white;
             text-align: center;
             padding: 15px;
-            margin-top: 8px;
+            margin-top: 40px;
         }
 
-        .footer-text {
-            font-family: 'Libre Baskerville', serif;
-            font-size: 20px;
-            color: #FFFFFF;
-        }
         .codigo-benef {
             font-size: 20px;
         }
@@ -604,84 +544,64 @@
         .epilepsia-mode .floating-icon {
             position: fixed;
         }
-    </style>
 
-    @vite(['resources/js/app.js'])
+    </style>
 </head>
 <body>
 <header class="header">
     <h1 class="logo-text">LICONSA</h1>
     <img class="logo-mexico" src="{{ asset('img/logo_gobierno_mexico.png') }}" alt="logo de mexico">
 </header>
-
-<!-- NAVBAR -->
 <nav class="navbar">
-    <a class="nav-link {{ Route::is('inicio') ? 'active' : '' }}" href="{{route('inicio')}}">Inicio</a>
-    <a class="nav-link {{ Route::is('beneficiarios.list') ? 'active' : '' }}" href="{{route('beneficiarios.list')}}">Lista de Beneficiarios</a>
-    <a class="nav-link {{ Route::is('beneficiarios.nuevo') ? 'active' : '' }}" href="{{route('beneficiarios.nuevo')}}">Registrar Beneficiario</a>
-    <a class="nav-link {{ Route::is('add.sell') ? 'active' : '' }}" href="{{route('add.sell')}}">Registrar Nueva Venta</a>
-    <a class="nav-link {{ Route::is('user.nuevo') ? 'active' : '' }}" href="{{route('user.nuevo')}}">Registrar Usuario</a>
-    <a class="nav-link {{ Route::is('trabajadores.list') ? 'active' : '' }}" href="{{route('trabajadores.list')}}">Lista de Usuarios</a>
-    <a class="nav-link {{ Route::is('ventas.list') ? 'active' : '' }}" href="{{route('ventas.list')}}">Lista de Ventas</a>
+    <a href="{{route('inicio')}}">Inicio</a>
+    <a href="{{route('beneficiarios.list')}}">Lista de Beneficiarios</a>
+    <a href="{{route('beneficiarios.nuevo')}}">Registrar Beneficiario</a>
+    <a href="{{route('add.sell')}}">Registrar Nueva Venta</a>
+    <a href="{{route('user.nuevo')}}">Registrar Usuario</a>
+    <a href="{{route('trabajadores.list')}}">Lista de Usuarios</a>
+    <a href="{{route('ventas.list')}}">Lista de Ventas</a>
 </nav>
 
-<!-- Mensajes de éxito y errores -->
-@if(session('success'))
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-        {{ session('success') }}
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-@endif
-@if($errors->any())
-    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-        <ul>
-            @foreach($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-@endif
-
-<!-- Contenido principal -->
 <div class="content">
-    <div class="user-list">
-        <h2>Beneficiarios Registrados</h2>
-        <div class="table-responsive">
-            <!-- Usamos clases de Bootstrap: table, table-hover, etc. -->
-            <table class="table table-hover user-table">
-                <thead>
-                <tr>
-                    <th>Nombre</th>
-                    <th>Apellido Paterno</th>
-                    <th>Apellido Materno</th>
-                    <th>CURP</th>
-                    <th>Número de Dependientes</th>
-                    <th>Num de Lechería</th>
-                    <th>Acciones</th>
-                </tr>
-                </thead>
-                <tbody>
-                @foreach ($beneficiarios as $beneficiario)
-                    <tr>
-                        <td>{{ $beneficiario->nombre }}</td>
-                        <td>{{ $beneficiario->apellido_p }}</td>
-                        <td>{{ $beneficiario->apellido_m }}</td>
-                        <td>{{ $beneficiario->curp }}</td>
-                        <td>{{ $beneficiario->n_dependientes }}</td>
-                        <td>{{ $beneficiario->num_lecheria }}</td>
-                        <td>
-                            <a href="{{ route('beneficiarios.edit', $beneficiario->id) }}" class="btn btn-warning btn-sm">Editar</a>
-                            <a href="{{ route('beneficiarios.destroy', $beneficiario->id) }}" class="btn btn-danger btn-sm">Eliminar</a>
-                            <a href="{{ route('beneficiarios.show', $beneficiario->id) }}" class="btn btn-primary btn-sm">Detalles</a>
-                        </td>
-                    </tr>
-                @endforeach
-                </tbody>
-            </table>
+    <div class="panel">
+        <a class="btn1" href="{{route('beneficiarios.list')}}">Lista de Beneficiarios</a>
+        <div class="image-container">
+            <img src="/img/bx-list-ul.svg" alt="Leche"/>
         </div>
-        <div class="pagination">
-            {{ $beneficiarios->links() }}
+    </div>
+
+    <div class="panel">
+        <a class="btn1" href="{{route('beneficiarios.nuevo')}}">Registrar Beneficiario</a>
+        <div class="image-container">
+            <img src="/img/bx-user-plus.svg" alt="Leche"/>
+        </div>
+    </div>
+
+    <div class="panel">
+        <a class="btn1" href="{{route('add.sell')}}">Registrar Nueva Venta</a>
+        <div class="image-container">
+            <img src="/img/bx-dollar-circle.svg" alt="Leche"/>
+        </div>
+    </div>
+
+    <div class="panel wide-panel">
+        <form class="form-container" action="{{ route('beneficiarios.buscar') }}" method="GET">
+            @csrf
+            <div class="tooltip-container">
+            <input class="num-benef" type="text" id="codigo" name="codigo" placeholder="Código del Beneficiario" required>
+                <span class="tooltip-text">El codigo de la tarjeta del Benificiario.</span>
+            </div>
+            <button type="submit" class="btn1 buscar-btn">Buscar</button>
+            <div class="image-container">
+                <img src="/img/bx-search-alt-2.svg" alt="Leche"/>
+            </div>
+        </form>
+    </div>
+
+    <div class="panel">
+        <a class="btn1" href="{{route('user.nuevo')}}">Registrar Usuario</a>
+        <div class="image-container">
+            <img src="/img/bx-user.svg" alt="Leche"/>
         </div>
     </div>
 
@@ -703,7 +623,6 @@
             <div id="listeningIcon" class="listening-icon">
                 <i class="bi bi-mic-fill"></i>
             </div>
-            <div class="menu-option"><i class="bi bi-sliders"></i> Configurar Comandos</div>
         </div>
 
         <div class="menu-option" onclick="toggleDropdown('personalizacionDropdown')">
@@ -807,10 +726,8 @@
 
 </div>
 
-<!-- Footer -->
 <footer class="footer">
-    <br>
-    <p class="footer-text">LICONSA © 2024</p>
+    <p class="footer-text">LICONSA © 2025</p>
 </footer>
 <script>
     function toggleMenu() {
