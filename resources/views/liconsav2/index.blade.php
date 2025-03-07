@@ -623,7 +623,6 @@
             <div id="listeningIcon" class="listening-icon">
                 <i class="bi bi-mic-fill"></i>
             </div>
-            <div class="menu-option"><i class="bi bi-sliders"></i> Configurar Comandos</div>
         </div>
 
         <div class="menu-option" onclick="toggleDropdown('personalizacionDropdown')">

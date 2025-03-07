@@ -702,7 +702,6 @@
         <div class="menu-option" onclick="detenerReconocimientoVoz()">
             <i class="bi bi-mic-mute"></i> Detener Control de Voz
         </div>
-        <div class="menu-option"><i class="bi bi-sliders"></i> Configurar Comandos</div>
     </div>
 
     <div class="menu-option" onclick="toggleDropdown('personalizacionDropdown')">
