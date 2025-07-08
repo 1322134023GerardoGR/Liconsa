@@ -104,4 +104,4 @@ Route::middleware(['throttle:20,1'])->group(function () {
     Route::match(['get', 'post'], '/ventas/detalles/{id}', [VentaController::class, 'show'])->name('ventas.show');
     Route::match(['get', 'post'], '/ventas/eliminar/{id}', [VentaController::class, 'destroy'])->name('ventas.destroy');
     Route::match(['get', 'post', 'delete'], '/ventas/lista', [VentaController::class, 'index'])->name('ventas.list');
-}
+});

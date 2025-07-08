@@ -1,0 +1,10 @@
+version: 2
+updates:
+  - package-ecosystem: "composer"
+    directory: "package.json"            # Ubicación del composer.json
+    schedule:
+      interval: "monthly"     # Cambia a daily, weekly o monthly
+  - package-ecosystem: "npm"
+    directory: "vite.config.js"            # Si usas npm
+    schedule:
+      interval: "monthly"
