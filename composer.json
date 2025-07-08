@@ -20,6 +20,7 @@
         "setasign/fpdf": "^1.8",
         "setasign/fpdi-fpdf": "^2.3",
         "setasign/tfpdf": "1.33",
+        "spatie/laravel-backup": "^9.3",
         "symfony/http-client": "^7.0",
         "symfony/mailgun-mailer": "^7.0",
         "symfony/postmark-mailer": "^7.0",
