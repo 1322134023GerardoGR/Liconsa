@@ -33,7 +33,7 @@ RUN php artisan storage:link
 
 RUN npm run build
 
-COPY docker/nginx.conf /etc/nginx/sites-available/default
+COPY Docker/nginx.conf /etc/nginx/sites-available/default
 RUN ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/
 
 EXPOSE 80
