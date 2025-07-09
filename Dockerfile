@@ -12,7 +12,7 @@ RUN apt-get update && apt-get install -y \
     g++ \
     make \
     autoconf \
-    && docker-php-ext-configure gd --with-freetype-dir=/usr/include/freetype2 --with-jpeg-dir=/usr/include \
+    && docker-php-ext-configure gd \
     && docker-php-ext-install gd zip pdo pdo_mysql
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
