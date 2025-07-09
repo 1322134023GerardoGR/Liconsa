@@ -27,6 +27,8 @@ COPY . .
 
 RUN composer install --no-interaction --optimize-autoloader
 
+RUN nohup npm run dev &
+
 RUN npm install
 
 RUN npm run dev
