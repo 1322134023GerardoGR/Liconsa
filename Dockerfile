@@ -1,9 +1,9 @@
-FROM php:8.2-fpm-alpine3.21
+FROM php:8.2-fpm
 
-RUN apk update && apk add --no-cache \
+RUN apt-get update && apt-get install -y \
     libpng-dev \
-    libjpeg-turbo-dev \
-    libfreetype-dev \
+    libjpeg-dev \
+    libfreetype6-dev \
     libzip-dev \
     git \
     curl \
@@ -18,7 +18,7 @@ RUN apk update && apk add --no-cache \
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 RUN curl -sL https://deb.nodesource.com/setup_16.x | bash - \
-    && apk add --no-cache nodejs npm
+    && apt-get install -y nodejs npm
 
 WORKDIR /var/www
 
