@@ -15,7 +15,7 @@ RUN apt-get update && apt-get install -y \
     make \
     autoconf \
     && docker-php-ext-configure gd \
-   && docker-php-ext-install gd zip pdo_pgsql
+   && docker-php-ext-install gd zip pdo pdo_pgsql
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 RUN apt-get install -y nodejs npm
