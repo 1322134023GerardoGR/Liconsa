@@ -35,7 +35,6 @@ RUN chown -R www-data:www-data /var/www \
 RUN cp .env.example .env
 RUN php artisan key:generate
 RUN php artisan storage:link
-RUN php artisan migrate --seed
 RUN npm run build
 
 COPY Docker/nginx.conf /etc/nginx/sites-available/default
