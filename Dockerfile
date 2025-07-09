@@ -15,7 +15,7 @@ RUN apt-get update && apt-get install -y \
     make \
     autoconf \
     && docker-php-ext-configure gd \
-    && docker-php-ext-install gd zip pdo pdo_mysql
+   && docker-php-ext-install gd zip pdo pdo_mysql pdo_pgsql
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 RUN apt-get install -y nodejs npm
@@ -34,7 +34,7 @@ RUN chown -R www-data:www-data /var/www \
 RUN cp .env.example .env
 RUN php artisan key:generate
 RUN php artisan storage:link
-
+RUN php artisan migrate --seed
 RUN npm run build
 
 COPY Docker/nginx.conf /etc/nginx/sites-available/default
