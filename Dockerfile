@@ -26,7 +26,11 @@ COPY . .
 RUN composer install --no-interaction --optimize-autoloader
 RUN npm install
 
-RUN chown -R www-data:www-data /var/www
+RUN chown -R www-data:www-data /var/www \
+       && chmod -R 775 /var/www/storage \
+       && chmod -R 775 /var/www/bootstrap/cache \
+       && php artisan optimize:clear \
+
 RUN cp .env.example .env
 RUN php artisan key:generate
 RUN php artisan storage:link
