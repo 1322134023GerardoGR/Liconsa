@@ -2,13 +2,17 @@ FROM php:8.2-fpm-alpine3.21
 
 RUN apk update && apk add --no-cache \
     libpng-dev \
-    libjpeg-dev \
-    libfreetype6-dev \
+    libjpeg-turbo-dev \
+    libfreetype-dev \
     libzip-dev \
     git \
     curl \
     bash \
-    && docker-php-ext-configure gd --with-freetype --with-jpeg \
+    gcc \
+    g++ \
+    make \
+    autoconf \
+    && docker-php-ext-configure gd --with-freetype-dir=/usr/include/freetype2 --with-jpeg-dir=/usr/include \
     && docker-php-ext-install gd zip pdo pdo_mysql
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
