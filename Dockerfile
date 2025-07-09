@@ -35,6 +35,5 @@ RUN cp .env.example .env
 RUN php artisan key:generate
 
 
-RUN npm run dev &
-
-CMD ["sh", "-c", "php-fpm & tail -f /dev/null"]
+RUN npm run build
+CMD ["php-fpm"]
