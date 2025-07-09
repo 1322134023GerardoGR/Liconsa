@@ -33,7 +33,8 @@ RUN chown -R www-data:www-data /var/www
 RUN cp .env.example .env
 
 RUN php artisan key:generate
-RUN nohup npm run dev &
-EXPOSE 9000
 
-CMD ["php-fpm"]
+
+RUN npm run dev &
+
+CMD ["sh", "-c", "php-fpm & tail -f /dev/null"]
