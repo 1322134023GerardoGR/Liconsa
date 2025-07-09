@@ -14,6 +14,7 @@ RUN apt-get update && apt-get install -y \
     g++ \
     make \
     autoconf \
+    libpq-dev \
     && docker-php-ext-configure gd \
    && docker-php-ext-install gd zip pdo pdo_pgsql
 
