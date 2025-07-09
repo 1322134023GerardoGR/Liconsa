@@ -26,19 +26,14 @@ WORKDIR /var/www
 COPY . .
 
 RUN composer install --no-interaction --optimize-autoloader
-
-RUN nohup npm run dev &
-
 RUN npm install
-
-RUN npm run dev
 
 RUN chown -R www-data:www-data /var/www
 
 RUN cp .env.example .env
 
 RUN php artisan key:generate
-
+RUN nohup npm run dev &
 EXPOSE 9000
 
 CMD ["php-fpm"]
